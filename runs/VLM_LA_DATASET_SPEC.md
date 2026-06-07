@@ -15,47 +15,47 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 ```
 
-## Phase 7 Closed-Loop Metadata
+## Phase 8 Rollout Dataset Metadata
 
 ```yaml
+dataset_name: a1_vlm_la_real_sensor_rollout_v0
+sample_format: vlm_la_jsonl
+sample_file: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/samples/vlm_la_samples.jsonl
+dataset_manifest: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/samples/dataset_manifest.json
+training_ready: false
+requires_human_review: true
+label_source: classical_argmax_information_gain_minus_path_cost
+target_language_contract: Go to candidate <id>.
 sensor_route: real_isaac_omniverse_sensor_suite
 sensor_method: real_isaac_omniverse_rgbd
 camera_pointcloud_source: depth_backprojection
-candidate_data_source: online_real_sensor_candidate_generation
-vlm_output_mode: pseudo_from_classical_selector
-movement_mode: kinematic_existing_a1_root
-closed_loop_steps_csv: /home/ubuntu22/VLA/runs/phase7_a1_vlm_la_closed_loop_smoke_20260607_210429/summary/closed_loop_steps.csv
-command_log_jsonl: /home/ubuntu22/VLA/runs/phase7_a1_vlm_la_closed_loop_smoke_20260607_210429/commands/command_log.jsonl
-parse_log_jsonl: /home/ubuntu22/VLA/runs/phase7_a1_vlm_la_closed_loop_smoke_20260607_210429/parsing/parse_log.jsonl
-summary_json: /home/ubuntu22/VLA/runs/phase7_a1_vlm_la_closed_loop_smoke_20260607_210429/summary/closed_loop_summary.json
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 real_vlm_inference: false
-long_rollout_started: false
 ```
 
-## Phase 7 Provenance
+## Phase 8 Provenance
 
 ```yaml
-action_count: 5
-successful_action_count: 5
+start_count: 10
+completed_start_count: 10
+total_action_count: 77
+candidate_rows: 1848
+vlm_la_sample_count: 77
+average_final_known_ratio: 0.305375
+average_known_ratio_gain: 0.305375
 parse_success_rate: 1.0
 validation_success_rate: 1.0
-target_pose_lookup_success_rate: 1.0
 movement_success_rate: 1.0
-initial_known_ratio: 0.0
-final_known_ratio: 0.322222
-total_known_ratio_gain: 0.322222
-collision_count: 0
-stuck_count: 0
-falling_count: 0
-failure_count: 0
-safe_to_continue_phase8: true
+rgb_valid_rate: 0.987
+depth_valid_rate: 1.0
+camera_pointcloud_valid_rate: 1.0
+safe_to_continue_phase9: true
 ```
 
 ## Status
 
-Phase 7 A1 VLM-LA closed-loop smoke passed. No training is allowed at this stage.
+Phase 8 passed. The data is review-only and must not be used for training until Phase 9 human review.
 
 ## Label Contract
 

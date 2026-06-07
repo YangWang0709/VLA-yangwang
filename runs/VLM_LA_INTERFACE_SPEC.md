@@ -19,7 +19,7 @@ base_frame: /World/A1/base
 Go to candidate <id>.
 ```
 
-## Phase 7 Closed-Loop Interface Gate
+## Phase 8 Interface Gate
 
 ```yaml
 candidate_data_source: online_real_sensor_candidate_generation
@@ -30,9 +30,8 @@ geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 parse_success_rate: 1.0
 validation_success_rate: 1.0
-target_pose_lookup_success_rate: 1.0
 movement_success_rate: 1.0
-safe_to_continue_phase8: true
+safe_to_continue_phase9: true
 ```
 
 ## Parser And Validator Contract

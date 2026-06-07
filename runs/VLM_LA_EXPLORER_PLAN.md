@@ -32,15 +32,16 @@ The USD scene's real robot is `/World/A1`. Do not claim the USD contains a verif
 - Phase 4R-real passed BEV mapping from real depth-backprojected pointclouds.
 - Phase 5R-real passed candidate viewpoint generation and information gain scoring on the real-sensor BEV route.
 - Phase 6 passed the constrained VLM-LA command parser, validator, target pose lookup, and fallback smoke.
-- Phase 7 passed a short closed-loop smoke with online real-sensor mapping, candidate generation, pseudo VLM command parsing, target lookup, kinematic A1 movement, and post-move map updates.
+- Phase 7 passed a short closed-loop smoke.
+- Phase 8 passed A1 primary-scene VLM-LA long rollout data collection.
 
-## Phase 7 Closed-Loop Route
+## Phase 8 Rollout Route
 
 ```yaml
 status: passed
-run_dir: /home/ubuntu22/VLA/runs/phase7_a1_vlm_la_closed_loop_smoke_20260607_210429
-script: /home/ubuntu22/VLA/scripts/phase7_a1_vlm_la_closed_loop_smoke.py
-report: /home/ubuntu22/VLA/runs/A1_VLM_LA_CLOSED_LOOP_SMOKE_REPORT.md
+run_dir: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536
+script: /home/ubuntu22/VLA/scripts/phase8_a1_vlm_la_long_rollout.py
+report: /home/ubuntu22/VLA/runs/A1_VLM_LA_LONG_ROLLOUT_REPORT.md
 scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
@@ -48,51 +49,53 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 sensor_method: real_isaac_omniverse_rgbd
 camera_pointcloud_source: depth_backprojection
+real_rgb_sensor_available: true
+real_depth_sensor_available: true
+real_camera_pointcloud_available: true
+real_rgb_sensor_valid_rate: 0.987
+real_depth_sensor_valid_rate: 1.0
+real_camera_pointcloud_valid_rate: 1.0
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 movement_mode: kinematic_existing_a1_root
 real_a1_locomotion_controller: false
 real_vlm_inference: false
 vlm_output_mode: pseudo_from_classical_selector
-candidate_data_source: online_real_sensor_candidate_generation
 output_contract: Go to candidate <id>.
-action_count: 5
-successful_action_count: 5
+start_count: 10
+completed_start_count: 10
+max_actions_per_start: 8
+total_action_count: 77
+candidate_rows: 1848
+vlm_la_sample_count: 77
+average_final_known_ratio: 0.305375
+average_known_ratio_gain: 0.305375
 parse_success_rate: 1.0
 validation_success_rate: 1.0
-target_pose_lookup_success_rate: 1.0
 movement_success_rate: 1.0
-fallback_count: 0
-initial_known_ratio: 0.0
-final_known_ratio: 0.322222
-total_known_ratio_gain: 0.322222
-known_ratio_monotonic_non_decreasing: true
-average_candidate_count: 24.0
-average_valid_candidate_count: 21.4
+starts_with_failures: 1
+rgb_invalid_step_count: 1
 collision_count: 0
 stuck_count: 0
 falling_count: 0
-failure_count: 0
-safe_to_continue_phase8: true
+safe_to_continue_phase9: true
 ```
 
 ## Core Pipeline
 
-```text
-USD scene with /World/A1
--> A1-synced real Isaac/Omniverse RGB-D sensor route
--> depth_backprojected_pointcloud
--> BEV explored_map / partial map
--> online candidate viewpoints
--> information gain + path cost + classical score
--> pseudo VLM command: Go to candidate <id>.
--> parser + validator + target pose lookup
--> kinematic_existing_a1_root movement
--> post-move real-sensor map update
-```
+1. Open primary USD read-only.
+2. Use existing `/World/A1` and `/World/A1/base`.
+3. Capture real Isaac/Omniverse RGB-D.
+4. Backproject depth to pointcloud using camera intrinsics.
+5. Update BEV explored map.
+6. Generate and score candidate viewpoints.
+7. Emit pseudo VLM label: `Go to candidate <id>.`
+8. Parse and validate candidate ID.
+9. Lookup target pose and move A1 with the kinematic wrapper.
+10. Write review-only VLM-LA samples.
 
-## Next Phase Gate
+## Next Phase
 
-next_phase: Phase 8 A1 primary-scene VLM-LA long rollout data collection
+Phase 9 human review packet.
 
-Phase 8 must only start when explicitly requested. It must not train, fine-tune, run RL, run map_predict training, train A1 locomotion, or let the VLM output free-form coordinates.
+Training remains out of scope until the review packet is complete and explicitly approved.
