@@ -13,52 +13,31 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 ```
 
-## Purpose
-
-Define a constrained language-action interface for candidate viewpoint selection. The interface does not expose coordinates, velocities, or joint actions to the VLM.
-
 ## Primary Output
 
 ```text
 Go to candidate <id>.
 ```
 
-## Parser Contract
-
-The parser extracts the integer candidate ID from a valid command. It accepts:
-
-- `Go to candidate 7.`
-- `go to candidate 7`
-- `Go to candidate 7 because it faces unknown space.`
-- `{"command": "go_to_candidate", "selected_candidate_id": 7}`
-
-It rejects free coordinate, velocity, joint action, malformed JSON, missing-ID, out-of-range, invalid-candidate, and unreachable-candidate outputs as main control commands.
-
-## Validator Contract
-
-The validator checks:
-
-- candidate ID exists in the current Phase 5R candidate table.
-- candidate is valid.
-- candidate is reachable.
-- candidate collision risk is acceptable.
-
-Invalid outputs fallback to the Phase 5R classical selected candidate for the same step.
-
-## Phase 6 Gate
+## Phase 7 Closed-Loop Interface Gate
 
 ```yaml
-candidate_data_source: phase5r_real_sensor
-legal_parse_success_rate: 1.0
-legal_validation_success_rate: 1.0
+candidate_data_source: online_real_sensor_candidate_generation
+vlm_output_mode: pseudo_from_classical_selector
+sensor_method: real_isaac_omniverse_rgbd
+camera_pointcloud_source: depth_backprojection
+geometry_proxy_used: false
+mounted_geometry_proxy_used: false
+parse_success_rate: 1.0
+validation_success_rate: 1.0
 target_pose_lookup_success_rate: 1.0
-illegal_reject_or_fallback_rate: 1.0
-fallback_test_passed: true
-free_coordinate_output_allowed: false
-velocity_output_allowed: false
-joint_action_output_allowed: false
-safe_to_continue_phase7: true
+movement_success_rate: 1.0
+safe_to_continue_phase8: true
 ```
+
+## Parser And Validator Contract
+
+The parser extracts the integer candidate ID from `Go to candidate <id>.` commands. The validator checks candidate existence, valid/reachable flags, and collision risk before target pose lookup.
 
 ## Invalid Main Outputs
 
@@ -75,13 +54,11 @@ Go to the left room.
 ```
 
 ```text
-forward, turn left, forward
-```
-
-```text
 v, omega
 ```
 
 ```text
 robot joint actions
 ```
+
+The main interface must remain candidate-ID based. Free coordinates, velocities, and joint commands are not accepted as VLM-LA outputs.
