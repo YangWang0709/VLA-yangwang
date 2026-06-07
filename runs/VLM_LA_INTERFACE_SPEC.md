@@ -36,7 +36,19 @@ Only `selected_candidate_id` may drive control. Explanation text must be logged 
 
 ## Sensor Route Gate
 
-Phase 5.5 introduced an A1-mounted sensor frame. Phase 4 and Phase 5 should be rerun with mounted sensor observations before Phase 6 interface smoke.
+Phase 5.6 validates real Isaac/Omniverse RGB-D capture for A1. Camera pointcloud source is `depth_backprojection` and geometry proxy is not allowed as final sensor data.
+
+```yaml
+real_rgb_sensor_available: true
+real_depth_sensor_available: true
+camera_params_available: true
+camera_intrinsics_available: true
+real_camera_pointcloud_available: true
+geometry_proxy_used: false
+mounted_geometry_proxy_used: false
+```
+
+Phase 4 and Phase 5 should be rerun with real sensor observations before Phase 6 interface smoke.
 
 ## Invalid Main Outputs
 
@@ -70,4 +82,4 @@ If parsing or candidate validation fails, the system must fall back to the class
 
 ## Current Gate
 
-Do not enter Phase 6 yet. Next phase is rerunning Phase 4 A1 mapping smoke with mounted sensor.
+Do not enter Phase 6 yet. Next phase is `Rerun Phase 4 A1 mapping smoke with real Isaac/Omniverse sensors`.

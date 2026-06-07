@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 5.5 A1 mounted sensor smoke
+Phase 5.6 A1-mounted real Isaac/Omniverse sensor suite smoke
 
 ## Workspace
 
@@ -25,41 +25,53 @@ base_frame: /World/A1/base
 
 ## Why This Phase Was Inserted
 
-Phase 3 through Phase 5 passed with `geometry_proxy_pointcloud_from_a1_base_pose`, but final VLM-LA data should use an A1-mounted sensor route. Phase 5.5 validates the mounted sensor frame before rerunning mapping and candidate gain.
+Phase 5.5 validated a mounted sensor frame but still used a mounted geometry proxy. The formal route now requires real Isaac/Omniverse sensor output: RGB, depth, camera params, and pointcloud from either an Isaac pointcloud annotator or depth backprojection.
 
 ## Completed
 
-- Created `scripts/phase55_a1_mounted_sensor_smoke.py`.
+- Created `scripts/phase56_a1_real_sensor_suite_smoke.py`.
 - Opened the primary USD scene without saving or overwriting it.
-- Created runtime sensor frame `/World/A1/base/Sensors/a1_front_sensor` in memory.
-- Created runtime RGB/depth camera marker prims under that sensor frame.
-- Validated A1-mounted depth/pointcloud proxy observations over 6 short steps.
-- Saved only lightweight metadata and 3 small debug depth PNGs in the ignored run directory.
-- Wrote `runs/A1_MOUNTED_SENSOR_SMOKE_REPORT.md`.
+- Used the existing `/World/A1` and `/World/A1/base`.
+- Created a runtime Replicator camera at `/World/RuntimeSensors/a1_front_rgbd_camera` synced to A1 base motion.
+- Captured real Replicator RGB and `distance_to_image_plane` depth.
+- Read camera params and computed intrinsics from focal length and aperture where OpenCV fx/fy were zero.
+- Produced camera pointcloud via `depth_backprojection`.
+- Attempted RTX LiDAR and recorded its availability.
+- Saved lightweight metadata and debug frames only.
+- Wrote `runs/A1_REAL_SENSOR_SUITE_SMOKE_REPORT.md`.
 
-## Phase 5.5 Metrics
+## Phase 5.6 Metrics
 
-run_dir: /home/ubuntu22/VLA/runs/phase55_a1_mounted_sensor_smoke_20260607_200210
-real_rgb_sensor_available: false
-real_depth_sensor_available: false
-real_pointcloud_available: false
-mounted_geometry_proxy_used: true
+status: passed
+run_dir: /home/ubuntu22/VLA/runs/phase56_a1_real_sensor_suite_smoke_20260607_202405
+real_rgb_sensor_available: true
+real_depth_sensor_available: true
+camera_params_available: true
+camera_intrinsics_available: true
+real_camera_pointcloud_available: true
+camera_pointcloud_source: depth_backprojection
+rtx_lidar_attempted: true
+rtx_lidar_available: true
+lidar_pointcloud_available: true
 step_count: 6
 successful_steps: 6
+rgb_valid_steps: 6
 depth_valid_steps: 6
-pointcloud_valid_steps: 6
-sensor_follows_base_rate: 1.0
-average_depth_valid_ratio: 1.0
-average_pointcloud_count: 432.0
+camera_pointcloud_valid_steps: 6
+lidar_valid_steps: 2
+camera_follows_base_rate: 1.0
+average_rgb_nonzero_ratio: 0.8384
+average_depth_valid_ratio: 0.8349
+average_camera_pointcloud_count: 992.83
 core_dump_found: false
-safe_to_rerun_phase4_with_mounted_sensor: true
-safe_to_rerun_phase5_with_mounted_sensor: true
+safe_to_rerun_phase4_with_real_sensors: true
+safe_to_rerun_phase5_with_real_sensors: true
 
 ## Key Caveats
 
-- This is mounted geometry proxy sensor smoke, not final real RGB-D data.
-- Real Isaac RGB-D capture was not used in this pass.
-- The next step must be rerunning Phase 4 with the mounted sensor, not Phase 6.
+- This is a smoke test, not a rollout and not candidate generation.
+- Real RGB-D data is available; geometry proxy was not used.
+- The next step must be rerunning Phase 4 with real Isaac/Omniverse sensors, not Phase 6.
 
 ## Negative Scope
 
@@ -74,4 +86,4 @@ safe_to_rerun_phase5_with_mounted_sensor: true
 
 ## Next Step
 
-Rerun Phase 4 A1 mapping smoke with mounted sensor.
+Rerun Phase 4 A1 mapping smoke with real Isaac/Omniverse sensors.
