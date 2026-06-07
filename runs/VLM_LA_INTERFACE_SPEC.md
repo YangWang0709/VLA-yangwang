@@ -10,6 +10,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
+base_frame: /World/A1/base
 ```
 
 Legacy proxy smoke data must be labeled with:
@@ -87,4 +88,4 @@ If parsing or candidate validation fails, the system must fall back to the class
 
 ## Current Gate
 
-Phase 3 A1 sensor smoke passed with `safe_to_continue_phase4: true`. Phase 4 A1 mapping smoke is the next formal phase. Phase 6 remains paused.
+Phase 4 A1 mapping smoke passed with `safe_to_continue_phase5: true`. Phase 5 A1 candidate viewpoint + information gain smoke is the next formal phase. Phase 6 remains paused.

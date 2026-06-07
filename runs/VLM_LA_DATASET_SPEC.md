@@ -12,6 +12,7 @@ Formal A1 data must use:
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
+base_frame: /World/A1/base
 ```
 
 Old proxy smoke data must use:
@@ -24,20 +25,19 @@ not_final_robot_asset: true
 
 ## Status
 
-Phase 3 A1 sensor smoke passed. No training is allowed at this stage.
+Phase 4 A1 primary-scene mapping smoke passed. No training is allowed at this stage.
 
-## Phase 3 A1 Provenance
+## Phase 4 A1 Mapping Provenance
 
 ```yaml
-run_dir: /home/ubuntu22/VLA/runs/phase3_a1_sensor_smoke_20260607_193054
+run_dir: /home/ubuntu22/VLA/runs/phase4_a1_mapping_smoke_20260607_194403
 scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
-base_frame: /World/A1/base
 movement_mode: kinematic_existing_a1_root
 real_a1_locomotion_controller: false
 sensor_method: geometry_proxy_pointcloud_from_a1_base_pose
-existing_sensor_reused: false
-geometry_proxy_sensor_used: true
-safe_to_continue_phase4: true
+map_type: BEV occupancy grid
+mapping_method: raycast_bev_proxy_mapping
+safe_to_continue_phase5: true
 ```
 
 ## Sample Purpose
@@ -52,6 +52,7 @@ Each sample teaches a model to choose a candidate viewpoint through constrained 
   "robot_platform": "unitree_a1",
   "robot_source": "existing_usd_prim",
   "a1_root_prim": "/World/A1",
+  "base_frame": "/World/A1/base",
   "scene_path": "/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd",
   "bev_image": "relative/path/to/bev_candidates.png",
   "rgb_image": null,
@@ -81,8 +82,8 @@ Go to candidate <id>.
 
 ## Current Gate
 
-Phase 4 A1 primary-scene mapping smoke is next. Do not prepare candidate generation, training, rollout, or Phase 6 evaluation until the formal A1 mapping and candidate phases exist.
+Phase 5 A1 candidate viewpoint + information gain smoke is next. Do not prepare training, rollout, or Phase 6 evaluation until candidate artifacts exist and are reviewed.
 
 ## Large Artifact Safety
 
-Raw sensor data, BEV images, RGB/depth images, `.npz`, `.hdf5`, checkpoints, meshes, textures, and USD scene bundles must not be committed to Git.
+Raw sensor data, large BEV/RGB/depth images, `.npz`, `.hdf5`, checkpoints, meshes, textures, and USD scene bundles must not be committed to Git.
