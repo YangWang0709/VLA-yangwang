@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 4 A1 primary-scene mapping smoke
+Phase 5 A1 candidate viewpoint + information gain smoke
 
 ## Workspace
 
@@ -25,40 +25,38 @@ base_frame: /World/A1/base
 
 ## Completed
 
-- Created `scripts/phase4_a1_mapping_smoke.py`.
+- Created `scripts/phase5_a1_candidate_gain_smoke.py`.
 - Opened the primary USD scene without saving or overwriting it.
 - Used the existing `/World/A1` prim and `/World/A1/base` frame.
-- Ran 10 short in-memory kinematic A1 root mapping steps.
-- Built a BEV occupancy grid from geometry proxy pointcloud/depth observations.
-- Wrote `runs/A1_MAPPING_SMOKE_REPORT.md`.
+- Rebuilt a proxy BEV partial map from A1 base pose observations.
+- Generated 24 candidate viewpoints per step across 6 steps.
+- Computed approximate validity, reachability, path cost, BEV unknown visibility, information gain, and classical score.
+- Generated lightweight BEV candidate overlay renders under the Phase 5 run directory.
+- Wrote `runs/A1_CANDIDATE_GAIN_REPORT.md`.
 
-## Phase 4 Metrics
+## Phase 5 Metrics
 
-run_dir: /home/ubuntu22/VLA/runs/phase4_a1_mapping_smoke_20260607_194403
-scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
-step_count: 10
-successful_steps: 10
-valid_observation_steps: 10
-initial_known_ratio: 0.052969
-final_known_ratio: 0.087188
-final_occupied_cells: 308
-final_known_free_cells: 250
-final_unknown_cells: 5842
-total_new_known_cells: 558
-known_ratio_monotonic_non_decreasing: true
-map_update_behavior: pass
-collision_count: 0
-stuck_count: 0
-falling_count: 0
-core_dump_found: false
-safe_to_continue_phase5: true
+run_dir: /home/ubuntu22/VLA/runs/phase5_a1_candidate_gain_smoke_20260607_195140
+step_count: 6
+candidate_count_per_step: 24
+total_candidate_rows: 144
+valid_candidate_ratio: 0.3958
+positive_gain_candidate_ratio: 0.8056
+selected_candidate_valid_rate: 1.0
+selected_is_top_score_rate: 1.0
+path_cost_constant: false
+min_path_cost: 0.9
+max_path_cost: 6.98
+min_information_gain: 0.0
+max_information_gain: 406.0
+failure_count: 0
+safe_to_continue_phase6: true
 
 ## Key Caveats
 
-- No A1-bound USD camera/sensor prim was found; only Omniverse default cameras exist.
-- Sensor data is geometry proxy pointcloud/depth, not real RGB-D SLAM.
-- Movement is `kinematic_existing_a1_root`, not real A1 locomotion control.
-- Phase 5 candidate generation was not run.
+- Phase 5 is proxy-mapping based candidate smoke, not final real-sensor data.
+- No VLM inference or VLM-LA interface smoke was run.
+- Candidate scoring is classical and uses BEV proxy information gain.
 
 ## Negative Scope
 
@@ -67,11 +65,10 @@ safe_to_continue_phase5: true
 - map_predict_mainline: false
 - PI_action_finetuning: false
 - A1_locomotion_training: false
-- candidate_generation: false
+- VLM_inference: false
 - primary_rollout: false
-- Phase_5_executed: false
-- Phase_6: false
+- Phase_6_executed: false
 
 ## Next Step
 
-Phase 5 A1 candidate viewpoint + information gain smoke, only when explicitly requested.
+Phase 6 VLM-LA interface smoke, only when explicitly requested.

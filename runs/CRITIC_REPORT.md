@@ -2,61 +2,59 @@
 
 ## Current Phase
 
-Phase 4 A1 primary-scene mapping smoke
+Phase 5 A1 candidate viewpoint + information gain smoke
 
 ## Corrected Fact
 
 The USD scene's real robot is `/World/A1`, not Go2.
 
-## Phase 4 A1 Mapping Review
+## Phase 5 A1 Candidate Gain Review
 
 status: passed
-run_dir: /home/ubuntu22/VLA/runs/phase4_a1_mapping_smoke_20260607_194403
-script: /home/ubuntu22/VLA/scripts/phase4_a1_mapping_smoke.py
-report: /home/ubuntu22/VLA/runs/A1_MAPPING_SMOKE_REPORT.md
+run_dir: /home/ubuntu22/VLA/runs/phase5_a1_candidate_gain_smoke_20260607_195140
+script: /home/ubuntu22/VLA/scripts/phase5_a1_candidate_gain_smoke.py
+report: /home/ubuntu22/VLA/runs/A1_CANDIDATE_GAIN_REPORT.md
 
 ## Evidence
 
 - primary scene opened successfully.
 - `/World/A1` exists.
 - base_frame: `/World/A1/base`.
-- movement_mode: `kinematic_existing_a1_root`.
-- sensor_method: `geometry_proxy_pointcloud_from_a1_base_pose`.
-- mapping_method: `raycast_bev_proxy_mapping`.
-- step_count: 10.
-- successful_steps: 10.
-- valid_observation_steps: 10.
-- initial_known_ratio: 0.052969.
-- final_known_ratio: 0.087188.
-- final_occupied_cells: 308.
-- final_known_free_cells: 250.
-- final_unknown_cells: 5842.
-- total_new_known_cells: 558.
-- known_ratio_monotonic_non_decreasing: true.
-- map_update_behavior: pass.
-- collision_count: 0.
-- stuck_count: 0.
-- falling_count: 0.
-- core_dump_found: false.
-- safe_to_continue_phase5: true.
+- BEV partial map available through proxy mapping.
+- candidate_sampling_method: `radial_24_candidates_3_radii_8_angles_around_a1_base`.
+- path_cost_method: `euclidean_plus_obstacle_penalty`.
+- information_gain_method: `bev_unknown_visibility_proxy`.
+- step_count: 6.
+- candidate_count_per_step: 24.
+- total_candidate_rows: 144.
+- valid_candidate_ratio: 0.3958.
+- positive_gain_candidate_ratio: 0.8056.
+- selected_candidate_valid_rate: 1.0.
+- selected_is_top_score_rate: 1.0.
+- path_cost_constant: false.
+- min_path_cost: 0.9.
+- max_path_cost: 6.98.
+- min_information_gain: 0.0.
+- max_information_gain: 406.0.
+- failure_count: 0.
+- safe_to_continue_phase6: true.
 
 ## Residual Risks And Caveats
 
-- Existing USD cameras are only Omniverse default cameras, not A1-mounted sensors.
-- This is BEV mapping smoke from geometry proxy observations, not real RGB-D SLAM.
-- The A1 movement is an in-memory kinematic root update, not a trained or existing A1 locomotion controller.
-- This phase does not validate candidate generation, information gain ranking, VLM parsing, or Phase 6 behavior.
+- This is proxy-mapping based candidate smoke, not final real-sensor data.
+- Information gain is BEV unknown visibility proxy, not real RGB-D SLAM or learned exploration value.
+- Path cost is approximate, not full navigation planning.
+- Phase 6 interface parsing and fallback behavior are not validated yet.
 
 ## Prohibited Work Check
 
 - VLM training performed: false
 - VLM inference performed: false
+- VLM-LA interface smoke performed: false
 - RL training performed: false
 - map_predict training performed: false
 - PI/openpi fine-tuning performed: false
 - A1 locomotion training performed: false
-- Phase 5 candidate generation performed: false
-- Phase 6 performed: false
 - rollout performed: false
 - original USD saved or overwritten: false
 - temporary Go2 proxy created: false
@@ -64,4 +62,4 @@ report: /home/ubuntu22/VLA/runs/A1_MAPPING_SMOKE_REPORT.md
 
 ## Decision
 
-Phase 4 A1 mapping smoke is sufficient to proceed to Phase 5 A1 candidate viewpoint + information gain smoke when requested. Do not enter Phase 5 or Phase 6 in this step.
+Phase 5 A1 candidate viewpoint + information gain smoke is sufficient to proceed to Phase 6 VLM-LA interface smoke when requested. Do not enter Phase 6 in this step.
