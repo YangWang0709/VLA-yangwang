@@ -34,11 +34,14 @@ The parser extracts the integer candidate ID from a valid command. It must valid
 
 Only `selected_candidate_id` may drive control. Explanation text must be logged but ignored for motion decisions.
 
-## Sensor Route Gate
+## Sensor And Map Route Gate
 
-Phase 5.6 validates real Isaac/Omniverse RGB-D capture for A1. Camera pointcloud source is `depth_backprojection` and geometry proxy is not allowed as final sensor data.
+Phase 4R-real validates BEV mapping from real Isaac/Omniverse RGB-D observations.
 
 ```yaml
+sensor_method: real_isaac_omniverse_rgbd
+map_update_source: depth_backprojection_pointcloud
+camera_pointcloud_source: depth_backprojection
 real_rgb_sensor_available: true
 real_depth_sensor_available: true
 camera_params_available: true
@@ -48,7 +51,7 @@ geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 ```
 
-Phase 4 and Phase 5 should be rerun with real sensor observations before Phase 6 interface smoke.
+Phase 5 should be rerun with real sensor mapping before Phase 6 interface smoke.
 
 ## Invalid Main Outputs
 
@@ -82,4 +85,4 @@ If parsing or candidate validation fails, the system must fall back to the class
 
 ## Current Gate
 
-Do not enter Phase 6 yet. Next phase is `Rerun Phase 4 A1 mapping smoke with real Isaac/Omniverse sensors`.
+Do not enter Phase 6 yet. Next phase is `Rerun Phase 5 A1 candidate viewpoint + information gain smoke with real sensors`.

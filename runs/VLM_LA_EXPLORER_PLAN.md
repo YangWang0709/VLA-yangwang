@@ -27,32 +27,50 @@ The USD scene's real robot is `/World/A1`. Do not claim the USD contains a verif
 
 - Phase 1 placed the primary USD scene bundle and kept it ignored by Git.
 - Phase 2 opened the scene and identified the articulated `/World/A1` hierarchy.
-- Phase 3 A1 sensor smoke passed using base-pose geometry proxy observations.
-- Phase 4 A1 mapping smoke passed using base-pose proxy observations.
-- Phase 5 A1 candidate gain smoke passed using base-pose proxy BEV maps.
-- Phase 5.5 A1 mounted sensor smoke passed using mounted geometry proxy observations.
-- Phase 5.6 A1 real sensor suite smoke passed using real Replicator RGB-D and `depth_backprojection` pointcloud.
+- Phase 3 through Phase 5 old formal route used proxy observations and should not be treated as final real-sensor data.
+- Phase 5.6 validated real Isaac/Omniverse RGB-D sensing and depth-backprojected pointclouds.
+- Phase 4R-real passed by building BEV map updates from real depth-backprojected pointclouds.
 
-## Real Sensor Route
+## Real Sensor Mapping Route
 
 ```yaml
-run_dir: /home/ubuntu22/VLA/runs/phase56_a1_real_sensor_suite_smoke_20260607_202405
+status: passed
+run_dir: /home/ubuntu22/VLA/runs/phase4r_a1_real_sensor_mapping_smoke_20260607_203607
+scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
 camera_prim_path: /World/RuntimeSensors/a1_front_rgbd_camera
-sensor_mount_parent: /World/A1/base (runtime camera synced under /World/RuntimeSensors)
-sensor_mount_xyz: [0.3, 0.0, 0.28]
-sensor_mount_rpy: [0.0, -0.261799, 0.0]
 real_rgb_sensor_available: true
 real_depth_sensor_available: true
 camera_params_available: true
 camera_intrinsics_available: true
 real_camera_pointcloud_available: true
 camera_pointcloud_source: depth_backprojection
-rtx_lidar_attempted: true
+semantic_segmentation_available: true
+instance_segmentation_available: true
 rtx_lidar_available: true
+lidar_used_for_mapping: false
+lidar_is_required_for_pass: false
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
-safe_to_rerun_phase4_with_real_sensors: true
+camera_follows_base_rate: 1.0
+mapping_method: raycast_real_sensor_bev_mapping
+map_update_source: depth_backprojection_pointcloud
+step_count: 10
+successful_steps: 10
+valid_rgb_steps: 10
+valid_depth_steps: 10
+valid_camera_pointcloud_steps: 10
+valid_lidar_steps: 1
+initial_known_ratio: 0.055802
+final_known_ratio: 0.069383
+final_occupied_cells: 136
+final_known_free_cells: 426
+final_unknown_cells: 7538
+total_new_known_cells: 562
+known_ratio_monotonic_non_decreasing: true
+map_update_behavior: pass
+core_dump_found: false
 safe_to_rerun_phase5_with_real_sensors: true
+safe_to_continue_phase6: false
 ```
 
 ## Core Pipeline
@@ -60,7 +78,7 @@ safe_to_rerun_phase5_with_real_sensors: true
 ```text
 USD scene with /World/A1
 -> A1-synced real Isaac/Omniverse RGB-D sensor route
--> real depth-derived pointcloud and optional RTX LiDAR/segmentation
+-> real depth-derived pointcloud and optional segmentation / RTX LiDAR telemetry
 -> explored_map / partial map
 -> candidate viewpoints
 -> BEV render with candidate IDs
@@ -80,7 +98,7 @@ Only the candidate ID may drive control. Explanation text may be logged but must
 
 ## Current Gate
 
-Phase 5.6 passed. The next formal route is `Rerun Phase 4 A1 mapping smoke with real Isaac/Omniverse sensors`. Do not enter Phase 6 yet.
+Phase 4R-real passed. The next formal route is `Rerun Phase 5 A1 candidate viewpoint + information gain smoke with real sensors`. Do not enter Phase 6 yet.
 
 ## Negative Scope
 

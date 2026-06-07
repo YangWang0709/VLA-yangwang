@@ -15,45 +15,46 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 ```
 
-## Real Sensor Metadata
+## Real Sensor Mapping Metadata
 
 ```yaml
 sensor_route: real_isaac_omniverse_sensor_suite
-run_dir: /home/ubuntu22/VLA/runs/phase56_a1_real_sensor_suite_smoke_20260607_202405
-camera_prim_path: /World/RuntimeSensors/a1_front_rgbd_camera
-sensor_mount_parent: /World/A1/base (runtime camera synced under /World/RuntimeSensors)
-sensor_mount_xyz: [0.3, 0.0, 0.28]
-sensor_mount_rpy: [0.0, -0.261799, 0.0]
+sensor_method: real_isaac_omniverse_rgbd
+map_update_source: depth_backprojection_pointcloud
+camera_pointcloud_source: depth_backprojection
+run_dir: /home/ubuntu22/VLA/runs/phase4r_a1_real_sensor_mapping_smoke_20260607_203607
 real_rgb_sensor_available: true
 real_depth_sensor_available: true
 camera_params_available: true
 camera_intrinsics_available: true
 real_camera_pointcloud_available: true
-camera_pointcloud_source: depth_backprojection
-rtx_lidar_attempted: true
-rtx_lidar_available: true
 semantic_segmentation_available: true
 instance_segmentation_available: true
+rtx_lidar_available: true
+lidar_used_for_mapping: false
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 ```
 
 ## Status
 
-Phase 5.6 A1 real sensor suite smoke passed. No training is allowed at this stage.
+Phase 4R-real A1 real-sensor mapping smoke passed. No training is allowed at this stage.
 
-## Phase 5.6 Provenance
+## Phase 4R-real Provenance
 
 ```yaml
-scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
-step_count: 6
-successful_steps: 6
-rgb_valid_steps: 6
-depth_valid_steps: 6
-camera_pointcloud_valid_steps: 6
-camera_follows_base_rate: 1.0
-safe_to_rerun_phase4_with_real_sensors: true
+step_count: 10
+successful_steps: 10
+valid_rgb_steps: 10
+valid_depth_steps: 10
+valid_camera_pointcloud_steps: 10
+initial_known_ratio: 0.055802
+final_known_ratio: 0.069383
+final_occupied_cells: 136
+final_known_free_cells: 426
+final_unknown_cells: 7538
 safe_to_rerun_phase5_with_real_sensors: true
+safe_to_continue_phase6: false
 ```
 
 ## Sample Purpose
@@ -70,7 +71,7 @@ Go to candidate <id>.
 
 ## Current Gate
 
-Rerun Phase 4 and Phase 5 with real Isaac/Omniverse sensor observations before Phase 6 VLM-LA interface smoke. Do not prepare training, rollout, or final evaluation yet.
+Rerun Phase 5 with real Isaac/Omniverse sensor mapping before Phase 6 VLM-LA interface smoke. Do not prepare training, rollout, or final evaluation yet.
 
 ## Large Artifact Safety
 
