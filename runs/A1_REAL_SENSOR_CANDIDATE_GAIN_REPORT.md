@@ -1,40 +1,8 @@
-# Active Task Board
+# A1 Real Sensor Candidate Gain Smoke Report
 
-current_phase: Phase 5R-real A1 candidate viewpoint + information gain smoke with real sensors
+phase: Phase 5R-real
 workspace: /home/ubuntu22/VLA
-main_goal: A1-VLM-LA Explorer for 3D Active Exploration
-output_contract: Go to candidate <id>.
-robot_platform: unitree_a1
-robot_source: existing_usd_prim
-a1_root_prim: /World/A1
-base_frame: /World/A1/base
-sensor_method: real_isaac_omniverse_rgbd
-primary_input_channels:
-- RGB
-- depth
-- depth_backprojected_pointcloud
-- camera intrinsics/extrinsics
-- BEV explored_map
-- candidate viewpoints
-optional_channels:
-- semantic segmentation
-- instance segmentation
-- RTX LiDAR
-negative_scope:
-- training: false
-- RL: false
-- map_predict_mainline: false
-- PI_action_finetuning: false
-- A1_locomotion_training: false
-- primary_rollout: false
-next_phase: Phase 6 VLM-LA interface smoke
-
-## Phase 5R-real Result
-
-status: passed
-run_dir: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631
-script: /home/ubuntu22/VLA/scripts/phase5r_a1_real_sensor_candidate_gain_smoke.py
-report: /home/ubuntu22/VLA/runs/A1_REAL_SENSOR_CANDIDATE_GAIN_REPORT.md
+project_name: A1-VLM-LA Explorer
 scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
@@ -62,7 +30,6 @@ path_cost_method: astar_bev_grid_unknown_penalty
 information_gain_method: real_sensor_bev_unknown_visibility
 score_formula: score = information_gain - 0.2 * path_cost - 1.0 * collision_penalty - 200.0 * invalid_penalty
 step_count: 6
-successful_steps: 6
 candidate_count_per_step: 24
 total_candidate_rows: 144
 valid_candidate_ratio: 0.8958
@@ -75,15 +42,33 @@ max_path_cost: 6.4742
 min_information_gain: 0
 max_information_gain: 749
 failure_count: 0
+BEV candidate render path: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/bev_renders
+candidate_summary path: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_summary.csv
+candidate_steps path: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_steps.jsonl
 safe_to_continue_phase6: true
+caveats: ['Candidate gain is classical scoring, not VLM inference.', 'BEV map and candidate gains use depth-backprojected real RGB-D pointclouds.', 'RTX LiDAR and segmentation are optional telemetry and not required for pass/fail.', 'Runtime sensors and light are in-memory; the primary USD is not saved.']
+training: false
+RL: false
+map_predict: false
+PI_finetuning: false
+A1_locomotion_training: false
+rollout_started: false
 
-## Evidence Paths
+## Evidence
 
+- run_dir: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631
 - candidate_summary_json: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_summary.json
 - candidate_summary_csv: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_summary.csv
 - candidate_steps_jsonl: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_steps.jsonl
 - bev_renders_dir: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/bev_renders
+- Candidate scoring used the BEV map updated from depth-backprojected real RGB-D pointclouds.
+- RTX LiDAR and segmentation were recorded only as optional telemetry.
+- The original USD scene was not saved or overwritten.
 
-## Decision
+## Negative Scope
 
-Phase 5R-real passed with existing USD A1 and the real Isaac/Omniverse RGB-D route. It is now safe to continue to Phase 6 VLM-LA interface smoke when explicitly requested. Phase 6 was not run in this task.
+- No Phase 6 was run automatically.
+- No VLM inference or fine-tuning.
+- No training, RL, map_predict, checkpoint, or rollout.
+- No geometry proxy or mounted geometry proxy candidate-gain source.
+- No Go2 label is used as the actual robot platform.

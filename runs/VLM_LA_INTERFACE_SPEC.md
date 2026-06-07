@@ -32,16 +32,17 @@ The parser extracts the integer candidate ID from a valid command. It must valid
 - The candidate is valid.
 - The candidate is reachable.
 
-Only `selected_candidate_id` may drive control. Explanation text must be logged but ignored for motion decisions.
+Only `selected_candidate_id` may drive downstream motion. Explanation text must be logged but ignored for motion decisions.
 
-## Sensor And Map Route Gate
-
-Phase 4R-real validates BEV mapping from real Isaac/Omniverse RGB-D observations.
+## Sensor, Map, And Candidate Gate
 
 ```yaml
 sensor_method: real_isaac_omniverse_rgbd
 map_update_source: depth_backprojection_pointcloud
 camera_pointcloud_source: depth_backprojection
+candidate_sampling_method: radial_24_candidates_3_radii_8_angles_around_a1_base
+path_cost_method: astar_bev_grid_unknown_penalty
+information_gain_method: real_sensor_bev_unknown_visibility
 real_rgb_sensor_available: true
 real_depth_sensor_available: true
 camera_params_available: true
@@ -49,9 +50,8 @@ camera_intrinsics_available: true
 real_camera_pointcloud_available: true
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
+safe_to_continue_phase6: true
 ```
-
-Phase 5 should be rerun with real sensor mapping before Phase 6 interface smoke.
 
 ## Invalid Main Outputs
 
@@ -79,10 +79,6 @@ v, omega
 robot joint actions
 ```
 
-## Fallback Policy
+## Phase 6 Scope
 
-If parsing or candidate validation fails, the system must fall back to the classical candidate selector for that step and log the reason code.
-
-## Current Gate
-
-Do not enter Phase 6 yet. Next phase is `Rerun Phase 5 A1 candidate viewpoint + information gain smoke with real sensors`.
+Phase 6 may test only the constrained VLM-LA interface smoke when explicitly requested. It must not perform VLM training, RL, map_predict training, PI/openpi fine-tuning, rollout, or free-form coordinate control.

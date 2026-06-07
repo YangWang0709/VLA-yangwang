@@ -15,14 +15,15 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 ```
 
-## Real Sensor Mapping Metadata
+## Real Sensor Candidate Metadata
 
 ```yaml
 sensor_route: real_isaac_omniverse_sensor_suite
 sensor_method: real_isaac_omniverse_rgbd
 map_update_source: depth_backprojection_pointcloud
 camera_pointcloud_source: depth_backprojection
-run_dir: /home/ubuntu22/VLA/runs/phase4r_a1_real_sensor_mapping_smoke_20260607_203607
+candidate_summary_csv: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_summary.csv
+candidate_steps_jsonl: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631/summary/candidate_steps.jsonl
 real_rgb_sensor_available: true
 real_depth_sensor_available: true
 camera_params_available: true
@@ -31,35 +32,38 @@ real_camera_pointcloud_available: true
 semantic_segmentation_available: true
 instance_segmentation_available: true
 rtx_lidar_available: true
-lidar_used_for_mapping: false
+lidar_used_for_candidate_gain: false
 geometry_proxy_used: false
 mounted_geometry_proxy_used: false
 ```
 
 ## Status
 
-Phase 4R-real A1 real-sensor mapping smoke passed. No training is allowed at this stage.
+Phase 5R-real A1 real-sensor candidate gain smoke passed. No training is allowed at this stage.
 
-## Phase 4R-real Provenance
+## Phase 5R-real Provenance
 
 ```yaml
-step_count: 10
-successful_steps: 10
-valid_rgb_steps: 10
-valid_depth_steps: 10
-valid_camera_pointcloud_steps: 10
-initial_known_ratio: 0.055802
-final_known_ratio: 0.069383
-final_occupied_cells: 136
-final_known_free_cells: 426
-final_unknown_cells: 7538
-safe_to_rerun_phase5_with_real_sensors: true
-safe_to_continue_phase6: false
+step_count: 6
+successful_steps: 6
+candidate_count_per_step: 24
+total_candidate_rows: 144
+valid_candidate_ratio: 0.8958
+positive_gain_candidate_ratio: 0.8819
+selected_candidate_valid_rate: 1.0
+selected_is_top_score_rate: 1.0
+path_cost_constant: false
+min_path_cost: 1.0243
+max_path_cost: 6.4742
+min_information_gain: 0
+max_information_gain: 749
+failure_count: 0
+safe_to_continue_phase6: true
 ```
 
 ## Sample Purpose
 
-Each sample teaches a model to choose a candidate viewpoint through constrained language, not free-form coordinates or low-level robot commands.
+Each sample teaches a model or interface smoke test to choose a candidate viewpoint through constrained language, not free-form coordinates or low-level robot commands.
 
 ## Label Contract
 
@@ -68,10 +72,6 @@ Each sample teaches a model to choose a candidate viewpoint through constrained 
 ```text
 Go to candidate <id>.
 ```
-
-## Current Gate
-
-Rerun Phase 5 with real Isaac/Omniverse sensor mapping before Phase 6 VLM-LA interface smoke. Do not prepare training, rollout, or final evaluation yet.
 
 ## Large Artifact Safety
 
