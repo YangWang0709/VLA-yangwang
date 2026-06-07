@@ -25,32 +25,39 @@ Go to candidate <id>.
 
 ## Parser Contract
 
-The parser extracts the integer candidate ID from a valid command. It must validate that:
+The parser extracts the integer candidate ID from a valid command. It accepts:
 
-- The command contains a candidate ID.
-- The ID exists in the current candidate table.
-- The candidate is valid.
-- The candidate is reachable.
+- `Go to candidate 7.`
+- `go to candidate 7`
+- `Go to candidate 7 because it faces unknown space.`
+- `{"command": "go_to_candidate", "selected_candidate_id": 7}`
 
-Only `selected_candidate_id` may drive downstream motion. Explanation text must be logged but ignored for motion decisions.
+It rejects free coordinate, velocity, joint action, malformed JSON, missing-ID, out-of-range, invalid-candidate, and unreachable-candidate outputs as main control commands.
 
-## Sensor, Map, And Candidate Gate
+## Validator Contract
+
+The validator checks:
+
+- candidate ID exists in the current Phase 5R candidate table.
+- candidate is valid.
+- candidate is reachable.
+- candidate collision risk is acceptable.
+
+Invalid outputs fallback to the Phase 5R classical selected candidate for the same step.
+
+## Phase 6 Gate
 
 ```yaml
-sensor_method: real_isaac_omniverse_rgbd
-map_update_source: depth_backprojection_pointcloud
-camera_pointcloud_source: depth_backprojection
-candidate_sampling_method: radial_24_candidates_3_radii_8_angles_around_a1_base
-path_cost_method: astar_bev_grid_unknown_penalty
-information_gain_method: real_sensor_bev_unknown_visibility
-real_rgb_sensor_available: true
-real_depth_sensor_available: true
-camera_params_available: true
-camera_intrinsics_available: true
-real_camera_pointcloud_available: true
-geometry_proxy_used: false
-mounted_geometry_proxy_used: false
-safe_to_continue_phase6: true
+candidate_data_source: phase5r_real_sensor
+legal_parse_success_rate: 1.0
+legal_validation_success_rate: 1.0
+target_pose_lookup_success_rate: 1.0
+illegal_reject_or_fallback_rate: 1.0
+fallback_test_passed: true
+free_coordinate_output_allowed: false
+velocity_output_allowed: false
+joint_action_output_allowed: false
+safe_to_continue_phase7: true
 ```
 
 ## Invalid Main Outputs
@@ -78,7 +85,3 @@ v, omega
 ```text
 robot joint actions
 ```
-
-## Phase 6 Scope
-
-Phase 6 may test only the constrained VLM-LA interface smoke when explicitly requested. It must not perform VLM training, RL, map_predict training, PI/openpi fine-tuning, rollout, or free-form coordinate control.

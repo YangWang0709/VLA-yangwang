@@ -31,55 +31,42 @@ The USD scene's real robot is `/World/A1`. Do not claim the USD contains a verif
 - Phase 5.6 validated real Isaac/Omniverse RGB-D sensing and depth-backprojected pointclouds.
 - Phase 4R-real passed BEV mapping from real depth-backprojected pointclouds.
 - Phase 5R-real passed candidate viewpoint generation and information gain scoring on the real-sensor BEV route.
+- Phase 6 passed the constrained VLM-LA command parser, validator, target pose lookup, and fallback smoke.
 
-## Phase 5R-real Candidate Gain Route
+## Phase 6 Interface Route
 
 ```yaml
 status: passed
-run_dir: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631
-script: /home/ubuntu22/VLA/scripts/phase5r_a1_real_sensor_candidate_gain_smoke.py
-report: /home/ubuntu22/VLA/runs/A1_REAL_SENSOR_CANDIDATE_GAIN_REPORT.md
-scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
+run_dir: /home/ubuntu22/VLA/runs/phase6_vlm_la_interface_smoke_20260607_205612
+script: /home/ubuntu22/VLA/scripts/phase6_vlm_la_interface_smoke.py
+report: /home/ubuntu22/VLA/runs/VLM_LA_INTERFACE_SMOKE_REPORT.md
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 base_frame: /World/A1/base
 sensor_method: real_isaac_omniverse_rgbd
-real_rgb_sensor_available: true
-real_depth_sensor_available: true
-camera_params_available: true
-camera_intrinsics_available: true
-real_camera_pointcloud_available: true
-camera_pointcloud_source: depth_backprojection
-semantic_segmentation_available: true
-instance_segmentation_available: true
-rtx_lidar_available: true
-lidar_used_for_candidate_gain: false
-lidar_is_required_for_pass: false
-geometry_proxy_used: false
-mounted_geometry_proxy_used: false
-map_type: BEV occupancy grid
-mapping_method: raycast_real_sensor_bev_mapping
-map_update_source: depth_backprojection_pointcloud
-candidate_sampling_method: radial_24_candidates_3_radii_8_angles_around_a1_base
-path_cost_method: astar_bev_grid_unknown_penalty
-information_gain_method: real_sensor_bev_unknown_visibility
-score_formula: score = information_gain - 0.2 * path_cost - 1.0 * collision_penalty - 200.0 * invalid_penalty
-step_count: 6
-successful_steps: 6
-candidate_count_per_step: 24
-total_candidate_rows: 144
-valid_candidate_ratio: 0.8958
-positive_gain_candidate_ratio: 0.8819
-selected_candidate_valid_rate: 1.0
-selected_is_top_score_rate: 1.0
-path_cost_constant: false
-min_path_cost: 1.0243
-max_path_cost: 6.4742
-min_information_gain: 0
-max_information_gain: 749
-failure_count: 0
-safe_to_continue_phase6: true
+candidate_data_source: phase5r_real_sensor
+output_contract: Go to candidate <id>.
+phase5r_candidate_data_used: true
+phase5r_run_dir: /home/ubuntu22/VLA/runs/phase5r_a1_real_sensor_candidate_gain_smoke_20260607_204631
+legal_command_count: 24
+legal_parse_success_rate: 1.0
+legal_validation_success_rate: 1.0
+target_pose_lookup_success_rate: 1.0
+illegal_test_count: 47
+illegal_reject_or_fallback_rate: 1.0
+fallback_test_passed: true
+invalid_candidate_fallback_tested: true
+unreachable_candidate_fallback_tested: true
+free_coordinate_output_allowed: false
+velocity_output_allowed: false
+joint_action_output_allowed: false
+malformed_output_rejected: true
+A1_moved: false
+mapping_started: false
+candidate_generation_started: false
+real_vlm_inference_started: false
+safe_to_continue_phase7: true
 ```
 
 ## Core Pipeline
@@ -91,11 +78,12 @@ USD scene with /World/A1
 -> BEV explored_map / partial map
 -> candidate viewpoints
 -> information gain + path cost + classical score
--> constrained VLM-LA contract: Go to candidate <id>.
+-> constrained command: Go to candidate <id>.
+-> parser + validator + target pose lookup + fallback
 ```
 
 ## Next Phase Gate
 
-next_phase: Phase 6 VLM-LA interface smoke
+next_phase: Phase 7 A1 VLM-LA closed-loop smoke
 
-Phase 6 should only test the constrained interface. It must not train, fine-tune, run RL, run map_predict training, run A1 locomotion training, or let the VLM output free-form coordinates.
+Phase 7 may only run a closed-loop smoke when explicitly requested. It must not train, fine-tune, run RL, run map_predict training, run A1 locomotion training, or let the VLM output free-form coordinates.
