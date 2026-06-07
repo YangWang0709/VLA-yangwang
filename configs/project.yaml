@@ -1,0 +1,16 @@
+workspace: /home/ubuntu22/VLA
+project_name: Go2-VLM-LA Explorer
+main_goal: Go2-VLM-LA Explorer for 3D Active Exploration
+robot_platform: unitree_go2
+robot_role: sensor_carrier_for_vlm_la_active_exploration
+primary_scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
+output_contract: "Go to candidate <id>."
+training_allowed: false
+rl_allowed: false
+go2_locomotion_training_allowed: false
+explicit_map_predict_mainline: false
+free_coordinate_output_allowed: false
+assumptions:
+  usd_scene_contains_go2: true
+  prefer_existing_usd_go2_prim: true
+  temporary_go2_proxy_only_if_no_go2_found: true
