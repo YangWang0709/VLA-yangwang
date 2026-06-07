@@ -2,54 +2,61 @@
 
 ## Current Phase
 
-Phase 4 Go2 primary-scene mapping smoke
+Phase 5.5 robot platform correction audit
 
-## Mainline Alignment
+## Corrected Fact
 
-- workspace: /home/ubuntu22/VLA
-- main_goal: Go2-VLM-LA Explorer for 3D Active Exploration
+The USD scene's real robot is `/World/A1`, not Go2.
+
+## Mainline Correction
+
+- corrected_project_name: A1-VLM-LA Explorer for 3D Active Exploration
+- corrected_robot_platform: unitree_a1
+- corrected_robot_source: existing_usd_prim
+- a1_root_prim: /World/A1
 - output_contract: Go to candidate <id>.
-- robot_platform_target: Unitree Go2
-- robot_source: temporary_go2_proxy
 
-## Phase 4 Findings
+## Audit Findings
 
-- primary scene loaded: true
-- temporary proxy used: true
-- not final robot asset: true
-- map type: BEV occupancy grid
-- step_count >= 8: true
-- valid observation rate >= 0.8: true
-- occupied_cells > 0: true
-- known_free_cells > 0: true
-- unknown_cells > 0: true
-- final_known_ratio > initial_known_ratio: true
-- total_new_known_cells > 0: true
-- known_ratio_monotonic_non_decreasing: true
-- map_update_behavior: pass
-- safe_to_continue_phase5: true
+- Phase 3 actual robot source: temporary_go2_proxy
+- Phase 4 actual robot source: temporary_go2_proxy
+- Phase 5 actual robot source: not_found_in_current_repo
+- Phase 3/4 validity: valid_as_proxy_pipeline_smoke
+- Phase 5 data usable: false
+- Valid as final A1 data: false
+- Rerun needed for A1: true
+
+## Risk Correction
+
+The previous Go2 label is now considered a target/platform label used during proxy smoke, not evidence of a verified Go2 asset in the USD. Future formal data must use `/World/A1` with:
+
+```yaml
+robot_platform: unitree_a1
+robot_source: existing_usd_prim
+a1_root_prim: /World/A1
+```
+
+Old proxy data must stay labeled as:
+
+```yaml
+robot_platform: temporary_quadruped_proxy
+robot_source: temporary_go2_proxy
+not_final_robot_asset: true
+```
 
 ## Prohibited Work Check
 
 - VLM training performed: false
 - RL training performed: false
 - map_predict training performed: false
-- PI/openpi action-head fine-tuning performed: false
-- Go2 locomotion policy training performed: false
-- Long rollout performed: false
-- Candidate generation performed: false
-- VLM inference/fine-tuning performed: false
-- Phase 5 performed: false
-- Original USD saved or overwritten: false
-- `/World/A1` claimed as Go2: false
-- Scene bundle committed: false
-- Raw sensor dump committed: false
-- Checkpoint/core dump committed: false
-
-## Critic Notes
-
-The mapping smoke is intentionally simplified. It validates partial-map mechanics and BEV artifact generation but does not represent final SLAM or learned map prediction. Phase 5 may use this as a smoke-tested map substrate for candidate generation.
+- PI/openpi fine-tuning performed: false
+- Phase 6 performed: false
+- rollout performed: false
+- historical CSV/JSONL rows modified: false
+- Phase 3/4 run results deleted: false
+- original USD saved or overwritten: false
+- large files committed: false
 
 ## Decision
 
-Phase 4 passes the mapping smoke gate and may proceed to Phase 5 candidate viewpoint + information gain smoke.
+Do not enter Phase 6 yet. Rerun Phase 3 through Phase 5 using explicit `/World/A1`, unless the user explicitly chooses to continue with proxy-only data.

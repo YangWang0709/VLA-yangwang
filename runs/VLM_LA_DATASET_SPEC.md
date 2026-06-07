@@ -1,21 +1,43 @@
 # VLM-LA Dataset Spec
 
+## Corrected Project Route
+
+A1-VLM-LA Explorer for 3D Active Exploration
+
+## Corrected Robot Metadata
+
+Formal A1 data must use:
+
+```yaml
+robot_platform: unitree_a1
+robot_source: existing_usd_prim
+a1_root_prim: /World/A1
+```
+
+Old proxy smoke data must use:
+
+```yaml
+robot_platform: temporary_quadruped_proxy
+robot_source: temporary_go2_proxy
+not_final_robot_asset: true
+```
+
 ## Status
 
-Specification only. No training is allowed in Phase 0.
+Specification only. No training is allowed at this correction stage.
 
 ## Sample Purpose
 
 Each sample teaches a model to choose a candidate viewpoint through constrained language, not free-form coordinates or low-level robot commands.
 
-## Required Fields
+## Required Fields For Formal A1 Samples
 
 ```json
 {
-  "sample_id": "home_like_scene_v1_go2_start000_step000",
-  "robot_platform": "unitree_go2",
+  "sample_id": "home_like_scene_v1_a1_start000_step000",
+  "robot_platform": "unitree_a1",
   "robot_source": "existing_usd_prim",
-  "go2_root_prim": "/World/...",
+  "a1_root_prim": "/World/A1",
   "scene_path": "/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd",
   "bev_image": "relative/path/to/bev_candidates.png",
   "rgb_image": null,
@@ -26,24 +48,7 @@ Each sample teaches a model to choose a candidate viewpoint through constrained 
     "z": 0.0,
     "yaw": 0.0
   },
-  "robot_state": {
-    "base_frame": "base_link",
-    "locomotion_mode": "kinematic_proxy_or_existing_controller"
-  },
-  "candidates": [
-    {
-      "id": 0,
-      "x": 1.5,
-      "y": 0.0,
-      "z": 0.0,
-      "yaw": 0.0,
-      "is_valid": true,
-      "is_reachable": true,
-      "path_cost": 1.5,
-      "information_gain": 120.0,
-      "score": 87.0
-    }
-  ],
+  "candidates": [],
   "prompt": "Select the best next viewpoint for active exploration.",
   "target_language": "Go to candidate 7.",
   "selected_candidate_id": 7,
@@ -60,9 +65,9 @@ Each sample teaches a model to choose a candidate viewpoint through constrained 
 Go to candidate <id>.
 ```
 
-## Data Collection Gate
+## Correction Gate
 
-Long rollout data collection belongs to Phase 8. Human review belongs to Phase 9. Training preparation belongs to Phase 10. Actual training requires explicit approval after review.
+Current Phase 3 and Phase 4 results are proxy pipeline smoke and are not final A1 data. Phase 5 data is not present in the current repository. Do not prepare training or Phase 6 evaluation until the user decides whether to rerun Phase 3 through Phase 5 using `/World/A1`.
 
 ## Large Artifact Safety
 
