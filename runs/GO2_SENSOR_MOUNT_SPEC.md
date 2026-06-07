@@ -1,43 +1,72 @@
 # Go2 Sensor Mount Spec
 
-## Status
+current_phase: Phase 3 Unitree Go2 sensor smoke
+workspace: /home/ubuntu22/VLA
+main_goal: Go2-VLM-LA Explorer for 3D Active Exploration
+output_contract: Go to candidate <id>.
 
-Phase 0 planning spec. Actual USD prim paths and sensor availability must be verified in Phase 2 and Phase 3.
+## Robot Source
 
-## Frame Convention
-
-```yaml
-robot_platform: unitree_go2
-robot_source: existing_usd_prim
-working_premise_usd_contains_go2: true
-go2_root_prim: TBD_by_phase_2_stage_inspection
-go2_base_frame: TBD_by_phase_2_stage_inspection_or_base_link
+robot_platform_target: Unitree Go2
+go2_in_usd_found: false
+robot_source: temporary_go2_proxy
+temporary_go2_proxy_used: true
+not_final_robot_asset: true
+go2_root_prim: /World/TemporaryGo2Proxy
+base_frame: temporary_go2_base_link
 sensor_frame: go2_front_camera
 map_frame: map
 odom_frame: odom
-```
 
-## Planned Sensor Mount
+## Sensor Method
 
-- Reuse existing camera/sensor prims if the USD already contains them.
-- If no usable sensor exists, logically bind a front RGB-D/depth/pointcloud proxy to the existing Go2 base frame.
-- The front sensor should face forward and sit slightly above the body center.
-- Save camera extrinsics relative to the discovered base frame.
-- If RTX sensors are too complex for the first smoke test, a geometry proxy observation is allowed with a clear caveat.
+sensor_method: geometry/depth/pointcloud proxy
+real_rendered_sensor_used: false
+geometry_proxy_observation_used: true
+raw_sensor_dump_saved: false
+large_image_saved: false
 
-## Required Report Items
+The temporary sensor frame is attached logically in front of the temporary proxy body. Phase 3 generated lightweight finite pointcloud/depth proxy statistics only; it did not render RGB/depth images or save raw sensor arrays.
 
-1. Go2 root prim path: TBD by Phase 2.
-2. Go2 base frame: TBD by Phase 2.
-3. Sensor frame: `go2_front_camera`.
-4. Camera pose relative to base: planned front-facing, slightly above body center; exact transform TBD.
-5. Depth / pointcloud proxy method: TBD in Phase 3.
-6. Real rendered sensor used: false in Phase 0, TBD in Phase 3.
-7. Geometry proxy observation used: false in Phase 0, TBD in Phase 3.
-8. Locomotion mode: existing controller if available, otherwise first-version kinematic base movement.
-9. USD already contains Go2: working premise true, pending Phase 2 verification.
-10. Temporary Go2 proxy: not created in Phase 0; only allowed if Phase 2 finds no Go2.
+## Camera Pose Relative To Base
+
+- x: 0.36 m forward
+- y: 0.00 m lateral
+- z: 0.18 m above temporary base center
+- yaw/pitch/roll: aligned forward with the temporary base frame
+
+## Locomotion Mode
+
+movement_mode: kinematic_proxy
+real_go2_locomotion_controller: false
+Go2_locomotion_training: false
+joint_actions_used: false
+base_velocity_commands_from_VLM: false
+
+## Phase 3 Smoke Metrics
+
+- step_count: 8
+- successful_steps: 8
+- sensor_valid_rate: 1.0
+- min_pointcloud_count: 161
+- max_pointcloud_count: 161
+- collision_count: 0
+- stuck_count: 0
+- falling_count: 0
+- safe_to_continue_phase4: true
+
+## Caveats
+
+- Phase 2 did not verify an existing Go2 prim inside the USD.
+- `/World/A1` is not treated as Go2.
+- The temporary proxy is a smoke-test sensor carrier and not a final robot asset.
+- The sensor method is a proxy observation, not real RTX sensor rendering.
 
 ## Negative Scope
 
-Do not train Go2 locomotion. Do not let the VLM output velocities, coordinates, or joint actions.
+- training: false
+- RL: false
+- map_predict_mainline: false
+- PI_action_finetuning: false
+- Go2_locomotion_training: false
+- primary_rollout: false

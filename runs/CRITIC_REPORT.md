@@ -2,27 +2,31 @@
 
 ## Current Phase
 
-Phase 2 Isaac headless scene open + Go2 stage inspection smoke
+Phase 3 Unitree Go2 sensor smoke
 
 ## Mainline Alignment
 
 - workspace: /home/ubuntu22/VLA
 - main_goal: Go2-VLM-LA Explorer for 3D Active Exploration
 - output_contract: Go to candidate <id>.
-- robot_platform: Unitree Go2
-- robot_source: temporary_proxy_required
+- robot_platform_target: Unitree Go2
+- robot_source: temporary_go2_proxy
 
-## Phase 2 Findings
+## Phase 3 Findings
 
-- Scene headless open succeeded: true
-- Stage available: true
-- Prim count > 0: true
-- Core dump found: false
-- MDL/material warnings found: true
-- MDL/material warnings blocking: false
-- Explicit Go2 prim found: false
-- Temporary Go2 proxy required: true
-- Safe to continue Phase 3: true
+- primary scene loaded: true
+- temporary Go2 proxy created: true
+- not final robot asset: true
+- movement mode: kinematic_proxy
+- base pose readable: true
+- step_count: 8
+- successful_steps: 8
+- sensor_valid_rate >= 0.8: true
+- pointcloud count > 0 for valid steps: true
+- collision_count: 0
+- stuck_count: 0
+- falling_count: 0
+- safe_to_continue_phase4: true
 
 ## Prohibited Work Check
 
@@ -31,21 +35,22 @@ Phase 2 Isaac headless scene open + Go2 stage inspection smoke
 - map_predict training performed: false
 - PI/openpi action-head fine-tuning performed: false
 - Go2 locomotion policy training performed: false
-- PPO/SAC/locomotion RL performed: false
 - Rollout performed: false
 - Mapping performed: false
 - Candidate generation performed: false
-- Sensor mounting performed: false
-- Robot movement performed: false
-- USD stage modified: false
+- VLM inference/fine-tuning performed: false
+- Real Go2 locomotion control performed: false
+- Joint action output performed: false
+- Free coordinate VLM output performed: false
+- Original USD saved or overwritten: false
 - Scene bundle committed: false
-- Mesh/texture/dependencies committed: false
+- Raw sensor dump committed: false
 - Checkpoint/core dump committed: false
 
 ## Critic Notes
 
-The scene opens successfully and contains an articulated `/World/A1` hierarchy, but Phase 2 did not verify an explicit Unitree Go2 prim. The project must not claim `go2_in_usd_found: true` based on `/World/A1`. If Phase 3 proceeds without a verified Go2 prim, it must clearly report `temporary_go2_proxy_required: true` and `not_final_robot_asset: true`.
+The result is a smoke validation of a temporary Go2-shaped sensor carrier only. It must not be described as using a verified USD Go2 asset, and `/World/A1` must not be promoted to Go2 without additional user evidence.
 
 ## Decision
 
-Phase 2 passes the scene-open gate and the inspection-report gate. It may proceed to Phase 3 with the temporary-proxy caveat unless a verified Go2 prim is supplied.
+Phase 3 passes the temporary-proxy sensor smoke gate and may proceed to Phase 4 mapping smoke.

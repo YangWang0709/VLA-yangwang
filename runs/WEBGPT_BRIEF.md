@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 2 Isaac headless scene open + Go2 stage inspection smoke
+Phase 3 Unitree Go2 sensor smoke
 
 ## Workspace
 
@@ -16,49 +16,49 @@ Go2-VLM-LA Explorer for 3D Active Exploration
 
 Go to candidate <id>.
 
-## Robot Platform
+## Robot Platform Target
 
 Unitree Go2
 
 ## Robot Source
 
-temporary_proxy_required
+temporary_go2_proxy
 
 ## Completed
 
-- Verified Phase 1 commit and origin/main sync.
-- Opened the primary USD with Isaac headless SimulationApp.
-- Confirmed the stage is available and has 1324 prims.
-- Confirmed no core dump was detected.
-- Ran read-only stage inspection for Go2/Unitree/robot/base/sensor candidates.
-- Wrote Phase 2 reports.
+- Loaded the primary scene in Isaac headless.
+- Created `/World/TemporaryGo2Proxy` as an in-memory temporary Go2-shaped sensor carrier.
+- Confirmed the proxy is not a final robot asset and is not the existing USD Go2.
+- Ran 8 short kinematic proxy action steps.
+- Recorded pose, depth proxy, pointcloud proxy, and failure flags for each step.
+- Confirmed no training, no RL, no rollout, no mapping, no candidate generation, and no USD save.
 
 ## Key Metrics
 
 - scene_path: `/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd`
-- scene_bundle_size: 490M
-- dependencies_present: true
-- git_ignore_scene_bundle: true
-- isaac_headless_open_exit_code: 0
-- open_stage_result: true
-- stage_available: true
-- prim_count: 1324
-- mesh_count: 127
-- cube_count: 279
-- material_count: 124
-- camera_count: 4
 - go2_in_usd_found: false
-- go2_root_prim: null
-- temporary_go2_proxy_required: true
-- safe_to_continue_phase3: true
+- robot_source: temporary_go2_proxy
+- temporary_go2_proxy_used: true
+- not_final_robot_asset: true
+- movement_mode: kinematic_proxy
+- step_count: 8
+- successful_steps: 8
+- sensor_valid_rate: 1.0
+- min_pointcloud_count: 161
+- average_pointcloud_count: 161
+- collision_count: 0
+- stuck_count: 0
+- falling_count: 0
+- core_dump_found: false
+- safe_to_continue_phase4: true
 
 ## Artifacts
 
-- runs/SCENE_OPEN_SMOKE_REPORT.md
-- runs/GO2_STAGE_INSPECTION_REPORT.md
-- scripts/probe_isaac_open_stage.py
-- scripts/inspect_usd_go2_stage.py
-- /home/ubuntu22/VLA/runs/phase2_scene_open_go2_inspection_20260607_181505
+- runs/GO2_SENSOR_SMOKE_REPORT.md
+- scripts/phase3_go2_sensor_smoke.py
+- /home/ubuntu22/VLA/runs/phase3_go2_sensor_smoke_20260607_190528
+- /home/ubuntu22/VLA/runs/phase3_go2_sensor_smoke_20260607_190528/sensor_smoke/go2_sensor_smoke_steps.csv
+- /home/ubuntu22/VLA/runs/phase3_go2_sensor_smoke_20260607_190528/sensor_smoke/go2_sensor_smoke_summary.json
 
 ## Negative Scope
 
@@ -69,11 +69,13 @@ temporary_proxy_required
 - Go2_locomotion_training: false
 - primary_rollout: false
 - free_coordinate_output: false
+- candidate_generation: false
+- VLM_inference_or_finetuning: false
 
 ## Caveat
 
-Inspection found an articulated `/World/A1` hierarchy but did not find an explicit verified Go2 prim. Phase 3 must use the temporary proxy route unless a verified Go2 prim is provided or identified.
+Phase 3 used a temporary Go2-shaped proxy because Phase 2 did not verify an existing Go2 prim. `/World/A1` is not reported as Go2.
 
 ## Next Phase
 
-Phase 3 Unitree Go2 sensor smoke.
+Phase 4 Go2 primary-scene mapping smoke.
