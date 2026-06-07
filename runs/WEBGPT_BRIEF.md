@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 0: VLA workspace initialization.
+Phase 1: USD scene bundle placement and Git ignore
 
 ## Workspace
 
@@ -26,32 +26,30 @@ VLM output: Go to candidate <id>.
 
 ## Completed
 
-- Created the VLA workspace structure.
-- Audited conda, Python, Isaac-related modules, GPU, and Git.
-- Created Phase 0 planning, interface, dataset, Go2 sensor mount, critic, and context docs.
-- Added Git ignore rules for large USD/scene/mesh/texture/data/checkpoint artifacts.
+- Activated `env_isaaclab` in the VLA workspace.
+- Copied the complete primary scene bundle from `/home/ubuntu22/pi/scenes/primary_building_scene_repaired/` to `/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/`.
+- Confirmed the target USD exists and is `USD ASCII, version 1.0`.
+- Confirmed `dependencies/` exists.
+- Confirmed the scene bundle and dependencies are ignored by Git.
+- Confirmed no files larger than 50MB are tracked by Git.
 
 ## Key Metrics
 
-- Conda env: env_isaaclab activation succeeds.
-- Python: 3.11.15 in env_isaaclab.
-- Isaac module discovery: isaacsim true, isaaclab true.
-- GPU: NVIDIA GeForce RTX 5080 detected through nvidia-smi.
-- Git: available.
-- Training: false.
+- scene_path: `/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd`
+- scene_exists: true
+- copied_from_pi: true
+- bundle_size: 490M
+- dependencies_present: true
+- git_ignore_scene_bundle: true
+- files_over_50MB_tracked_by_git: none
+- safe_to_continue_phase2: true
 
 ## Artifacts
 
-- runs/ENVIRONMENT_AUDIT.md
-- runs/VLM_LA_EXPLORER_PLAN.md
-- runs/VLM_LA_INTERFACE_SPEC.md
-- runs/VLM_LA_DATASET_SPEC.md
-- runs/GO2_SENSOR_MOUNT_SPEC.md
-- runs/GO2_STAGE_INSPECTION_REPORT.md
+- runs/SCENE_BUNDLE_PLACEMENT_REPORT.md
 - runs/ACTIVE_TASK_BOARD.md
+- runs/WEBGPT_BRIEF.md
 - runs/CRITIC_REPORT.md
-- runs/CONTEXT_COMPACT.md
-- runs/FAILURE_DIAGNOSIS.md
 
 ## Negative Scope
 
@@ -62,7 +60,8 @@ VLM output: Go to candidate <id>.
 - openpi action fine-tuning: false
 - explicit map_predict mainline: false
 - free coordinate output: false
+- rollout: false
 
 ## Next Step
 
-Phase 1: locate or copy the full primary USD scene bundle into `/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/`, then verify it is ignored by Git.
+Phase 2: Isaac headless scene open + Go2 stage inspection smoke.

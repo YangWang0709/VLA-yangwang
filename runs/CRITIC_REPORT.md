@@ -1,17 +1,31 @@
 # Critic Report
 
-## Scope Review
+## Current Phase
 
-Phase 0 stayed within workspace initialization and documentation.
+Phase 1: USD scene bundle placement and Git ignore.
+
+## Workspace
+
+`/home/ubuntu22/VLA`
 
 ## Mainline Alignment
 
 - Main research line: Go2-VLM-LA Explorer for 3D Active Exploration.
-- Workspace: `/home/ubuntu22/VLA`.
 - Robot platform: Unitree Go2.
-- Robot role: sensor carrier for active exploration.
 - Expected robot source: existing Go2 prim inside the USD scene.
 - Output contract: `Go to candidate <id>.`
+- Phase 1 scope: place scene bundle and verify Git safety only.
+
+## Phase 1 Checks
+
+- Target USD exists: true
+- Full scene bundle copied instead of only one USD: true
+- Copied from old workspace without deleting or overwriting old workspace: true
+- `dependencies/` present: true
+- Scene bundle ignored by Git: true
+- Files larger than 50MB tracked by Git: none
+- Scene bundle staged or committed: false
+- Safe to continue Phase 2: true
 
 ## Prohibited Work Check
 
@@ -21,19 +35,19 @@ Phase 0 stayed within workspace initialization and documentation.
 - PI/openpi action-head fine-tuning performed: false
 - Go2 locomotion policy training performed: false
 - PPO/SAC/locomotion RL performed: false
+- Rollout performed: false
 - VLM free coordinate output allowed: false
 - VLM `v, omega` output allowed: false
 - VLM Go2 joint action output allowed: false
-- End-to-end planner replacement performed: false
-- Smoke/fallback data treated as training data: false
-- Large scene bundle committed: false
+- Scene bundle committed: false
+- Mesh/texture/dependencies committed: false
+- Checkpoint/core dump committed: false
 - Old `/home/ubuntu22/pi` files deleted or overwritten: false
-- Duplicate main robot created in USD: false
-
-## Required Caveats
-
-Phase 0 records the premise that the primary USD contains Unitree Go2. It does not verify the USD stage. Phase 2 must perform stage inspection before any Go2-specific sensor or motion smoke test.
 
 ## Decision
 
-Phase 0 is allowed to proceed to commit after Git safety checks pass.
+Phase 1 passes the safety gate and may proceed to Phase 2.
+
+## Next Phase
+
+Phase 2: Isaac headless scene open + Go2 stage inspection smoke.
