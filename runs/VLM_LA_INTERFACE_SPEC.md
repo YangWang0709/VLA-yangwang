@@ -23,18 +23,6 @@ Define a constrained language-action interface for candidate viewpoint selection
 Go to candidate <id>.
 ```
 
-Example:
-
-```text
-Go to candidate 7.
-```
-
-Optional explanation is allowed only after a valid candidate ID:
-
-```text
-Go to candidate 7 because it faces the largest unexplored region.
-```
-
 ## Parser Contract
 
 The parser extracts the integer candidate ID from a valid command. It must validate that:
@@ -46,9 +34,9 @@ The parser extracts the integer candidate ID from a valid command. It must valid
 
 Only `selected_candidate_id` may drive control. Explanation text must be logged but ignored for motion decisions.
 
-## Candidate Input Provenance
+## Sensor Route Gate
 
-Phase 5 produced proxy-mapping based candidate tables and BEV overlays. They are suitable for Phase 6 interface smoke, but they are not final real-sensor data.
+Phase 5.5 introduced an A1-mounted sensor frame. Phase 4 and Phase 5 should be rerun with mounted sensor observations before Phase 6 interface smoke.
 
 ## Invalid Main Outputs
 
@@ -82,4 +70,4 @@ If parsing or candidate validation fails, the system must fall back to the class
 
 ## Current Gate
 
-Phase 5 A1 candidate viewpoint + information gain smoke passed with `safe_to_continue_phase6: true`. Phase 6 VLM-LA interface smoke is the next formal phase, but it has not been run yet.
+Do not enter Phase 6 yet. Next phase is rerunning Phase 4 A1 mapping smoke with mounted sensor.
