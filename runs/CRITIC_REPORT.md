@@ -2,33 +2,48 @@
 
 ## Current Phase
 
-Phase 5.5 robot platform correction audit
+Phase 3 Unitree A1 sensor smoke
 
 ## Corrected Fact
 
 The USD scene's real robot is `/World/A1`, not Go2.
 
-## Mainline Correction
+## Phase 3 A1 Smoke Review
 
-- corrected_project_name: A1-VLM-LA Explorer for 3D Active Exploration
-- corrected_robot_platform: unitree_a1
-- corrected_robot_source: existing_usd_prim
-- a1_root_prim: /World/A1
-- output_contract: Go to candidate <id>.
+status: passed
+run_dir: /home/ubuntu22/VLA/runs/phase3_a1_sensor_smoke_20260607_193054
+script: /home/ubuntu22/VLA/scripts/phase3_a1_sensor_smoke.py
+report: /home/ubuntu22/VLA/runs/A1_SENSOR_SMOKE_REPORT.md
 
-## Audit Findings
+## Evidence
 
-- Phase 3 actual robot source: temporary_go2_proxy
-- Phase 4 actual robot source: temporary_go2_proxy
-- Phase 5 actual robot source: not_found_in_current_repo
-- Phase 3/4 validity: valid_as_proxy_pipeline_smoke
-- Phase 5 data usable: false
-- Valid as final A1 data: false
-- Rerun needed for A1: true
+- primary scene opened successfully.
+- `/World/A1` exists.
+- `/World/A1` has articulation root API.
+- base_frame: `/World/A1/base`.
+- initial_root_pose_xyz: `[0.0, -2.2, 0.6]`.
+- initial_base_pose_xyz: `[-0.0, -2.199414, 0.59675]`.
+- movement_mode: `kinematic_existing_a1_root`.
+- step_count: 8.
+- successful_steps: 8.
+- sensor_valid_rate: 1.0.
+- min_pointcloud_count: 161.
+- collision_count: 0.
+- stuck_count: 0.
+- falling_count: 0.
+- core_dump_found: false.
+- safe_to_continue_phase4: true.
 
-## Risk Correction
+## Residual Risks And Caveats
 
-The previous Go2 label is now considered a target/platform label used during proxy smoke, not evidence of a verified Go2 asset in the USD. Future formal data must use `/World/A1` with:
+- Existing USD cameras are only Omniverse default cameras, not A1-mounted sensors.
+- The sensor smoke uses geometry/depth/pointcloud proxy observations.
+- The A1 movement is an in-memory kinematic root update, not a trained or existing A1 locomotion controller.
+- This phase does not validate mapping, candidates, VLM parsing, or Phase 6 behavior.
+
+## Platform Correction
+
+Formal data must use:
 
 ```yaml
 robot_platform: unitree_a1
@@ -36,7 +51,7 @@ robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 ```
 
-Old proxy data must stay labeled as:
+Legacy proxy data must stay labeled as:
 
 ```yaml
 robot_platform: temporary_quadruped_proxy
@@ -50,13 +65,16 @@ not_final_robot_asset: true
 - RL training performed: false
 - map_predict training performed: false
 - PI/openpi fine-tuning performed: false
+- A1 locomotion training performed: false
+- Phase 4 mapping performed in this step: false
+- candidate generation performed: false
 - Phase 6 performed: false
 - rollout performed: false
 - historical CSV/JSONL rows modified: false
-- Phase 3/4 run results deleted: false
 - original USD saved or overwritten: false
+- temporary Go2 proxy created: false
 - large files committed: false
 
 ## Decision
 
-Do not enter Phase 6 yet. Rerun Phase 3 through Phase 5 using explicit `/World/A1`, unless the user explicitly chooses to continue with proxy-only data.
+Phase 3 A1 sensor smoke is sufficient to proceed to Phase 4 A1 primary-scene mapping smoke when requested. Do not enter Phase 6 yet.

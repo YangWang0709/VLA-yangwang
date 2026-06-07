@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 5.5 robot platform correction audit
+Phase 3 Unitree A1 sensor smoke
 
 ## Workspace
 
@@ -16,7 +16,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 
 Go to candidate <id>.
 
-## Corrected Robot Platform
+## Robot Platform
 
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
@@ -24,23 +24,35 @@ a1_root_prim: /World/A1
 
 ## Completed
 
-- Audited Phase 3 and Phase 4 reports and run summaries.
-- Confirmed Phase 3 and Phase 4 used `temporary_go2_proxy`, not `/World/A1`.
-- Confirmed current repository has no Phase 5 candidate report or Phase 5 run directory.
-- Wrote `runs/ROBOT_PLATFORM_CORRECTION_AUDIT.md`.
-- Paused Phase 6.
+- Created `scripts/phase3_a1_sensor_smoke.py`.
+- Opened the primary USD scene without saving or overwriting it.
+- Verified `/World/A1` exists and has articulation root API.
+- Selected `/World/A1/base` as the base frame.
+- Ran 8 short in-memory kinematic A1 root steps.
+- Generated lightweight geometry/depth/pointcloud proxy observations.
+- Wrote `runs/A1_SENSOR_SMOKE_REPORT.md`.
 
-## Key Findings
+## Phase 3 Metrics
 
-- current_fact: USD real robot is `/World/A1`.
-- previous_label: Go2 / temporary_go2_proxy.
-- phase3_actual_robot_source: temporary_go2_proxy.
-- phase4_actual_robot_source: temporary_go2_proxy.
-- phase5_actual_robot_source: not_found_in_current_repo.
-- phase3_phase4_validity: valid_as_proxy_pipeline_smoke.
-- phase5_validity: not_available.
-- not_valid_as_final_a1_data: true.
-- rerun_needed_for_a1: true.
+run_dir: /home/ubuntu22/VLA/runs/phase3_a1_sensor_smoke_20260607_193054
+scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
+step_count: 8
+successful_steps: 8
+sensor_valid_steps: 8
+sensor_valid_rate: 1.0
+pointcloud_point_count_per_valid_step: 161
+collision_count: 0
+stuck_count: 0
+falling_count: 0
+core_dump_found: false
+safe_to_continue_phase4: true
+
+## Key Caveats
+
+- No A1-bound USD camera/sensor prim was found; only Omniverse default cameras exist.
+- Sensor data is a geometry proxy, not RTX rendering or raw sensor data.
+- Movement is `kinematic_existing_a1_root`, not real A1 locomotion control.
+- Previous Go2 proxy results remain proxy-only smoke and are superseded for formal A1 pipeline data.
 
 ## Negative Scope
 
@@ -48,10 +60,11 @@ a1_root_prim: /World/A1
 - RL: false
 - map_predict_mainline: false
 - PI_action_finetuning: false
-- Go2_locomotion_training: false
+- A1_locomotion_training: false
+- candidate_generation: false
 - primary_rollout: false
 - Phase_6: false
 
 ## Next Step
 
-Rerun Phase 3 through Phase 5 using explicit `/World/A1` root prim, or explicitly continue as proxy only. Do not enter Phase 6 yet.
+Phase 4 A1 primary-scene mapping smoke. Do not run candidate generation, rollout, or Phase 6 in this phase.

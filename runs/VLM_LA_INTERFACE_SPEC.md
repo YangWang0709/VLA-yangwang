@@ -1,10 +1,10 @@
 # VLM-LA Interface Spec
 
-## Corrected Project Route
+## Project Route
 
 A1-VLM-LA Explorer for 3D Active Exploration
 
-## Corrected Robot Platform
+## Robot Platform
 
 ```yaml
 robot_platform: unitree_a1
@@ -85,6 +85,6 @@ robot joint actions
 
 If parsing or candidate validation fails, the system must fall back to the classical candidate selector for that step and log the reason code.
 
-## Current Correction Gate
+## Current Gate
 
-Phase 6 is paused until Phase 3 through Phase 5 are either rerun with explicit `/World/A1` or the user explicitly chooses proxy-only continuation.
+Phase 3 A1 sensor smoke passed with `safe_to_continue_phase4: true`. Phase 4 A1 mapping smoke is the next formal phase. Phase 6 remains paused.

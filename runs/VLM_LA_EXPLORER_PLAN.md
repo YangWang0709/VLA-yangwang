@@ -1,6 +1,6 @@
 # VLM-LA Explorer Plan
 
-## Corrected Method Name
+## Method Name
 
 A1-VLM-LA Explorer
 
@@ -12,7 +12,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 
 `/home/ubuntu22/VLA`
 
-## Corrected Robot Platform
+## Robot Platform
 
 ```yaml
 robot_platform: unitree_a1
@@ -22,9 +22,30 @@ a1_root_prim: /World/A1
 
 The USD scene's real robot is `/World/A1`. Do not claim the USD contains a verified Go2 robot unless a real Go2 asset is provided or substituted later.
 
+## Current Progress
+
+- Phase 1 placed the primary USD scene bundle and kept it ignored by Git.
+- Phase 2 opened the scene and identified the articulated `/World/A1` hierarchy.
+- Phase 3 A1 sensor smoke passed using the existing USD A1 prim.
+- Previous temporary Go2 proxy smoke results are superseded for formal A1 pipeline data.
+
+## Phase 3 A1 Smoke Summary
+
+```yaml
+run_dir: /home/ubuntu22/VLA/runs/phase3_a1_sensor_smoke_20260607_193054
+scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
+base_frame: /World/A1/base
+movement_mode: kinematic_existing_a1_root
+real_a1_locomotion_controller: false
+existing_sensor_reused: false
+geometry_proxy_sensor_used: true
+sensor_valid_rate: 1.0
+safe_to_continue_phase4: true
+```
+
 ## Legacy Proxy Results
 
-Previous Phase 3 and Phase 4 smoke results used a temporary proxy and must be labeled as:
+Previous proxy smoke results must be labeled as:
 
 ```yaml
 robot_platform: temporary_quadruped_proxy
@@ -65,10 +86,10 @@ Only the candidate ID may drive control. Explanation text may be logged but must
 3. map_predict may be added later only as ablation or optional auxiliary prior.
 4. Do not implement map_predict before primary-scene VLM-LA data collection and review.
 
-## Current Correction Gate
+## Current Gate
 
-Phase 6 is paused. Rerun Phase 3 through Phase 5 using explicit `/World/A1`, or explicitly continue as proxy-only, before moving forward.
+Phase 3 A1 sensor smoke passed. The next formal route is Phase 4 A1 primary-scene mapping smoke. Do not enter Phase 6 yet.
 
 ## Negative Scope
 
-Do not train VLM, RL, map_predict, PI/openpi action heads, or locomotion policies in the current stage. Do not let the VLM output free coordinates, base velocities, or joint actions. Do not commit scene bundles, meshes, textures, raw sensor dumps, checkpoints, core dumps, tokens, keys, or private configs.
+Do not train VLM, RL, map_predict, PI/openpi action heads, or A1 locomotion policies in the current stage. Do not let the VLM output free coordinates, base velocities, or joint actions. Do not commit scene bundles, meshes, textures, raw sensor dumps, checkpoints, core dumps, tokens, keys, or private configs.

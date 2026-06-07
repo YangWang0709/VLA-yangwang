@@ -1,10 +1,10 @@
 # VLM-LA Dataset Spec
 
-## Corrected Project Route
+## Project Route
 
 A1-VLM-LA Explorer for 3D Active Exploration
 
-## Corrected Robot Metadata
+## Formal A1 Metadata
 
 Formal A1 data must use:
 
@@ -24,7 +24,21 @@ not_final_robot_asset: true
 
 ## Status
 
-Specification only. No training is allowed at this correction stage.
+Phase 3 A1 sensor smoke passed. No training is allowed at this stage.
+
+## Phase 3 A1 Provenance
+
+```yaml
+run_dir: /home/ubuntu22/VLA/runs/phase3_a1_sensor_smoke_20260607_193054
+scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
+base_frame: /World/A1/base
+movement_mode: kinematic_existing_a1_root
+real_a1_locomotion_controller: false
+sensor_method: geometry_proxy_pointcloud_from_a1_base_pose
+existing_sensor_reused: false
+geometry_proxy_sensor_used: true
+safe_to_continue_phase4: true
+```
 
 ## Sample Purpose
 
@@ -65,9 +79,9 @@ Each sample teaches a model to choose a candidate viewpoint through constrained 
 Go to candidate <id>.
 ```
 
-## Correction Gate
+## Current Gate
 
-Current Phase 3 and Phase 4 results are proxy pipeline smoke and are not final A1 data. Phase 5 data is not present in the current repository. Do not prepare training or Phase 6 evaluation until the user decides whether to rerun Phase 3 through Phase 5 using `/World/A1`.
+Phase 4 A1 primary-scene mapping smoke is next. Do not prepare candidate generation, training, rollout, or Phase 6 evaluation until the formal A1 mapping and candidate phases exist.
 
 ## Large Artifact Safety
 
