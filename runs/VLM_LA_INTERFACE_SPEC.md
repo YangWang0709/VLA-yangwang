@@ -19,45 +19,18 @@ base_frame: /World/A1/base
 Go to candidate <id>.
 ```
 
-## Phase 8 Interface Gate
+## Phase 9 Interface Audit
 
 ```yaml
-candidate_data_source: online_real_sensor_candidate_generation
-vlm_output_mode: pseudo_from_classical_selector
-sensor_method: real_isaac_omniverse_rgbd
-camera_pointcloud_source: depth_backprojection
-geometry_proxy_used: false
-mounted_geometry_proxy_used: false
+source_dataset: Phase 8 rollout
 parse_success_rate: 1.0
 validation_success_rate: 1.0
 movement_success_rate: 1.0
-safe_to_continue_phase9: true
+accepted_sample_count: 74
+warning_sample_count: 3
+rejected_sample_count: 0
+training_ready: false
+requires_human_review: true
 ```
 
-## Parser And Validator Contract
-
-The parser extracts the integer candidate ID from `Go to candidate <id>.` commands. The validator checks candidate existence, valid/reachable flags, and collision risk before target pose lookup.
-
-## Invalid Main Outputs
-
-```text
-Go to the left room.
-```
-
-```json
-{
-  "x": 1.2,
-  "y": 3.4,
-  "yaw": 1.57
-}
-```
-
-```text
-v, omega
-```
-
-```text
-robot joint actions
-```
-
-The main interface must remain candidate-ID based. Free coordinates, velocities, and joint commands are not accepted as VLM-LA outputs.
+The main interface remains candidate-ID based. Free coordinates, velocities, and joint commands are not accepted as VLM-LA outputs.

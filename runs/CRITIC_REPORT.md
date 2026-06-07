@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 8 A1 primary-scene VLM-LA long rollout data collection
+Phase 9 human review packet
 
 ## Corrected Fact
 
@@ -15,84 +15,44 @@ a1_root_prim: /World/A1
 base_frame: /World/A1/base
 ```
 
-## Phase 8 Review
+## Phase 9 Review
 
-status: passed
-run_dir: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536
-script: /home/ubuntu22/VLA/scripts/phase8_a1_vlm_la_long_rollout.py
-report: /home/ubuntu22/VLA/runs/A1_VLM_LA_LONG_ROLLOUT_REPORT.md
-scene_path: /home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd
-robot_platform: unitree_a1
-robot_source: existing_usd_prim
-a1_root_prim: /World/A1
-base_frame: /World/A1/base
-sensor_method: real_isaac_omniverse_rgbd
-camera_pointcloud_source: depth_backprojection
-real_rgb_sensor_available: true
-real_depth_sensor_available: true
-real_camera_pointcloud_available: true
-real_rgb_sensor_valid_rate: 0.987
-real_depth_sensor_valid_rate: 1.0
-real_camera_pointcloud_valid_rate: 1.0
-geometry_proxy_used: false
-mounted_geometry_proxy_used: false
-movement_mode: kinematic_existing_a1_root
-real_a1_locomotion_controller: false
-real_vlm_inference: false
-vlm_output_mode: pseudo_from_classical_selector
-output_contract: Go to candidate <id>.
-start_count: 10
-completed_start_count: 10
-max_actions_per_start: 8
-total_action_count: 77
-candidate_rows: 1848
-vlm_la_sample_count: 77
-average_final_known_ratio: 0.305375
-average_known_ratio_gain: 0.305375
+status: review_packet_prepared
+run_dir: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732
+script: /home/ubuntu22/VLA/scripts/phase9_dataset_quality_audit.py
+checklist: /home/ubuntu22/VLA/runs/HUMAN_REVIEW_A1_VLM_LA_DATASET_CHECKLIST.md
+quality_report: /home/ubuntu22/VLA/runs/DATASET_QUALITY_REPORT.md
+source_run_dir: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536
+total_samples: 77
+accepted_sample_count: 74
+warning_sample_count: 3
+rejected_sample_count: 0
+acceptance_rate: 0.961
+warning_rate: 0.039
+rejection_rate: 0.0
 parse_success_rate: 1.0
 validation_success_rate: 1.0
 movement_success_rate: 1.0
-starts_with_failures: 1
-rgb_invalid_step_count: 1
-collision_count: 0
-stuck_count: 0
-falling_count: 0
-safe_to_continue_phase9: true
+real_sensor_sample_rate: 1.0
+average_final_known_ratio: 0.305375
+training_ready: false
+requires_human_review: true
+recommended_next_phase: manual_review_before_sft_preparation
 
 ## Findings
 
-- No blocking issue found for Phase 8 pass criteria.
-- Ten starts were attempted and completed with at least two action steps each.
-- Candidate-ID output contract stayed constrained to `Go to candidate <id>.`
-- Parser, validator, target pose lookup, and movement success rates were 1.0.
-- Depth and depth-backprojected pointcloud validity rates were 1.0.
-- One post-move RGB validity check failed at start 004 step 004 and is recorded as `post_rgb_invalid`; raw CSV/JSONL rows were not edited.
-- No collision, stuck, falling, training, RL, checkpoint, real VLM inference, geometry proxy, or mounted geometry proxy was recorded.
-
-## Residual Risks And Caveats
-
-- Movement is kinematic root movement, not a trained or deployed A1 locomotion controller.
-- VLM labels are pseudo labels from a classical selector, not real VLM inference.
-- Samples are prototype data and require Phase 9 human review before any training use.
-- RGB validity was 0.987 across rollout step rows because of the one recorded post-move RGB failure.
+- Dataset audit completed without training, SFT, GDPO, RL, real VLM inference, or Phase 8 raw row mutation.
+- No rejected samples were found under the implemented gates.
+- One warning sample was found due to the Phase 8 `post_rgb_invalid` record.
+- All samples retained candidate-ID language contract checks.
+- The data is not training-ready until manual review approves a later preparation phase.
 
 ## Evidence
 
-- rollout_steps_csv: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/summary/rollout_steps.csv
-- candidate_summary_csv: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/summary/candidate_summary.csv
-- vlm_la_samples_jsonl: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/samples/vlm_la_samples.jsonl
-- dataset_manifest_json: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/samples/dataset_manifest.json
-- rollout_summary_json: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/summary/rollout_summary.json
-- plots_path: /home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536/plots
-
-## Prohibited Work Check
-
-- VLM training performed: false
-- real VLM inference performed: false
-- RL training performed: false
-- map_predict training performed: false
-- PI/openpi fine-tuning performed: false
-- A1 locomotion training performed: false
-- checkpoint created: false
-- geometry proxy used: false
-- USD scene modified: false
+- dataset_quality_summary: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/summary/dataset_quality_summary.json
+- start_quality_summary: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/summary/start_quality_summary.csv
+- failure_reason_summary: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/summary/failure_reason_summary.csv
+- accepted_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/accepted_samples.jsonl
+- warning_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/warning_samples.jsonl
+- rejected_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/rejected_samples.jsonl
+- plots_path: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/plots
