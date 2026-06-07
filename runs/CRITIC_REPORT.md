@@ -2,30 +2,27 @@
 
 ## Current Phase
 
-Phase 1: USD scene bundle placement and Git ignore.
-
-## Workspace
-
-`/home/ubuntu22/VLA`
+Phase 2 Isaac headless scene open + Go2 stage inspection smoke
 
 ## Mainline Alignment
 
-- Main research line: Go2-VLM-LA Explorer for 3D Active Exploration.
-- Robot platform: Unitree Go2.
-- Expected robot source: existing Go2 prim inside the USD scene.
-- Output contract: `Go to candidate <id>.`
-- Phase 1 scope: place scene bundle and verify Git safety only.
+- workspace: /home/ubuntu22/VLA
+- main_goal: Go2-VLM-LA Explorer for 3D Active Exploration
+- output_contract: Go to candidate <id>.
+- robot_platform: Unitree Go2
+- robot_source: temporary_proxy_required
 
-## Phase 1 Checks
+## Phase 2 Findings
 
-- Target USD exists: true
-- Full scene bundle copied instead of only one USD: true
-- Copied from old workspace without deleting or overwriting old workspace: true
-- `dependencies/` present: true
-- Scene bundle ignored by Git: true
-- Files larger than 50MB tracked by Git: none
-- Scene bundle staged or committed: false
-- Safe to continue Phase 2: true
+- Scene headless open succeeded: true
+- Stage available: true
+- Prim count > 0: true
+- Core dump found: false
+- MDL/material warnings found: true
+- MDL/material warnings blocking: false
+- Explicit Go2 prim found: false
+- Temporary Go2 proxy required: true
+- Safe to continue Phase 3: true
 
 ## Prohibited Work Check
 
@@ -36,18 +33,19 @@ Phase 1: USD scene bundle placement and Git ignore.
 - Go2 locomotion policy training performed: false
 - PPO/SAC/locomotion RL performed: false
 - Rollout performed: false
-- VLM free coordinate output allowed: false
-- VLM `v, omega` output allowed: false
-- VLM Go2 joint action output allowed: false
+- Mapping performed: false
+- Candidate generation performed: false
+- Sensor mounting performed: false
+- Robot movement performed: false
+- USD stage modified: false
 - Scene bundle committed: false
 - Mesh/texture/dependencies committed: false
 - Checkpoint/core dump committed: false
-- Old `/home/ubuntu22/pi` files deleted or overwritten: false
+
+## Critic Notes
+
+The scene opens successfully and contains an articulated `/World/A1` hierarchy, but Phase 2 did not verify an explicit Unitree Go2 prim. The project must not claim `go2_in_usd_found: true` based on `/World/A1`. If Phase 3 proceeds without a verified Go2 prim, it must clearly report `temporary_go2_proxy_required: true` and `not_final_robot_asset: true`.
 
 ## Decision
 
-Phase 1 passes the safety gate and may proceed to Phase 2.
-
-## Next Phase
-
-Phase 2: Isaac headless scene open + Go2 stage inspection smoke.
+Phase 2 passes the scene-open gate and the inspection-report gate. It may proceed to Phase 3 with the temporary-proxy caveat unless a verified Go2 prim is supplied.
