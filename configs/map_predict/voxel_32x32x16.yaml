@@ -1,0 +1,20 @@
+name: voxel_32x32x16
+phase: map_predict_phase0
+grid:
+  dims: [16, 32, 32]
+  layout: [D, H, W]
+  voxel_size: 0.25
+  crop_extent_m: [4.0, 8.0, 8.0]
+  crop_center: robot_base
+channels:
+  input:
+    - observed_free
+    - observed_occupied
+    - unknown_mask
+    - frontier_mask
+  target:
+    - full_occupancy
+safety:
+  training_enabled: false
+  rollout_enabled: false
+  modify_vla_data: false

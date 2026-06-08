@@ -1,0 +1,20 @@
+name: diffusion_small
+phase: map_predict_phase0
+model:
+  architecture: occupancy_3d_unet
+  in_channels: 4
+  out_channels:
+    occupancy_logits: 1
+    uncertainty_logits: 1
+  base_channels: 24
+diffusion:
+  timesteps: 100
+  beta_start: 0.0001
+  beta_end: 0.02
+training:
+  enabled: false
+  note: Phase 0 defines the config draft only. Do not train.
+outputs:
+  predicted_occupancy: true
+  occupancy_probability: true
+  uncertainty: true
