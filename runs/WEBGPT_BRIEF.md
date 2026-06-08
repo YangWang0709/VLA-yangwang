@@ -1,3 +1,35 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 3D U-Net Baseline Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+project_name: A1-VLM-LA Explorer
+module_role: SceneSense-style feature provider
+dataset: local_voxel_v2_aligned_real_partial_3d
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+partial_3d_source: real_depth_backprojection_raycast
+sample_count: 97
+train/val/test: 68 / 20 / 9
+model: lightweight 3-level 3D U-Net
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+output: occupancy_logits [B,1,D,H,W]
+training_started: true
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+best_val_unknown_iou: 0.24434269921427498
+best_val_unknown_bce: 0.16702158148546034
+test_unknown_iou: 0.2395377323549695
+observed_consistency_error: 0.0
+checkpoint_committed_to_git: false
+safe_to_build_uncertainty_baseline: true
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Alignment Debug Status
 

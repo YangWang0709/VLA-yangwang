@@ -31,6 +31,81 @@ def unknown_region_iou(pred: np.ndarray, target: np.ndarray, unknown_mask: np.nd
     return binary_iou(np.asarray(pred)[mask], np.asarray(target)[mask])
 
 
+def binary_cross_entropy_prob(prob: np.ndarray, target: np.ndarray, mask: np.ndarray | None = None) -> float:
+    p = np.asarray(prob, dtype=np.float64)
+    t = np.asarray(target, dtype=np.float64)
+    if mask is not None:
+        m = np.asarray(mask, dtype=bool)
+        p = p[m]
+        t = t[m]
+    if p.size == 0:
+        return 0.0
+    p = np.clip(p, 1e-6, 1.0 - 1e-6)
+    return float(np.mean(-(t * np.log(p) + (1.0 - t) * np.log(1.0 - p))))
+
+
+def observed_consistency_error(
+    pred_occ: np.ndarray,
+    observed_free: np.ndarray,
+    observed_occupied: np.ndarray,
+) -> float:
+    pred = np.asarray(pred_occ, dtype=bool)
+    free = np.asarray(observed_free, dtype=bool)
+    occupied = np.asarray(observed_occupied, dtype=bool)
+    errors = 0
+    total = int(free.sum() + occupied.sum())
+    if total == 0:
+        return 0.0
+    errors += int(np.logical_and(pred, free).sum())
+    errors += int(np.logical_and(~pred, occupied).sum())
+    return float(errors / total)
+
+
+def masked_binary_stats(pred_occ: np.ndarray, gt_occ: np.ndarray, mask: np.ndarray) -> dict[str, float]:
+    m = np.asarray(mask, dtype=bool)
+    if m.sum() == 0:
+        return {"iou": 1.0, "precision": 1.0, "recall": 1.0}
+    pred = np.asarray(pred_occ, dtype=bool)[m]
+    gt = np.asarray(gt_occ, dtype=bool)[m]
+    precision, recall = precision_recall(pred, gt)
+    return {"iou": binary_iou(pred, gt), "precision": precision, "recall": recall}
+
+
+def occupancy_completion_metrics(
+    pred_prob: np.ndarray,
+    full_occupancy: np.ndarray,
+    unknown_mask: np.ndarray,
+    observed_free: np.ndarray,
+    observed_occupied: np.ndarray,
+    *,
+    threshold: float = 0.5,
+) -> dict[str, float]:
+    """Compute Phase 3 validation metrics for one sample."""
+
+    prob = np.asarray(pred_prob, dtype=np.float32)
+    gt = np.asarray(full_occupancy, dtype=bool)
+    unknown = np.asarray(unknown_mask, dtype=bool)
+    pred_occ = prob > float(threshold)
+    unknown_stats = masked_binary_stats(pred_occ, gt, unknown)
+    full_stats = masked_binary_stats(pred_occ, gt, np.ones_like(gt, dtype=bool))
+    naive_free_prob = np.zeros_like(prob, dtype=np.float32)
+    naive_occ_prob = np.ones_like(prob, dtype=np.float32)
+    naive_free_occ = np.zeros_like(gt, dtype=bool)
+    naive_occ_occ = np.ones_like(gt, dtype=bool)
+    return {
+        "unknown_region_bce": binary_cross_entropy_prob(prob, gt.astype(np.float32), unknown),
+        "unknown_region_iou": unknown_stats["iou"],
+        "unknown_region_precision": unknown_stats["precision"],
+        "unknown_region_recall": unknown_stats["recall"],
+        "observed_consistency_error": observed_consistency_error(pred_occ, observed_free, observed_occupied),
+        "full_crop_iou": full_stats["iou"],
+        "naive_all_free_iou": masked_binary_stats(naive_free_occ, gt, unknown)["iou"],
+        "naive_all_occupied_iou": masked_binary_stats(naive_occ_occ, gt, unknown)["iou"],
+        "naive_all_free_bce": binary_cross_entropy_prob(naive_free_prob, gt.astype(np.float32), unknown),
+        "naive_all_occupied_bce": binary_cross_entropy_prob(naive_occ_prob, gt.astype(np.float32), unknown),
+    }
+
+
 def observed_gt_conflict_ratio(observed_occupied: np.ndarray, full_occupancy: np.ndarray) -> float:
     """Return fraction of observed occupied voxels absent from full occupancy."""
 

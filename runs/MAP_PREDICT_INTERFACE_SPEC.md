@@ -1,3 +1,30 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 Interface Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+feature_provider_role: true
+planner: false
+VLA: false
+output_actions: false
+input_partial_3d_source: real_depth_backprojection_raycast
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+target_label: full_occupancy
+target_label_type: dense_scan_pseudo_gt
+target_label_is_perfect_ground_truth: false
+model_output: occupancy_logits [B,1,D,H,W]
+inference_postprocess: clamp observed_free to 0.0 and observed_occupied to 1.0
+observed_consistency_error: 0.0
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+VLM_output_contract_unchanged: Go to candidate <id>.
+safe_to_build_uncertainty_baseline: true
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Interface Status
 

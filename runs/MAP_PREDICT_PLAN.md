@@ -1,3 +1,26 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 3D U-Net Baseline Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+module_role: SceneSense-style feature provider
+planner: false
+VLA: false
+dataset: local_voxel_v2_aligned_real_partial_3d
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+model: lightweight 3-level 3D U-Net occupancy completion baseline
+training_started: true
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_build_uncertainty_baseline: true
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Alignment Debug Status
 

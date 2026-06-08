@@ -1,3 +1,34 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 Dataset Usage Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+dataset_version: local_voxel_v2_aligned_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+array_layout: [D, H, W]
+axis_order_convention: D=Z,H=Y,W=X
+voxel_shape: [24, 64, 64]
+voxel_size: 0.2
+partial_3d_source: real_depth_backprojection_raycast
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+full_occupancy_used_as_input: false
+full_occupancy_label_only: true
+quality_filter: quality_status=pass
+sample_count_used: 97
+train_sample_count: 68
+val_sample_count: 20
+test_sample_count: 9
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+safe_to_build_uncertainty_baseline: true
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Corrected Dataset Status
 

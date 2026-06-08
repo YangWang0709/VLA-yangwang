@@ -1,3 +1,43 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 3D U-Net Baseline Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+map_predict_goal: SceneSense-style partial occupancy completion and uncertainty feature provider
+dataset: local_voxel_v2_aligned_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+run_dir: /home/ubuntu22/VLA/runs/map_predict_phase3_3d_unet_baseline_20260609_002658
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+sample_count: 97
+train_sample_count: 68
+val_sample_count: 20
+test_sample_count: 9
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+output: occupancy_logits [B,1,D,H,W]
+smoke_train_passed: true
+epochs: 30
+batch_size: 2
+best_val_unknown_iou: 0.24434269921427498
+best_val_unknown_bce: 0.16702158148546034
+test_unknown_iou: 0.2395377323549695
+test_unknown_bce: 0.1729543162925098
+observed_consistency_error: 0.0
+checkpoint_path: /home/ubuntu22/VLA/runs/map_predict_phase3_3d_unet_baseline_20260609_002658/checkpoints/best_3d_unet.pt
+checkpoint_committed_to_git: false
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_build_uncertainty_baseline: true
+report: /home/ubuntu22/VLA/runs/MAP_PREDICT_PHASE3_3D_UNET_BASELINE_REPORT.md
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Alignment Debug Status
 

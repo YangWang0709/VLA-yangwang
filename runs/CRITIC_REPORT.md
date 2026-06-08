@@ -1,3 +1,32 @@
+<!-- map_predict_phase3_status:start -->
+## MapPredict Phase 3 3D U-Net Baseline Critic Status
+
+current_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+finding: completed
+evidence: 3 epoch smoke and 30 epoch baseline completed on local_voxel_v2_aligned_real_partial_3d using only quality_status=pass samples.
+dataset: local_voxel_v2_aligned_real_partial_3d
+sample_count: 97
+train/val/test: 68 / 20 / 9
+best_val_unknown_iou: 0.24434269921427498
+best_val_unknown_bce: 0.16702158148546034
+test_unknown_iou: 0.2395377323549695
+test_unknown_bce: 0.1729543162925098
+observed_consistency_error: 0.0
+naive_baseline_check: val IoU beats all-free and all-occupied; val BCE beats all-free.
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+map_predict_training_started: true
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+checkpoint_committed_to_git: false
+safe_to_build_uncertainty_baseline: true
+next_phase: MapPredict Phase 4 uncertainty baseline via MC dropout / ensemble or lightweight diffusion sampling
+<!-- map_predict_phase3_status:end -->
+
 <!-- map_predict_phase26_status:start -->
 ## MapPredict Phase 2.6 Alignment Debug Status
 
