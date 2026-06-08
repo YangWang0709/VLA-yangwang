@@ -2,47 +2,60 @@
 
 ## Current Phase
 
-New Scene Phase A scene open and robot inspection
+New Scene Phase B real sensor suite smoke
 
 ## Context
 
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-workspace: /home/ubuntu22/VLA
-main_goal: A1-VLM-LA Explorer for 3D Active Exploration
-output_contract: Go to candidate <id>.
+current_scene_phase: New Scene Phase B real sensor suite smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 base_frame: /World/A1/base
-sensor_method: real_isaac_omniverse_rgbd_not_started
+sensor_method: real_isaac_omniverse_sensor_suite
+output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
+next_phase: New Scene Phase C real-sensor mapping smoke
+
+negative_scope:
+- training: false
+- RL: false
+- SFT: false
+- GDPO: false
+- map_predict: false
+- rollout: false
+- PI_action_finetuning: false
+- A1_locomotion_training: false
 
 ## Completed
 
-- Searched requested roots and selected the newest user USD.
-- Observed that direct `omni.usd` open on the single USDC was unsafe/unstable.
-- Followed the previous bundle approach: created a localized repaired bundle and kept the original USD unchanged.
-- Replaced the remote Unitree A1 reference with a local dependency copy inside the ignored bundle.
-- Validated the localized scene with Isaac headless plus `pxr.Usd.Stage.Open`.
+- Opened the repaired new scene in Isaac/Omniverse after localizing remaining remote prop references into ignored dependencies.
 - Confirmed `/World/A1` and `/World/A1/base`.
+- Created runtime RGB-D camera and optional RTX LiDAR under runtime sensor paths, synchronized to the A1 base.
+- Validated Replicator RGB, distance-to-image-plane depth, camera params, intrinsics, and camera pointcloud from real depth backprojection or Isaac pointcloud annotator.
+- Did not use geometry proxy and did not start mapping, candidates, rollout, or training.
 
 ## Metrics
 
-open_stage_result: true
-stage_available: true
-stage_open_elapsed_sec: 2.59
-prim_count: 1230
-mesh_count: 170
-cube_count: 149
-material_count: 167
-articulation_root_count: 1
-physics_joint_count: 54
+step_count: 6
+successful_steps: 6
+real_rgb_sensor_available: true
+real_depth_sensor_available: true
+camera_params_available: true
+camera_intrinsics_available: true
+real_camera_pointcloud_available: true
+camera_pointcloud_source: depth_backprojection
+rtx_lidar_attempted: true
+rtx_lidar_available: true
+camera_follows_base_rate: 1.0
+geometry_proxy_used: false
+mounted_geometry_proxy_used: false
 core_dump_found: false
-safe_to_real_sensor_smoke: true
+safe_to_mapping: true
 
 ## Next Action
 
-Continue only to New Scene Phase B real Isaac/Omniverse sensor suite smoke. Do not start rollout, training, SFT, GDPO, RL, or map_predict.
+New Scene Phase C real-sensor mapping smoke
