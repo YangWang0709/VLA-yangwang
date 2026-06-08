@@ -1,3 +1,28 @@
+<!-- map_predict_phase25_status:start -->
+## MapPredict Phase 2.5 Real Partial 3D Recapture Status
+
+current_phase: MapPredict Phase 2.5 real partial 3D occupancy recapture
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+module_role: SceneSense-style feature provider
+dataset_version: local_voxel_v1_real_partial_3d
+partial_3d_source: real_depth_backprojection_raycast
+gt_type: dense_scan_pseudo_gt
+recapture_completed: true
+sample_count: 100
+observed_occupied_zero_rate: 0.02
+main_reject_rate: 0.9
+safe_to_rebuild_phase2_dataset: false
+safe_to_train_3d_unet_baseline: false
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+next_phase: MapPredict Phase 2.6 finalize local voxel dataset with real partial 3D and resolve pseudo-GT alignment conflicts
+<!-- map_predict_phase25_status:end -->
+
 <!-- map_predict_phase2_status:start -->
 ## MapPredict Phase 2 Local Voxel Dataset Status
 

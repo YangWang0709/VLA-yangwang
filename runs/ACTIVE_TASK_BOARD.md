@@ -1,3 +1,43 @@
+<!-- map_predict_phase25_status:start -->
+## MapPredict Phase 2.5 Real Partial 3D Recapture Status
+
+current_phase: MapPredict Phase 2.5 real partial 3D occupancy recapture
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+map_predict_goal: SceneSense-style partial occupancy completion and uncertainty feature provider
+dataset_version: local_voxel_v1_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v1_real_partial_3d
+smoke_dataset_version: local_voxel_smoke_v1_real_partial_3d
+source_GT: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+partial_3d_source: real_depth_backprojection_raycast
+sensor_method: real_isaac_omniverse_rgbd
+scenes_processed: [old_home_like_scene_v1, new_building_scene_1]
+sample_count: 100
+pass_count: 7
+warning_count: 3
+reject_count: 90
+observed_occupied_zero_rate: 0.02
+frontier_empty_rate: 0.0
+main_reject_rate: 0.9
+main_reject_reason: severe_gt_observed_conflict_ratio_against_dense_scan_pseudo_gt
+recapture_completed: true
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+requires_review: true
+training_ready: false
+safe_to_rebuild_phase2_dataset: false
+safe_to_train_3d_unet_baseline: false
+run_dir: /home/ubuntu22/VLA/runs/map_predict_phase25_real_partial_3d_recapture_20260608_235553
+report: /home/ubuntu22/VLA/runs/MAP_PREDICT_PHASE25_REAL_PARTIAL_3D_RECAPTURE_REPORT.md
+next_phase: MapPredict Phase 2.6 finalize local voxel dataset with real partial 3D and resolve pseudo-GT alignment conflicts
+<!-- map_predict_phase25_status:end -->
+
 <!-- map_predict_phase2_status:start -->
 ## MapPredict Phase 2 Local Voxel Dataset Status
 

@@ -41,6 +41,19 @@ def observed_gt_conflict_ratio(observed_occupied: np.ndarray, full_occupancy: np
     return float(np.logical_and(observed, ~full).sum() / observed.sum())
 
 
+def overlap_count(left: np.ndarray, right: np.ndarray) -> int:
+    """Return the number of voxels set in both binary arrays."""
+
+    return int(np.logical_and(np.asarray(left, dtype=bool), np.asarray(right, dtype=bool)).sum())
+
+
+def zero_rate(values: Iterable[int | float]) -> float:
+    arr = np.asarray(list(values), dtype=np.float64)
+    if arr.size == 0:
+        return 0.0
+    return float(np.count_nonzero(arr == 0) / arr.size)
+
+
 def count_distribution(values: Iterable[int | float]) -> dict[str, float | int | None]:
     arr = np.asarray(list(values), dtype=np.float64)
     if arr.size == 0:

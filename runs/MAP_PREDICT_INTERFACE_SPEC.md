@@ -1,3 +1,30 @@
+<!-- map_predict_phase25_status:start -->
+## MapPredict Phase 2.5 Real Partial 3D Interface Status
+
+current_phase: MapPredict Phase 2.5 real partial 3D occupancy recapture
+feature_provider_role: true
+planner: false
+VLA: false
+output_actions: false
+input_partial_3d_source: real_depth_backprojection_raycast
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+metadata_channels: robot_pose, camera_pose, camera_intrinsics, crop_origin_xyz, crop_center_xyz, voxel_size
+target_label: full_occupancy
+target_label_type: dense_scan_pseudo_gt
+target_label_is_perfect_ground_truth: false
+full_occupancy_used_as_input: false
+observed_occupied_zero_rate: 0.02
+safe_to_train_3d_unet_baseline: false
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+VLM_output_contract_unchanged: Go to candidate <id>.
+next_phase: MapPredict Phase 2.6 finalize local voxel dataset with real partial 3D and resolve pseudo-GT alignment conflicts
+<!-- map_predict_phase25_status:end -->
+
 <!-- map_predict_phase2_status:start -->
 ## MapPredict Phase 2 Local Voxel Dataset Status
 

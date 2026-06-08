@@ -128,10 +128,11 @@ def local_voxel_dataset_manifest(
     warning_count: int,
     reject_count: int,
     partial_3d_source: str,
+    observed_occupied_zero_rate: float | None = None,
 ) -> dict[str, Any]:
     """Build the canonical manifest for a local voxel crop dataset."""
 
-    return {
+    manifest = {
         "dataset_name": dataset_name,
         "gt_type": gt_type,
         "scenes": scenes,
@@ -147,3 +148,6 @@ def local_voxel_dataset_manifest(
         "training_ready": False,
         "requires_review": True,
     }
+    if observed_occupied_zero_rate is not None:
+        manifest["observed_occupied_zero_rate"] = float(observed_occupied_zero_rate)
+    return manifest

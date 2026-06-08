@@ -1,3 +1,33 @@
+<!-- map_predict_phase25_status:start -->
+## MapPredict Phase 2.5 Real Partial 3D Dataset Status
+
+current_phase: MapPredict Phase 2.5 real partial 3D occupancy recapture
+dataset_version: local_voxel_v1_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v1_real_partial_3d
+smoke_dataset_version: local_voxel_smoke_v1_real_partial_3d
+array_layout: [D, H, W]
+voxel_shape: [24, 64, 64]
+voxel_size: 0.2
+partial_3d_source: real_depth_backprojection_raycast
+forbidden_partial_3d_source: reconstructed_from_map_stats_only
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+full_occupancy_used_as_input: false
+full_occupancy_label_only: true
+sample_count: 100
+pass_count: 7
+warning_count: 3
+reject_count: 90
+observed_occupied_zero_rate: 0.02
+frontier_empty_rate: 0.0
+main_reject_rate: 0.9
+training_started: false
+map_predict_training_started: false
+training_ready: false
+safe_to_train_3d_unet_baseline: false
+next_phase: MapPredict Phase 2.6 finalize local voxel dataset with real partial 3D and resolve pseudo-GT alignment conflicts
+<!-- map_predict_phase25_status:end -->
+
 <!-- map_predict_phase2_status:start -->
 ## MapPredict Phase 2 Local Voxel Dataset Status
 
