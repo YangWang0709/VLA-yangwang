@@ -1,3 +1,35 @@
+<!-- map_predict_phase4_status:start -->
+## MapPredict Phase 4 Uncertainty + BEV Projection Critic Status
+
+current_phase: MapPredict Phase 4 uncertainty baseline + BEV projection
+finding: completed
+evidence: Phase 3 checkpoint loaded and val/test inference completed without training or rollout.
+source_model: 3D U-Net baseline
+dataset: local_voxel_v2_aligned_real_partial_3d
+samples_evaluated: 29
+uncertainty_method: probability_entropy
+mc_dropout_available: false
+observed_space_preserved: true
+observed_consistency_error_after_projection: 0.0
+unknown_region_iou: 0.24285150260276642
+unknown_region_bce: 0.1688627752784241
+uncertainty_mean_unknown: 0.11295758059312558
+uncertainty_mean_observed: 0.0
+frontier_feature_row_count: 92
+frontier_feature_nan_count: 0
+safe_to_build_frontier_scoring_baseline: true
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+checkpoint_committed_to_git: false
+large_outputs_committed_to_git: false
+next_phase: MapPredict Phase 5 frontier feature extraction and scoring baseline
+<!-- map_predict_phase4_status:end -->
+
 <!-- map_predict_phase3_status:start -->
 ## MapPredict Phase 3 3D U-Net Baseline Critic Status
 

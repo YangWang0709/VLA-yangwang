@@ -23,6 +23,124 @@ def frontier_mask_2d(known_free: np.ndarray, unknown: np.ndarray) -> np.ndarray:
     return frontier
 
 
+def frontier_mask_from_3d(observed_free: np.ndarray, unknown_mask: np.ndarray) -> np.ndarray:
+    """Derive a 3D frontier mask from free voxels adjacent to unknown voxels."""
+
+    free = np.asarray(observed_free, dtype=bool)
+    unknown = np.asarray(unknown_mask, dtype=bool)
+    frontier = np.zeros_like(free, dtype=bool)
+    shifts = [
+        (-1, 0, 0),
+        (1, 0, 0),
+        (0, -1, 0),
+        (0, 1, 0),
+        (0, 0, -1),
+        (0, 0, 1),
+    ]
+    for dz, dy, dx in shifts:
+        shifted = np.zeros_like(unknown, dtype=bool)
+        src_z = slice(max(0, -dz), unknown.shape[0] - max(0, dz))
+        src_y = slice(max(0, -dy), unknown.shape[1] - max(0, dy))
+        src_x = slice(max(0, -dx), unknown.shape[2] - max(0, dx))
+        dst_z = slice(max(0, dz), unknown.shape[0] - max(0, -dz))
+        dst_y = slice(max(0, dy), unknown.shape[1] - max(0, -dy))
+        dst_x = slice(max(0, dx), unknown.shape[2] - max(0, -dx))
+        shifted[dst_z, dst_y, dst_x] = unknown[src_z, src_y, src_x]
+        frontier |= free & shifted
+    return frontier
+
+
+def connected_components_2d(mask: np.ndarray) -> list[np.ndarray]:
+    """Return 4-connected BEV component masks."""
+
+    source = np.asarray(mask, dtype=bool)
+    visited = np.zeros_like(source, dtype=bool)
+    components: list[np.ndarray] = []
+    h, w = source.shape
+    for y in range(h):
+        for x in range(w):
+            if visited[y, x] or not source[y, x]:
+                continue
+            component = np.zeros_like(source, dtype=bool)
+            stack = [(y, x)]
+            visited[y, x] = True
+            while stack:
+                cy, cx = stack.pop()
+                component[cy, cx] = True
+                for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                    ny, nx = cy + dy, cx + dx
+                    if 0 <= ny < h and 0 <= nx < w and source[ny, nx] and not visited[ny, nx]:
+                        visited[ny, nx] = True
+                        stack.append((ny, nx))
+            components.append(component)
+    return components
+
+
+def frontier_feature_rows(
+    *,
+    sample_id: str,
+    frontier_mask: np.ndarray,
+    unknown_mask: np.ndarray | None = None,
+    pred_occ_prob: np.ndarray,
+    uncertainty: np.ndarray,
+    bev_pred_occ: np.ndarray,
+    bev_uncertainty: np.ndarray,
+    max_components: int | None = None,
+) -> list[dict[str, Any]]:
+    """Summarize each BEV frontier connected component."""
+
+    frontier_3d = np.asarray(frontier_mask, dtype=bool)
+    if frontier_3d.ndim != 3:
+        raise ValueError(f"frontier_mask must be [D,H,W], got {frontier_3d.shape}")
+    pred = np.asarray(pred_occ_prob, dtype=np.float32)
+    unc = np.asarray(uncertainty, dtype=np.float32)
+    unknown = np.asarray(unknown_mask, dtype=bool) if unknown_mask is not None else np.zeros_like(frontier_3d, dtype=bool)
+    bev_frontier = frontier_3d.any(axis=0)
+    components = connected_components_2d(bev_frontier)
+    if max_components is not None:
+        components = components[: int(max_components)]
+    rows: list[dict[str, Any]] = []
+    for frontier_id, component_2d in enumerate(components):
+        component_3d = frontier_3d & component_2d[None, :, :]
+        if not component_3d.any():
+            continue
+        feature_3d = unknown & component_2d[None, :, :]
+        if not feature_3d.any():
+            feature_3d = component_3d
+        pred_values = pred[feature_3d]
+        unc_values = unc[feature_3d]
+        bev_unc_values = np.asarray(bev_uncertainty, dtype=np.float32)[component_2d]
+        rows.append(
+            {
+                "sample_id": sample_id,
+                "frontier_id": int(frontier_id),
+                "frontier_voxel_count": int(component_3d.sum()),
+                "frontier_bev_cell_count": int(component_2d.sum()),
+                "predicted_free_volume": float((1.0 - pred_values).sum()),
+                "predicted_occupied_risk": float(pred_values.mean()) if pred_values.size else 0.0,
+                "mean_uncertainty": float(unc_values.mean()) if unc_values.size else 0.0,
+                "max_uncertainty": float(unc_values.max()) if unc_values.size else 0.0,
+                "uncertainty_volume": float(unc_values.sum()) if unc_values.size else 0.0,
+                "expected_information_gain_proxy": float(
+                    (1.0 - pred_values).sum() * (bev_unc_values.mean() if bev_unc_values.size else 0.0)
+                ),
+                "bev_pred_occ_mean": float(np.asarray(bev_pred_occ, dtype=np.float32)[component_2d].mean())
+                if component_2d.any()
+                else 0.0,
+            }
+        )
+    return rows
+
+
+def frontier_feature_nan_count(rows: list[dict[str, Any]]) -> int:
+    count = 0
+    for row in rows:
+        for value in row.values():
+            if isinstance(value, float) and not np.isfinite(value):
+                count += 1
+    return count
+
+
 def summarize_candidate_uncertainty(
     candidates: list[dict[str, Any]],
     uncertainty_bev: np.ndarray,

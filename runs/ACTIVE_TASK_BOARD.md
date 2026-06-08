@@ -1,3 +1,42 @@
+<!-- map_predict_phase4_status:start -->
+## MapPredict Phase 4 Uncertainty + BEV Projection Status
+
+current_phase: MapPredict Phase 4 uncertainty baseline + BEV projection
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+map_predict_goal: SceneSense-style partial occupancy completion and uncertainty feature provider
+source_model: 3D U-Net baseline
+3d_unet_checkpoint_available: true
+checkpoint_path: /home/ubuntu22/VLA/runs/map_predict_phase3_3d_unet_baseline_20260609_002658/checkpoints/best_3d_unet.pt
+checkpoint_committed_to_git: false
+dataset: local_voxel_v2_aligned_real_partial_3d
+samples_evaluated: 29
+split_counts: val 20, test 9
+uncertainty_method: probability_entropy
+mc_dropout_available: false
+bev_occ_projection: max
+bev_uncertainty_projection: max
+observed_space_preserved: true
+observed_consistency_error_after_projection: 0.0
+unknown_region_iou: 0.24285150260276642
+unknown_region_bce: 0.1688627752784241
+uncertainty_mean_unknown: 0.11295758059312558
+uncertainty_mean_observed: 0.0
+frontier_feature_row_count: 92
+frontier_feature_nan_count: 0
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_build_frontier_scoring_baseline: true
+report: /home/ubuntu22/VLA/runs/MAP_PREDICT_PHASE4_UNCERTAINTY_BEV_REPORT.md
+run_dir: /home/ubuntu22/VLA/runs/map_predict_phase4_uncertainty_bev_projection_20260609_004045
+next_phase: MapPredict Phase 5 frontier feature extraction and scoring baseline
+<!-- map_predict_phase4_status:end -->
+
 <!-- map_predict_phase3_status:start -->
 ## MapPredict Phase 3 3D U-Net Baseline Status
 

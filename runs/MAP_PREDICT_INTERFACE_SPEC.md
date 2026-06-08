@@ -1,3 +1,33 @@
+<!-- map_predict_phase4_status:start -->
+## MapPredict Phase 4 Interface Status
+
+current_phase: MapPredict Phase 4 uncertainty baseline + BEV projection
+feature_provider_role: true
+planner: false
+VLA: false
+output_actions: false
+source_model: 3D U-Net baseline
+input: partial occupancy channels [observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel]
+output_pred_occ_prob: [D, H, W]
+output_voxel_uncertainty: [D, H, W]
+output_bev_pred_occ: [H, W]
+output_bev_uncertainty: [H, W]
+frontier_feature_fields: frontier_id, frontier_voxel_count, frontier_bev_cell_count, predicted_free_volume, predicted_occupied_risk, mean_uncertainty, max_uncertainty, uncertainty_volume, expected_information_gain_proxy
+uncertainty_method: probability_entropy
+mc_dropout_available: false
+observed_space_preserved: true
+observed_consistency_error_after_projection: 0.0
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+VLM_output_contract_unchanged: Go to candidate <id>.
+safe_to_build_frontier_scoring_baseline: true
+next_phase: MapPredict Phase 5 frontier feature extraction and scoring baseline
+<!-- map_predict_phase4_status:end -->
+
 <!-- map_predict_phase3_status:start -->
 ## MapPredict Phase 3 Interface Status
 

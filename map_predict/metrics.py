@@ -106,6 +106,37 @@ def occupancy_completion_metrics(
     }
 
 
+def uncertainty_evaluation_metrics(
+    uncertainty: np.ndarray,
+    unknown_mask: np.ndarray,
+    observed_free: np.ndarray,
+    observed_occupied: np.ndarray,
+    pred_prob: np.ndarray,
+    full_occupancy: np.ndarray,
+) -> dict[str, float]:
+    """Compute Phase 4 uncertainty and basic entropy calibration metrics."""
+
+    unc = np.asarray(uncertainty, dtype=np.float32)
+    unknown = np.asarray(unknown_mask, dtype=bool)
+    observed = np.asarray(observed_free, dtype=bool) | np.asarray(observed_occupied, dtype=bool)
+    mean_unknown = float(unc[unknown].mean()) if unknown.any() else 0.0
+    mean_observed = float(unc[observed].mean()) if observed.any() else 0.0
+    pred_occ = np.asarray(pred_prob, dtype=np.float32) > 0.5
+    gt_occ = np.asarray(full_occupancy, dtype=bool)
+    error_unknown = np.logical_xor(pred_occ, gt_occ) & unknown
+    correct_unknown = ~np.logical_xor(pred_occ, gt_occ) & unknown
+    error_unc = float(unc[error_unknown].mean()) if error_unknown.any() else 0.0
+    correct_unc = float(unc[correct_unknown].mean()) if correct_unknown.any() else 0.0
+    return {
+        "uncertainty_mean_unknown": mean_unknown,
+        "uncertainty_mean_observed": mean_observed,
+        "uncertainty_observed_gap": mean_unknown - mean_observed,
+        "entropy_calibration_basic": error_unc - correct_unc,
+        "uncertainty_mean_error_unknown": error_unc,
+        "uncertainty_mean_correct_unknown": correct_unc,
+    }
+
+
 def observed_gt_conflict_ratio(observed_occupied: np.ndarray, full_occupancy: np.ndarray) -> float:
     """Return fraction of observed occupied voxels absent from full occupancy."""
 

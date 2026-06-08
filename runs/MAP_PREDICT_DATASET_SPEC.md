@@ -1,3 +1,29 @@
+<!-- map_predict_phase4_status:start -->
+## MapPredict Phase 4 Dataset Usage Status
+
+current_phase: MapPredict Phase 4 uncertainty baseline + BEV projection
+dataset_version: local_voxel_v2_aligned_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+splits_used: val, test
+samples_evaluated: 29
+output_pred_occ_prob: [D, H, W]
+output_voxel_uncertainty: [D, H, W]
+output_bev_pred_occ: [H, W]
+output_bev_uncertainty: [H, W]
+frontier_feature_table: /home/ubuntu22/VLA/runs/map_predict_phase4_uncertainty_bev_projection_20260609_004045/frontier_features/frontier_feature_table.csv
+inference_outputs_local_only: true
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+safe_to_build_frontier_scoring_baseline: true
+next_phase: MapPredict Phase 5 frontier feature extraction and scoring baseline
+<!-- map_predict_phase4_status:end -->
+
 <!-- map_predict_phase3_status:start -->
 ## MapPredict Phase 3 Dataset Usage Status
 

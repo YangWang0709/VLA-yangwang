@@ -1,3 +1,27 @@
+<!-- map_predict_phase4_status:start -->
+## MapPredict Phase 4 Uncertainty + BEV Projection Status
+
+current_phase: MapPredict Phase 4 uncertainty baseline + BEV projection
+module_role: SceneSense-style feature provider
+planner: false
+VLA: false
+source_model: 3D U-Net baseline
+3d_unet_checkpoint_available: true
+uncertainty_method: probability_entropy
+mc_dropout_available: false
+bev_projection_ready: true
+frontier_feature_prototype_ready: true
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_build_frontier_scoring_baseline: true
+next_phase: MapPredict Phase 5 frontier feature extraction and scoring baseline
+<!-- map_predict_phase4_status:end -->
+
 <!-- map_predict_phase3_status:start -->
 ## MapPredict Phase 3 3D U-Net Baseline Status
 
