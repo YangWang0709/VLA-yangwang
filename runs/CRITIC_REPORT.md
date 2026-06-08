@@ -2,35 +2,37 @@
 
 ## Current Phase
 
-New Scene Phase B real sensor suite smoke
+New Scene Phase C real-sensor mapping smoke
 
 ## Finding
 
 status: passed
 
-The repaired new scene was rendered through the real Isaac/Omniverse RGB-D sensor route. Geometry proxy and mounted geometry proxy were not used as formal sensor data.
+The new-scene BEV map was updated from real Isaac/Omniverse RGB-D observations using depth_backprojection pointclouds. Geometry proxy and old proxy map outputs were not used.
 
 ## Evidence
 
 - scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 - a1_root_prim: /World/A1
 - base_frame: /World/A1/base
-- camera_prim_path: /World/RuntimeSensors/a1_front_rgbd_camera
-- pointcloud_source: depth_backprojection
-- rgb_valid_steps: 6
-- depth_valid_steps: 6
-- camera_pointcloud_valid_steps: 6
-- camera_follows_base_rate: 1.0
-- rtx_lidar_attempted: true
-- rtx_lidar_available: true
-- core_dump_found: false
-- safe_to_mapping: true
+- sensor_method: real_isaac_omniverse_rgbd
+- map_update_source: depth_backprojection_pointcloud
+- camera_pointcloud_source: depth_backprojection
+- valid_rgb_steps: 10
+- valid_depth_steps: 10
+- valid_camera_pointcloud_steps: 10
+- final_known_ratio: 0.076173
+- final_occupied_cells: 149
+- final_known_free_cells: 468
+- final_unknown_cells: 7483
+- map_update_behavior: pass
+- safe_to_candidate_gain: true
 
 ## Risks / Gates
 
-- RTX LiDAR is optional for this gate; failures are recorded but do not block RGB-D if the main route passes.
-- Some referenced props may emit MDL material warnings; the RGB-D/depth pointcloud gate is based on rendered sensor validity, not material completeness.
-- Do not start Phase C unless `safe_to_mapping` is true.
+- Phase C is a mapping smoke, not final dataset generation.
+- RTX LiDAR is optional telemetry and is not used for mapping pass/fail.
+- Do not start Phase D unless `safe_to_candidate_gain` is true.
 
 training: false
 RL: false

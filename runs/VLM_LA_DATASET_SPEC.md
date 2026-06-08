@@ -10,32 +10,33 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase B real sensor suite smoke
+current_scene_phase: New Scene Phase C real-sensor mapping smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 base_frame: /World/A1/base
-sensor_method: real_isaac_omniverse_sensor_suite
+sensor_method: real_isaac_omniverse_rgbd
+map_update_source: depth_backprojection_pointcloud
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase C real-sensor mapping smoke
+next_phase: New Scene Phase D candidate viewpoint + information gain smoke
 sensor_phaseB_status: passed
-real_rgb_sensor_available: true
-real_depth_sensor_available: true
-real_camera_pointcloud_available: true
-camera_pointcloud_source: depth_backprojection
+mapping_phaseC_status: passed
+mapping_method: raycast_real_sensor_bev_mapping
+map_update_source: depth_backprojection_pointcloud
+safe_to_candidate_gain: true
 ```
 
-No new-scene dataset samples have been created. Phase B only validated the real sensor route and did not create mapping, candidate, rollout, or training data.
+No new-scene dataset samples have been created. Phase C only validated real-sensor BEV map updating and did not create candidate, VLM-LA, rollout, or training data.
 
 ## Required New Scene Sample Metadata
 
 Future Phase G samples, only after Phase B-F pass, must include:
 
 - real RGB/depth metadata
-- depth_backprojection or Isaac pointcloud annotator stats
-- BEV candidate render reference
+- depth_backprojection pointcloud stats
+- BEV map/candidate render reference
 - candidate table reference
 - selected_candidate_id
 - target_language: `Go to candidate <id>.`

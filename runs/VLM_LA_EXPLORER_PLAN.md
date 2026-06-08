@@ -18,29 +18,29 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase B real sensor suite smoke
+current_scene_phase: New Scene Phase C real-sensor mapping smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 base_frame: /World/A1/base
-sensor_method: real_isaac_omniverse_sensor_suite
+sensor_method: real_isaac_omniverse_rgbd
+map_update_source: depth_backprojection_pointcloud
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase C real-sensor mapping smoke
-real_rgb_sensor_available: true
-real_depth_sensor_available: true
-real_camera_pointcloud_available: true
-camera_pointcloud_source: depth_backprojection
-safe_to_mapping: true
+next_phase: New Scene Phase D candidate viewpoint + information gain smoke
+mapping_method: raycast_real_sensor_bev_mapping
+initial_known_ratio: 0.059506
+final_known_ratio: 0.076173
+safe_to_candidate_gain: true
 ```
 
 ## New Scene Route
 
 1. Phase A: scene open and robot inspection. Status: passed.
 2. Phase B: real Isaac/Omniverse sensor suite smoke. Status: passed.
-3. Phase C: real-sensor mapping smoke. Status: next.
-4. Phase D: candidate viewpoint gain smoke.
+3. Phase C: real-sensor mapping smoke. Status: passed.
+4. Phase D: candidate viewpoint + information gain smoke. Status: next.
 5. Phase E: VLM-LA interface smoke.
 6. Phase F: short closed-loop smoke.
 7. Phase G: long rollout data collection.
