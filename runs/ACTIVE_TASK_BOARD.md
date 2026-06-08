@@ -1,3 +1,39 @@
+<!-- map_predict_phase5_status:start -->
+## MapPredict Phase 5 Frontier Scoring Status
+
+current_phase: MapPredict Phase 5 frontier scoring baseline
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+map_predict_goal: SceneSense-style frontier feature provider and handcrafted scoring baseline
+source_model: Phase 3 3D U-Net baseline
+source_uncertainty: Phase 4 probability_entropy
+3d_unet_checkpoint_available: true
+frontier_feature_scored_table: /home/ubuntu22/VLA/runs/map_predict_phase5_frontier_scoring_baseline_20260609_004919/frontier_features/frontier_feature_scored_table.csv
+frontier_row_count: 92
+sample_count: 29
+selected_frontier_count: 29
+selected_frontier_valid_rate: 1.0
+selected_is_top_score_rate: 1.0
+nan_feature_count: 0
+nan_score_count: 0
+score_formula: alpha*predicted_free_volume + beta*uncertainty_volume - gamma*occupied_risk - delta*path_cost
+path_cost_method: euclidean_proxy
+reachability_method: bev_validity_proxy
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_integrate_with_exploration_selector: true
+safe_to_prepare_vla_features: true
+data_volume_warning: current dataset is sufficient for pipeline validation but not final training or paper-level results
+report: /home/ubuntu22/VLA/runs/MAP_PREDICT_PHASE5_FRONTIER_SCORING_REPORT.md
+run_dir: /home/ubuntu22/VLA/runs/map_predict_phase5_frontier_scoring_baseline_20260609_004919
+next_phase: MapPredict Phase 6 integrate map_predict features into frontier selector / VLA dataset builder
+<!-- map_predict_phase5_status:end -->
+
 <!-- map_predict_phase4_status:start -->
 ## MapPredict Phase 4 Uncertainty + BEV Projection Status
 

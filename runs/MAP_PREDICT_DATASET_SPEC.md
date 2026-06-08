@@ -1,3 +1,25 @@
+<!-- map_predict_phase5_status:start -->
+## MapPredict Phase 5 Feature Table Status
+
+current_phase: MapPredict Phase 5 frontier scoring baseline
+source_phase4_run_dir: /home/ubuntu22/VLA/runs/map_predict_phase4_uncertainty_bev_projection_20260609_004045
+frontier_feature_scored_table: /home/ubuntu22/VLA/runs/map_predict_phase5_frontier_scoring_baseline_20260609_004919/frontier_features/frontier_feature_scored_table.csv
+frontier_row_count: 92
+sample_count: 29
+required_fields_present: sample_id, scene_id, frontier_id, frontier_voxel_count, frontier_bev_cell_count, predicted_free_volume, predicted_occupied_risk, mean_uncertainty, max_uncertainty, uncertainty_volume, expected_information_gain_proxy, path_cost_proxy, reachability_proxy, score, selected_by_map_predict_score, failure_reason
+nan_feature_count: 0
+nan_score_count: 0
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+safe_to_prepare_vla_features: true
+data_volume_warning: current dataset is sufficient for pipeline validation but not final training or paper-level results
+next_phase: MapPredict Phase 6 integrate map_predict features into frontier selector / VLA dataset builder
+<!-- map_predict_phase5_status:end -->
+
 <!-- map_predict_phase4_status:start -->
 ## MapPredict Phase 4 Dataset Usage Status
 

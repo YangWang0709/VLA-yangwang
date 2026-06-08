@@ -1,0 +1,10 @@
+alpha: 1.0
+beta: 0.5
+gamma: 1.0
+delta: 0.2
+uncertainty_threshold: 0.05
+path_cost_method: euclidean_proxy
+reachability_method: bev_validity_proxy
+risk_method: mean_predicted_occupied_probability
+occupied_risk_threshold: 0.5
+selection_method: max_score_per_sample

@@ -1,3 +1,28 @@
+<!-- map_predict_phase5_status:start -->
+## MapPredict Phase 5 Frontier Scoring Status
+
+current_phase: MapPredict Phase 5 frontier scoring baseline
+module_role: SceneSense-style feature provider
+planner: false
+VLA: false
+source_model: Phase 3 3D U-Net baseline
+source_uncertainty: Phase 4 probability_entropy
+3d_unet_checkpoint_available: true
+frontier_scoring_baseline_ready: true
+frontier_scoring_config: /home/ubuntu22/VLA/configs/map_predict/frontier_scoring_baseline.yaml
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_integrate_with_exploration_selector: true
+safe_to_prepare_vla_features: true
+data_volume_warning: current dataset is sufficient for pipeline validation but not final training or paper-level results
+next_phase: MapPredict Phase 6 integrate map_predict features into frontier selector / VLA dataset builder
+<!-- map_predict_phase5_status:end -->
+
 <!-- map_predict_phase4_status:start -->
 ## MapPredict Phase 4 Uncertainty + BEV Projection Status
 

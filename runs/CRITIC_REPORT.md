@@ -1,3 +1,30 @@
+<!-- map_predict_phase5_status:start -->
+## MapPredict Phase 5 Frontier Scoring Critic Status
+
+current_phase: MapPredict Phase 5 frontier scoring baseline
+finding: completed
+evidence: Phase 4 frontier features and inference outputs were converted into a scored frontier table with one selected frontier for each evaluated sample.
+frontier_row_count: 92
+sample_count: 29
+selected_frontier_count: 29
+selected_frontier_valid_rate: 1.0
+selected_is_top_score_rate: 1.0
+nan_feature_count: 0
+nan_score_count: 0
+agreement_with_classical_selector: null
+limitations: no strict classical selector label; euclidean path-cost proxy is not A*; small data is pipeline validation only.
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_integrate_with_exploration_selector: true
+safe_to_prepare_vla_features: true
+next_phase: MapPredict Phase 6 integrate map_predict features into frontier selector / VLA dataset builder
+<!-- map_predict_phase5_status:end -->
+
 <!-- map_predict_phase4_status:start -->
 ## MapPredict Phase 4 Uncertainty + BEV Projection Critic Status
 

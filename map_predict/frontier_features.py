@@ -79,12 +79,16 @@ def connected_components_2d(mask: np.ndarray) -> list[np.ndarray]:
 def frontier_feature_rows(
     *,
     sample_id: str,
+    scene_id: str | None = None,
     frontier_mask: np.ndarray,
     unknown_mask: np.ndarray | None = None,
     pred_occ_prob: np.ndarray,
     uncertainty: np.ndarray,
     bev_pred_occ: np.ndarray,
     bev_uncertainty: np.ndarray,
+    robot_pose: np.ndarray | None = None,
+    crop_origin_xyz: np.ndarray | None = None,
+    voxel_size: float | None = None,
     max_components: int | None = None,
 ) -> list[dict[str, Any]]:
     """Summarize each BEV frontier connected component."""
@@ -110,12 +114,42 @@ def frontier_feature_rows(
         pred_values = pred[feature_3d]
         unc_values = unc[feature_3d]
         bev_unc_values = np.asarray(bev_uncertainty, dtype=np.float32)[component_2d]
+        yy, xx = np.nonzero(component_2d)
+        centroid_y = float(yy.mean()) if yy.size else 0.0
+        centroid_x = float(xx.mean()) if xx.size else 0.0
+        centroid_world_x = None
+        centroid_world_y = None
+        robot_world_x = None
+        robot_world_y = None
+        robot_to_frontier_distance = None
+        if crop_origin_xyz is not None and voxel_size is not None:
+            origin = np.asarray(crop_origin_xyz, dtype=np.float32).reshape(-1)
+            if origin.size >= 2:
+                centroid_world_x = float(origin[0] + (centroid_x + 0.5) * float(voxel_size))
+                centroid_world_y = float(origin[1] + (centroid_y + 0.5) * float(voxel_size))
+        if robot_pose is not None:
+            pose = np.asarray(robot_pose, dtype=np.float32).reshape(-1)
+            if pose.size >= 2:
+                robot_world_x = float(pose[0])
+                robot_world_y = float(pose[1])
+        if centroid_world_x is not None and centroid_world_y is not None and robot_world_x is not None and robot_world_y is not None:
+            robot_to_frontier_distance = float(
+                np.hypot(centroid_world_x - robot_world_x, centroid_world_y - robot_world_y)
+            )
         rows.append(
             {
                 "sample_id": sample_id,
+                "scene_id": scene_id or "",
                 "frontier_id": int(frontier_id),
                 "frontier_voxel_count": int(component_3d.sum()),
                 "frontier_bev_cell_count": int(component_2d.sum()),
+                "frontier_centroid_y": centroid_y,
+                "frontier_centroid_x": centroid_x,
+                "frontier_centroid_world_x": centroid_world_x,
+                "frontier_centroid_world_y": centroid_world_y,
+                "robot_world_x": robot_world_x,
+                "robot_world_y": robot_world_y,
+                "robot_to_frontier_distance": robot_to_frontier_distance,
                 "predicted_free_volume": float((1.0 - pred_values).sum()),
                 "predicted_occupied_risk": float(pred_values.mean()) if pred_values.size else 0.0,
                 "mean_uncertainty": float(unc_values.mean()) if unc_values.size else 0.0,
