@@ -18,7 +18,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase E VLM-LA interface smoke
+current_scene_phase: New Scene Phase F short closed-loop smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
@@ -26,14 +26,14 @@ base_frame: /World/A1/base
 sensor_method: real_isaac_omniverse_rgbd
 camera_pointcloud_source: depth_backprojection
 map_update_source: depth_backprojection_pointcloud
-candidate_data_source: new_scene_phaseD_real_sensor
+candidate_data_source: online_new_scene_real_sensor_candidate_generation
+vlm_output_mode: pseudo_from_classical_selector
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase F short closed-loop smoke
-interface_phaseE_status: passed
-phaseD_candidate_data_used: true
-safe_to_closed_loop: true
+next_phase: New Scene Phase G long rollout data collection
+closed_loop_phaseF_status: passed
+safe_to_long_rollout: true
 ```
 
 ## New Scene Route
@@ -43,29 +43,30 @@ safe_to_closed_loop: true
 3. Phase C: real-sensor mapping smoke. Status: passed.
 4. Phase D: candidate viewpoint + information gain smoke. Status: passed.
 5. Phase E: VLM-LA interface smoke. Status: passed.
-6. Phase F: short closed-loop smoke. Status: next if Phase E passed.
-7. Phase G: long rollout data collection.
+6. Phase F: short closed-loop smoke. Status: passed.
+7. Phase G: long rollout data collection. Status: next if Phase F passed.
 8. Phase H: dataset quality audit and human review packet.
 
-## Phase E Gate
+## Phase F Gate
 
-
-phaseD_candidate_data_used: true
-legal_command_count: 24
-legal_parse_success_rate: 1.0
-legal_validation_success_rate: 1.0
+action_count: 5
+successful_action_count: 5
+parse_success_rate: 1.0
+validation_success_rate: 1.0
 target_pose_lookup_success_rate: 1.0
-illegal_test_count: 59
-illegal_reject_or_fallback_rate: 1.0
-fallback_behavior: pass
-invalid_candidate_fallback_passed: true
-unreachable_candidate_fallback_passed: true
-free_coordinate_output_allowed: false
-velocity_output_allowed: false
-joint_action_output_allowed: false
-malformed_output_rejected: true
-final_interface_output_contract_ok: true
-safe_to_closed_loop: true
+movement_success_rate: 1.0
+fallback_count: 0
+initial_known_ratio: 0.0
+final_known_ratio: 0.236667
+total_known_ratio_gain: 0.236667
+known_ratio_monotonic_non_decreasing: true
+average_candidate_count: 24.0
+average_valid_candidate_count: 21.4
+collision_count: 0
+stuck_count: 0
+falling_count: 0
+failure_count: 0
+safe_to_long_rollout: true
 
 
 ## Negative Scope
@@ -77,5 +78,5 @@ GDPO: false
 map_predict: false
 PI_finetuning: false
 A1_locomotion_training: false
-rollout: false
+long_rollout: false
 real_VLM_inference: false

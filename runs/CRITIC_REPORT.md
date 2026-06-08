@@ -2,41 +2,43 @@
 
 ## Current Phase
 
-New Scene Phase E VLM-LA interface smoke
+New Scene Phase F short closed-loop smoke
 
 ## Finding
 
 status: passed
 
-The new-scene VLM-LA language interface consumed only Phase D real-sensor
-candidate data. The final output contract stayed constrained to
-`Go to candidate <id>.`, and illegal outputs triggered rejection or fallback.
+The new-scene short closed loop used real RGB-D/depth_backprojection mapping,
+online candidates, pseudo VLM output, parser/validator checks, and kinematic A1
+movement. No geometry proxy, old scene data, Go2 label, real VLM inference, or
+training route was used.
 
 ## Evidence
 
 - scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
-- phaseD_run_dir: /home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseD_candidate_gain_20260608_182127
-- candidate_data_source: new_scene_phaseD_real_sensor
-- legal_parse_success_rate: 1.0
-- legal_validation_success_rate: 1.0
+- action_count: 5
+- successful_action_count: 5
+- parse_success_rate: 1.0
+- validation_success_rate: 1.0
 - target_pose_lookup_success_rate: 1.0
-- illegal_reject_or_fallback_rate: 1.0
-- fallback_behavior: pass
-- free_coordinate_output_allowed: false
-- velocity_output_allowed: false
-- joint_action_output_allowed: false
-- safe_to_closed_loop: true
+- movement_success_rate: 1.0
+- final_known_ratio: 0.236667
+- total_known_ratio_gain: 0.236667
+- collision_count: 0
+- stuck_count: 0
+- falling_count: 0
+- safe_to_long_rollout: true
 
 ## Risks / Gates
 
-- Phase E used pseudo VLM output only; no real VLM inference was run.
-- Phase F is a separate short closed-loop smoke and was not started.
-- Continue only if the user explicitly requests Phase F.
+- Phase F is a short smoke, not a long rollout.
+- Real VLM inference was not run; VLM commands were pseudo labels from the classical selector.
+- Continue to Phase G only after explicit user request.
 
 training: false
 RL: false
 SFT: false
 GDPO: false
-rollout: false
-A1_moved: false
+long_rollout: false
+real_VLM_inference: false
 USD_modified_or_saved: false

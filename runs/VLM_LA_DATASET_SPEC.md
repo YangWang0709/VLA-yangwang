@@ -10,7 +10,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase E VLM-LA interface smoke
+current_scene_phase: New Scene Phase F short closed-loop smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
@@ -18,26 +18,26 @@ base_frame: /World/A1/base
 sensor_method: real_isaac_omniverse_rgbd
 camera_pointcloud_source: depth_backprojection
 map_update_source: depth_backprojection_pointcloud
-candidate_data_source: new_scene_phaseD_real_sensor
+candidate_data_source: online_new_scene_real_sensor_candidate_generation
+vlm_output_mode: pseudo_from_classical_selector
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase F short closed-loop smoke
+next_phase: New Scene Phase G long rollout data collection
 sensor_phaseB_status: passed
 mapping_phaseC_status: passed
 candidate_phaseD_status: passed
 interface_phaseE_status: passed
-phaseD_candidate_data_used: true
-safe_to_closed_loop: true
+closed_loop_phaseF_status: passed
+safe_to_long_rollout: true
 ```
 
-No new-scene rollout dataset samples have been created. Phase E only produced
-small interface smoke records from the Phase D candidate table. It did not create
-training data, rollout samples, or real VLM outputs.
+No long-rollout dataset samples have been created in Phase F. Phase F only
+validated the short closed-loop chain and wrote small smoke logs.
 
 ## Required New Scene Sample Metadata
 
-Future Phase G samples, only after Phase F passes and the user approves, must include:
+Future Phase G samples, only after explicit user approval, must include:
 
 - real RGB/depth metadata
 - depth_backprojection pointcloud stats
