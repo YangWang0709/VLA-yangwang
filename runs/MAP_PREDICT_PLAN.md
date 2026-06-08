@@ -1,3 +1,27 @@
+<!-- map_predict_phase6_status:start -->
+## MapPredict Phase 6 Feature Integration Status
+
+current_phase: MapPredict Phase 6 feature integration with frontier selector and VLA dataset preview
+module_role: SceneSense-style feature provider
+planner: false
+VLA: false
+frontier_selector_interface_ready: true
+VLA_dataset_preview_interface_ready: true
+selector_API: select_frontier_with_map_predict(frontier_table, weights) -> selected_frontier
+preview_sample_path: /home/ubuntu22/VLA/runs/map_predict_phase6_feature_integration_20260609_005844/samples/enhanced_vla_samples_preview.jsonl
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_prepare_full_enhanced_vla_dataset: true
+safe_to_integrate_online_selector: true
+data_volume_warning: current dataset is sufficient for pipeline validation but not enough for final diffusion or VLA training
+recommended_next_step: Add more USD scenes and scale map_predict + VLA data before formal diffusion/VLA training.
+<!-- map_predict_phase6_status:end -->
+
 <!-- map_predict_phase5_status:start -->
 ## MapPredict Phase 5 Frontier Scoring Status
 

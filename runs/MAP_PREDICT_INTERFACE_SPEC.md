@@ -1,3 +1,29 @@
+<!-- map_predict_phase6_status:start -->
+## MapPredict Phase 6 Interface Status
+
+current_phase: MapPredict Phase 6 feature integration with frontier selector and VLA dataset preview
+feature_provider_role: true
+planner: false
+VLA: false
+output_actions: false
+selector_API: select_frontier_with_map_predict(frontier_table, weights) -> selected_frontier
+selector_output_fields: selected_frontier_id, score, reason, failure_reason
+VLA_enhanced_sample_fields: sample_id, robot_platform, sensor_method, images, candidate_table, map_predict_frontier_features, prompt, action_type, target_action, selected_candidate_id, training
+VLA_output_contract: Go to candidate <id>.
+action_type: high_level_candidate_action
+selector_smoke_passed: true
+target_action_format_valid_rate: 1.0
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+safe_to_prepare_full_enhanced_vla_dataset: true
+safe_to_integrate_online_selector: true
+recommended_next_step: Add more USD scenes and scale map_predict + VLA data before formal diffusion/VLA training.
+<!-- map_predict_phase6_status:end -->
+
 <!-- map_predict_phase5_status:start -->
 ## MapPredict Phase 5 Interface Status
 

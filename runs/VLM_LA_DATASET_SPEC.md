@@ -1,3 +1,27 @@
+<!-- map_predict_phase6_vla_dataset_status:start -->
+## MapPredict Phase 6 VLA Dataset Preview Status
+
+current_phase: MapPredict Phase 6 feature integration with frontier selector and VLA dataset preview
+project_name: A1-VLM-LA Explorer
+dataset_route: VLA high-level candidate action
+VLA_output_contract: Go to candidate <id>.
+action_type: high_level_candidate_action
+source_phase: MapPredict Phase 5 frontier scoring baseline
+preview_sample_path: /home/ubuntu22/VLA/runs/map_predict_phase6_feature_integration_20260609_005844/samples/enhanced_vla_samples_preview.jsonl
+enhanced_vla_preview_count: 20
+map_predict_frontier_features_present: true
+target_action_format_valid_rate: 1.0
+safe_to_prepare_full_enhanced_vla_dataset: true
+training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+diffusion_training_started: false
+data_volume_warning: current dataset is sufficient for pipeline validation but not enough for final diffusion or VLA training
+recommended_next_step: Add more USD scenes and scale map_predict + VLA data before formal diffusion/VLA training.
+<!-- map_predict_phase6_vla_dataset_status:end -->
+
 <!-- phase10_combined_sft_status:start -->
 ## Phase 10 Combined SFT Dataset Preparation Status
 

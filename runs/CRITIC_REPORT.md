@@ -1,3 +1,33 @@
+<!-- map_predict_phase6_status:start -->
+## MapPredict Phase 6 Feature Integration Critic Status
+
+current_phase: MapPredict Phase 6 feature integration with frontier selector and VLA dataset preview
+finding: completed
+evidence: selector smoke passed for Phase 5 scored frontier table; 20 enhanced VLA preview samples were generated and parsed.
+frontier_rows: 92
+sample_count: 29
+enhanced_vla_preview_count: 20
+selector_smoke_passed: true
+invalid_selected_count: 0
+nan_score_count: 0
+target_action_format_valid_rate: 1.0
+map_predict_feature_field_rate: 1.0
+VLA_output_contract: Go to candidate <id>.
+action_type: high_level_candidate_action
+limitations: preview only; no full training dataset; current data is not enough for final diffusion or VLA training.
+training_started: false
+map_predict_training_started: false
+diffusion_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+rollout_started: false
+safe_to_prepare_full_enhanced_vla_dataset: true
+safe_to_integrate_online_selector: true
+recommended_next_step: Add more USD scenes and scale map_predict + VLA data before formal diffusion/VLA training.
+<!-- map_predict_phase6_status:end -->
+
 <!-- map_predict_phase5_status:start -->
 ## MapPredict Phase 5 Frontier Scoring Critic Status
 
