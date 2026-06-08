@@ -2,38 +2,41 @@
 
 ## Current Phase
 
-New Scene Phase D candidate viewpoint + information gain smoke
+New Scene Phase E VLM-LA interface smoke
 
 ## Finding
 
 status: passed
 
-Candidate viewpoint generation and classical information gain scoring used the new-scene real RGB-D/depth_backprojection BEV map. No Go2 label, old scene data, proxy map, or geometry proxy was used.
+The new-scene VLM-LA language interface consumed only Phase D real-sensor
+candidate data. The final output contract stayed constrained to
+`Go to candidate <id>.`, and illegal outputs triggered rejection or fallback.
 
 ## Evidence
 
 - scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
-- a1_root_prim: /World/A1
-- sensor_method: real_isaac_omniverse_rgbd
-- map_update_source: depth_backprojection_pointcloud
-- candidate_sampling_method: radial_24_candidates_3_radii_8_angles_around_a1_base
-- path_cost_method: astar_bev_grid_unknown_penalty
-- information_gain_method: real_sensor_bev_unknown_visibility
-- candidate_count_per_step: 24
-- valid_candidate_ratio: 0.8819
-- positive_gain_candidate_ratio: 0.8819
-- selected_is_top_score_rate: 1.0
-- safe_to_interface: true
+- phaseD_run_dir: /home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseD_candidate_gain_20260608_182127
+- candidate_data_source: new_scene_phaseD_real_sensor
+- legal_parse_success_rate: 1.0
+- legal_validation_success_rate: 1.0
+- target_pose_lookup_success_rate: 1.0
+- illegal_reject_or_fallback_rate: 1.0
+- fallback_behavior: pass
+- free_coordinate_output_allowed: false
+- velocity_output_allowed: false
+- joint_action_output_allowed: false
+- safe_to_closed_loop: true
 
 ## Risks / Gates
 
-- This is classical candidate-gain smoke, not VLM inference.
-- Phase E may consume the candidate id contract but should not train or roll out.
-- Do not start Phase E unless `safe_to_interface` is true.
+- Phase E used pseudo VLM output only; no real VLM inference was run.
+- Phase F is a separate short closed-loop smoke and was not started.
+- Continue only if the user explicitly requests Phase F.
 
 training: false
 RL: false
 SFT: false
 GDPO: false
 rollout: false
+A1_moved: false
 USD_modified_or_saved: false

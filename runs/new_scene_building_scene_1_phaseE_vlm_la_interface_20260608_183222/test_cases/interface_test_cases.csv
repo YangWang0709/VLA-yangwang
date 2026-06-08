@@ -1,0 +1,84 @@
+step_id,test_case,expected_behavior,input_command,parse_success,parsed_candidate_id,candidate_exists,candidate_valid,candidate_reachable,candidate_collision_risk_ok,fallback_used,fallback_reason,fallback_selected_candidate_id,final_selected_candidate_id,final_interface_command,interface_passed
+0,legal_pseudo_vlm_command,legal,Go to candidate 5.,True,5,True,True,True,True,False,,5,5,Go to candidate 5.,True
+0,legal_lowercase_command,legal,go to candidate 5,True,5,True,True,True,True,False,,5,5,Go to candidate 5.,True
+0,legal_explanation_command,legal,Go to candidate 5 because it faces unknown space.,True,5,True,True,True,True,False,,5,5,Go to candidate 5.,True
+0,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 5}",True,5,True,True,True,True,False,,5,5,Go to candidate 5.,True
+0,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,5,5,Go to candidate 5.,True
+0,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,5,5,Go to candidate 5.,True
+0,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,5,5,Go to candidate 5.,True
+0,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,5,5,Go to candidate 5.,True
+0,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,5,5,Go to candidate 5.,True
+0,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,5,5,Go to candidate 5.,True
+0,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,5,5,Go to candidate 5.,True
+0,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,5,5,Go to candidate 5.,True
+0,invalid_candidate_id,illegal,Go to candidate 12.,True,12,True,False,False,False,True,candidate_marked_invalid,5,5,Go to candidate 5.,True
+0,unreachable_candidate_id,illegal,Go to candidate 12.,True,12,True,False,False,False,True,candidate_marked_invalid,5,5,Go to candidate 5.,True
+1,legal_pseudo_vlm_command,legal,Go to candidate 7.,True,7,True,True,True,True,False,,7,7,Go to candidate 7.,True
+1,legal_lowercase_command,legal,go to candidate 7,True,7,True,True,True,True,False,,7,7,Go to candidate 7.,True
+1,legal_explanation_command,legal,Go to candidate 7 because it faces unknown space.,True,7,True,True,True,True,False,,7,7,Go to candidate 7.,True
+1,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 7}",True,7,True,True,True,True,False,,7,7,Go to candidate 7.,True
+1,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,7,7,Go to candidate 7.,True
+1,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,7,7,Go to candidate 7.,True
+1,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,7,7,Go to candidate 7.,True
+1,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,7,7,Go to candidate 7.,True
+1,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,7,7,Go to candidate 7.,True
+1,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,7,7,Go to candidate 7.,True
+1,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,7,7,Go to candidate 7.,True
+1,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,7,7,Go to candidate 7.,True
+1,invalid_candidate_id,illegal,Go to candidate 4.,True,4,True,False,True,False,True,candidate_marked_invalid,7,7,Go to candidate 7.,True
+1,unreachable_candidate_id,illegal,Go to candidate 12.,True,12,True,False,False,False,True,candidate_marked_invalid,7,7,Go to candidate 7.,True
+2,legal_pseudo_vlm_command,legal,Go to candidate 1.,True,1,True,True,True,True,False,,1,1,Go to candidate 1.,True
+2,legal_lowercase_command,legal,go to candidate 1,True,1,True,True,True,True,False,,1,1,Go to candidate 1.,True
+2,legal_explanation_command,legal,Go to candidate 1 because it faces unknown space.,True,1,True,True,True,True,False,,1,1,Go to candidate 1.,True
+2,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 1}",True,1,True,True,True,True,False,,1,1,Go to candidate 1.,True
+2,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,1,1,Go to candidate 1.,True
+2,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,1,1,Go to candidate 1.,True
+2,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,1,1,Go to candidate 1.,True
+2,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,1,1,Go to candidate 1.,True
+2,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,1,1,Go to candidate 1.,True
+2,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,1,1,Go to candidate 1.,True
+2,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,1,1,Go to candidate 1.,True
+2,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,1,1,Go to candidate 1.,True
+2,invalid_candidate_id,illegal,Go to candidate 3.,True,3,True,False,True,False,True,candidate_marked_invalid,1,1,Go to candidate 1.,True
+2,unreachable_candidate_id,illegal,Go to candidate 12.,True,12,True,False,False,False,True,candidate_marked_invalid,1,1,Go to candidate 1.,True
+3,legal_pseudo_vlm_command,legal,Go to candidate 6.,True,6,True,True,True,True,False,,6,6,Go to candidate 6.,True
+3,legal_lowercase_command,legal,go to candidate 6,True,6,True,True,True,True,False,,6,6,Go to candidate 6.,True
+3,legal_explanation_command,legal,Go to candidate 6 because it faces unknown space.,True,6,True,True,True,True,False,,6,6,Go to candidate 6.,True
+3,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 6}",True,6,True,True,True,True,False,,6,6,Go to candidate 6.,True
+3,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,6,6,Go to candidate 6.,True
+3,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,6,6,Go to candidate 6.,True
+3,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,6,6,Go to candidate 6.,True
+3,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,6,6,Go to candidate 6.,True
+3,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,6,6,Go to candidate 6.,True
+3,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,6,6,Go to candidate 6.,True
+3,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,6,6,Go to candidate 6.,True
+3,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,6,6,Go to candidate 6.,True
+3,invalid_candidate_id,illegal,Go to candidate 3.,True,3,True,False,True,False,True,candidate_marked_invalid,6,6,Go to candidate 6.,True
+4,legal_pseudo_vlm_command,legal,Go to candidate 0.,True,0,True,True,True,True,False,,0,0,Go to candidate 0.,True
+4,legal_lowercase_command,legal,go to candidate 0,True,0,True,True,True,True,False,,0,0,Go to candidate 0.,True
+4,legal_explanation_command,legal,Go to candidate 0 because it faces unknown space.,True,0,True,True,True,True,False,,0,0,Go to candidate 0.,True
+4,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 0}",True,0,True,True,True,True,False,,0,0,Go to candidate 0.,True
+4,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,0,0,Go to candidate 0.,True
+4,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,0,0,Go to candidate 0.,True
+4,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,0,0,Go to candidate 0.,True
+4,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,0,0,Go to candidate 0.,True
+4,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,0,0,Go to candidate 0.,True
+4,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,0,0,Go to candidate 0.,True
+4,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,0,0,Go to candidate 0.,True
+4,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,0,0,Go to candidate 0.,True
+4,invalid_candidate_id,illegal,Go to candidate 3.,True,3,True,False,False,False,True,candidate_marked_invalid,0,0,Go to candidate 0.,True
+4,unreachable_candidate_id,illegal,Go to candidate 3.,True,3,True,False,False,False,True,candidate_marked_invalid,0,0,Go to candidate 0.,True
+5,legal_pseudo_vlm_command,legal,Go to candidate 8.,True,8,True,True,True,True,False,,8,8,Go to candidate 8.,True
+5,legal_lowercase_command,legal,go to candidate 8,True,8,True,True,True,True,False,,8,8,Go to candidate 8.,True
+5,legal_explanation_command,legal,Go to candidate 8 because it faces unknown space.,True,8,True,True,True,True,False,,8,8,Go to candidate 8.,True
+5,legal_json_command,legal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": 8}",True,8,True,True,True,True,False,,8,8,Go to candidate 8.,True
+5,missing_id,illegal,Go to the unexplored room.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,8,8,Go to candidate 8.,True
+5,move_forward,illegal,Move forward.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,8,8,Go to candidate 8.,True
+5,out_of_range_id,illegal,Go to candidate 999.,True,999,False,False,False,False,True,candidate_id_not_found,8,8,Go to candidate 8.,True
+5,coordinate_output,illegal,"{""x"": 1.2, ""y"": 3.4, ""yaw"": 1.57}",False,,False,False,False,False,True,free_coordinate_or_velocity_json_not_allowed,8,8,Go to candidate 8.,True
+5,velocity_output,illegal,"v=0.2, omega=0.1",False,,False,False,False,False,True,velocity_output_not_allowed,8,8,Go to candidate 8.,True
+5,joint_action_output,illegal,Set A1 hip joint to 0.3.,False,,False,False,False,False,True,joint_action_output_not_allowed,8,8,Go to candidate 8.,True
+5,malformed_json,illegal,"{""command"": ""go_to_candidate"", ""selected_candidate_id"": }",False,,False,False,False,False,True,malformed_json,8,8,Go to candidate 8.,True
+5,textual_number_id,illegal,Go to candidate seven.,False,,False,False,False,False,True,missing_candidate_id_or_contract_mismatch,8,8,Go to candidate 8.,True
+5,invalid_candidate_id,illegal,Go to candidate 3.,True,3,True,False,False,False,True,candidate_marked_invalid,8,8,Go to candidate 8.,True
+5,unreachable_candidate_id,illegal,Go to candidate 3.,True,3,True,False,False,False,True,candidate_marked_invalid,8,8,Go to candidate 8.,True
