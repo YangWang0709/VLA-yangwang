@@ -1,0 +1,49 @@
+{
+  "split_by": "scene_id_and_start_id",
+  "target_ratio": {
+    "test": 0.15,
+    "train": 0.7,
+    "val": 0.15
+  },
+  "test_sample_count": 56,
+  "test_scene_ids": [
+    "building_scene_1_scene_20260608_171052",
+    "old_home_like_scene_v1"
+  ],
+  "test_start_ids": [
+    "building_scene_1_scene_20260608_171052:start008",
+    "building_scene_1_scene_20260608_171052:start009",
+    "old_home_like_scene_v1:start008",
+    "old_home_like_scene_v1:start009"
+  ],
+  "train_sample_count": 161,
+  "train_scene_ids": [
+    "building_scene_1_scene_20260608_171052",
+    "old_home_like_scene_v1"
+  ],
+  "train_start_ids": [
+    "building_scene_1_scene_20260608_171052:start000",
+    "building_scene_1_scene_20260608_171052:start001",
+    "building_scene_1_scene_20260608_171052:start002",
+    "building_scene_1_scene_20260608_171052:start003",
+    "building_scene_1_scene_20260608_171052:start004",
+    "building_scene_1_scene_20260608_171052:start005",
+    "old_home_like_scene_v1:start000",
+    "old_home_like_scene_v1:start001",
+    "old_home_like_scene_v1:start002",
+    "old_home_like_scene_v1:start003",
+    "old_home_like_scene_v1:start004",
+    "old_home_like_scene_v1:start005"
+  ],
+  "val_sample_count": 56,
+  "val_scene_ids": [
+    "building_scene_1_scene_20260608_171052",
+    "old_home_like_scene_v1"
+  ],
+  "val_start_ids": [
+    "building_scene_1_scene_20260608_171052:start006",
+    "building_scene_1_scene_20260608_171052:start007",
+    "old_home_like_scene_v1:start006",
+    "old_home_like_scene_v1:start007"
+  ]
+}

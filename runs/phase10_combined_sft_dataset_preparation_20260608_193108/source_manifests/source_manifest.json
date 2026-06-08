@@ -1,0 +1,30 @@
+{
+  "phase": "Phase 10 combined SFT dataset preparation only",
+  "source_review_decision": "/home/ubuntu22/VLA/runs/COMBINED_DATASET_REVIEW_DECISION.md",
+  "sources": [
+    {
+      "accepted_path": "/home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/accepted_samples.jsonl",
+      "accepted_sample_count": 74,
+      "name": "old_scene",
+      "quality_run_dir": "/home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732",
+      "rejected_path": "/home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/rejected_samples.jsonl",
+      "rejected_sample_count": 0,
+      "scene_path": "/home/ubuntu22/VLA/scenes/primary_building_scene_repaired/home_like_scene_v1.usd",
+      "source_rollout_run_dir": "/home/ubuntu22/VLA/runs/phase8_a1_vlm_la_long_rollout_20260607_212536",
+      "warning_path": "/home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/warning_samples.jsonl",
+      "warning_sample_count": 3
+    },
+    {
+      "accepted_path": "/home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseH_dataset_quality_audit_20260608_191002/quality/accepted_samples.jsonl",
+      "accepted_sample_count": 199,
+      "name": "new_scene",
+      "quality_run_dir": "/home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseH_dataset_quality_audit_20260608_191002",
+      "rejected_path": "/home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseH_dataset_quality_audit_20260608_191002/quality/rejected_samples.jsonl",
+      "rejected_sample_count": 0,
+      "scene_path": "/home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda",
+      "source_rollout_run_dir": "/home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseG_long_rollout_20260608_185904",
+      "warning_path": "/home/ubuntu22/VLA/runs/new_scene_building_scene_1_phaseH_dataset_quality_audit_20260608_191002/quality/warning_samples.jsonl",
+      "warning_sample_count": 1
+    }
+  ]
+}
