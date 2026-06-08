@@ -10,7 +10,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase C real-sensor mapping smoke
+current_scene_phase: New Scene Phase D candidate viewpoint + information gain smoke
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
@@ -20,15 +20,15 @@ map_update_source: depth_backprojection_pointcloud
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase D candidate viewpoint + information gain smoke
+next_phase: New Scene Phase E VLM-LA interface smoke
 sensor_phaseB_status: passed
 mapping_phaseC_status: passed
-mapping_method: raycast_real_sensor_bev_mapping
-map_update_source: depth_backprojection_pointcloud
-safe_to_candidate_gain: true
+candidate_phaseD_status: passed
+candidate_sampling_method: radial_24_candidates_3_radii_8_angles_around_a1_base
+safe_to_interface: true
 ```
 
-No new-scene dataset samples have been created. Phase C only validated real-sensor BEV map updating and did not create candidate, VLM-LA, rollout, or training data.
+No new-scene dataset samples have been created. Phase D only validated classical candidate gain tables and did not create VLM-LA interface samples, rollout samples, or training data.
 
 ## Required New Scene Sample Metadata
 
