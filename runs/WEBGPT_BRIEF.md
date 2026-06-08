@@ -1,3 +1,38 @@
+<!-- map_predict_phase26_status:start -->
+## MapPredict Phase 2.6 Alignment Debug Status
+
+current_phase: MapPredict Phase 2.6 pseudo-GT alignment conflict resolution
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+source_dataset: local_voxel_v1_real_partial_3d
+corrected_dataset_version: local_voxel_v2_aligned_real_partial_3d
+corrected_dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+axis_order_convention: D=Z,H=Y,W=X
+partial_3d_source: real_depth_backprojection_raycast
+gt_type: dense_scan_pseudo_gt
+main_conflict_cause: Phase 2.5 counted dense_scan_pseudo_gt unknown voxels as conflicts.
+fixes_applied: conflict_metric_excludes_gt_unknown; endpoint_margin_vox_1
+sample_count: 100
+pass_count: 97
+warning_count: 3
+reject_count: 0
+observed_occupied_zero_rate: 0.02
+gt_observed_conflict_ratio_mean: 0.024815626936946437
+gt_observed_conflict_ratio_p95: 0.06417149773117023
+round_trip_error_max: 0.0
+voxel_size_check: pass
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+training_ready: false
+requires_review: true
+safe_to_train_3d_unet_baseline: true
+next_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+<!-- map_predict_phase26_status:end -->
+
 <!-- map_predict_phase25_status:start -->
 ## MapPredict Phase 2.5 Real Partial 3D Recapture Status
 

@@ -1,0 +1,159 @@
+# MapPredict Phase 2.6 Alignment Debug Report
+
+phase: MapPredict Phase 2.6
+purpose: diagnose and fix real partial 3D vs dense_scan_pseudo_gt alignment conflicts
+workspace: /home/ubuntu22/VLA
+project_name: A1-VLM-LA Explorer
+main_goal: A1-VLM-LA Explorer for 3D Active Exploration
+map_predict_role: feature_provider
+planner: false
+VLA: false
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+
+## Phase 2.5 Issue Summary
+
+source_dataset: local_voxel_v1_real_partial_3d
+phase25_sample_count: 100
+phase25_observed_occupied_zero_rate: 0.02
+phase25_reject_count: 90
+phase25_main_reject_reason: severe_gt_observed_conflict_ratio
+
+## Diagnostics
+
+diagnostic_sample_count: 34
+axis_order_convention: D=Z,H=Y,W=X
+round_trip_error_mean: 0.0
+round_trip_error_max: 0.0
+voxel_size_check: pass
+gt_voxel_sizes: [0.2]
+sample_voxel_sizes: [0.2]
+gt_coverage_summary: {'new_building_scene_1': {'occupied_count': 4250, 'free_count': 34429, 'unknown_count': 108507, 'observed_mask_coverage': 0.2627899392605275}, 'old_home_like_scene_v1': {'occupied_count': 5696, 'free_count': 45683, 'unknown_count': 93311, 'observed_mask_coverage': 0.35509710415370793}}
+
+## Conflict Metric Before / After
+
+old_conflict_ratio: {'count': 100, 'min': 0.0, 'max': 0.7987804878048781, 'mean': 0.39794723817101413, 'p50': 0.4088288312170294, 'p90': 0.5324908974084389, 'p95': 0.6082219662058371}
+true_conflict_ratio_before: {'count': 100, 'min': 0.0, 'max': 0.14883720930232558, 'mean': 0.051924865443601004, 'p50': 0.04639317165607075, 'p90': 0.08949009291786571, 'p95': 0.10667216391594382}
+true_conflict_ratio_after: {'count': 100, 'min': 0.0, 'max': 0.08183856502242152, 'mean': 0.024815626936946437, 'p50': 0.019786740772584903, 'p90': 0.047002211549590625, 'p95': 0.06417149773117023}
+observed_occ_in_gt_unknown_ratio: {'count': 100, 'min': 0.0, 'max': 0.5942982456140351, 'mean': 0.26723550343459496, 'p50': 0.2873143564356435, 'p90': 0.39492834162035684, 'p95': 0.40586807111907963}
+observed_occupied_zero_rate_before: 0.02
+observed_occupied_zero_rate_after: 0.02
+reject_count_before: 90
+reject_count_after: 0
+
+## Main Conflict Cause
+
+main_conflict_cause: Phase 2.5 treated dense_scan_pseudo_gt unknown voxels as negative evidence.
+true_conflict_definition: observed_occupied & gt_free OR observed_free & gt_occupied
+not_conflict: observed_occupied in gt_unknown; observed_free in gt_unknown
+
+## Fixes Applied
+
+fix_a_conflict_metric: true
+fix_b_axis_transform: no_change_needed
+fix_c_occupied_dilation_radius_vox: 0
+fix_d_endpoint_margin_vox: 1
+fix_e_rebuild_dense_scan_gt: not_needed_for_phase26
+
+## Corrected Dataset
+
+corrected_dataset_version: local_voxel_v2_aligned_real_partial_3d
+corrected_dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+sample_count: 100
+pass_count: 97
+warning_count: 3
+reject_count: 0
+observed_occupied_zero_rate: 0.02
+gt_observed_conflict_ratio_mean: 0.024815626936946437
+gt_observed_conflict_ratio_p95: 0.06417149773117023
+quality_flag_counts: {'low_observed_free_count': 2, 'observed_occupied_count_zero': 2}
+split_summary: {'split_method': 'deterministic_scene_id_start_id_group_modulo', 'train_group_count': 7, 'val_group_count': 2, 'test_group_count': 1, 'train_count': 70, 'val_count': 20, 'test_count': 10, 'group_overlap': False}
+
+## Visualization Paths
+
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step008_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step008_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start001_step007_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start001_step007_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step004_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step004_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step003_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step003_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step008_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step008_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step002_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step002_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start001_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start001_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step004_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step004_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step005_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step005_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start001_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start001_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step007_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step007_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step007_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step007_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step001_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step001_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start002_step008_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start002_step008_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step005_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start003_step005_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step001_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step001_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step009_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step009_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step000_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step000_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step001_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step001_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step000_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step000_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step003_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step003_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step002_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step002_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step000_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start000_step000_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step004_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start004_step004_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step003_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step003_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start002_step001_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/new_building_scene_1/new_building_scene_1_start002_step001_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step004_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start004_step004_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step002_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step002_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step003_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start003_step003_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step005_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step005_real_partial_z_slice_overlays.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step003_real_partial_bev_overlay.png
+* /home/ubuntu22/VLA/runs/map_predict_phase26_alignment_debug_20260609_001222/overlays/old_home_like_scene_v1/old_home_like_scene_v1_start002_step003_real_partial_z_slice_overlays.png
+
+## Decision
+
+safe_to_train_3d_unet_baseline: true
+training_ready: false
+requires_review: true
+next_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+
+## Notes
+
+* dense_scan_pseudo_gt remains pseudo GT, not perfect ground truth.
+* v2 does not overwrite v1.
+* corrected samples and debug images are kept in ignored paths.
+* no model training, SFT, GDPO, RL, rollout, or USD mutation was performed.

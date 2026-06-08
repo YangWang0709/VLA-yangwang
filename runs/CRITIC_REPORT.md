@@ -1,3 +1,30 @@
+<!-- map_predict_phase26_status:start -->
+## MapPredict Phase 2.6 Alignment Debug Status
+
+current_phase: MapPredict Phase 2.6 pseudo-GT alignment conflict resolution
+finding: conflict source was a metric/alignment interpretation bug, not missing partial occupied observations.
+evidence: old Phase 2.5 metric rejected 90 / 100 samples; corrected v2 has 0 rejects and true conflict p95 0.06417149773117023.
+main_conflict_cause: dense_scan_pseudo_gt unknown voxels were counted as contradictions in Phase 2.5.
+fixes_applied: conflict_metric_excludes_gt_unknown; endpoint_margin_vox_1; no occupied dilation
+corrected_dataset_version: local_voxel_v2_aligned_real_partial_3d
+sample_count: 100
+pass_count: 97
+warning_count: 3
+reject_count: 0
+observed_occupied_zero_rate: 0.02
+gt_observed_conflict_ratio_mean: 0.024815626936946437
+safe_to_train_3d_unet_baseline: true
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+training_ready: false
+requires_review: true
+next_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+<!-- map_predict_phase26_status:end -->
+
 <!-- map_predict_phase25_status:start -->
 ## MapPredict Phase 2.5 Real Partial 3D Recapture Status
 

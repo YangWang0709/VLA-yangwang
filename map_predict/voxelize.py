@@ -68,6 +68,7 @@ def raycast_points_to_occupancy(
     ray_step_fraction: float = 0.5,
     min_range: float = 0.05,
     max_range: float = 15.0,
+    endpoint_margin_vox: int = 0,
 ) -> tuple[np.ndarray, np.ndarray, dict[str, int]]:
     """Build local partial occupancy by ray carving depth endpoints.
 
@@ -88,6 +89,7 @@ def raycast_points_to_occupancy(
 
     eye = np.asarray(camera_origin_xyz, dtype=np.float32)
     step_size = max(1e-6, float(spec.voxel_size) * float(ray_step_fraction))
+    margin_steps = max(0, int(np.ceil(float(endpoint_margin_vox) / max(1e-6, float(ray_step_fraction)))))
     used = 0
     endpoint_inside = 0
 
@@ -98,8 +100,10 @@ def raycast_points_to_occupancy(
             continue
         used += 1
         steps = max(2, int(np.ceil(dist / step_size)))
-        # Keep the endpoint for occupied and carve only preceding samples.
-        for step in range(steps - 1):
+        # Keep the endpoint for occupied and optionally leave a conservative
+        # margin before it unknown to avoid carving through thin surfaces.
+        free_stop = max(1, steps - 1 - margin_steps)
+        for step in range(free_stop):
             t = step / steps
             idx = point_to_grid_index(eye + vec * t, spec)
             if idx is not None:

@@ -1,3 +1,33 @@
+<!-- map_predict_phase26_status:start -->
+## MapPredict Phase 2.6 Interface Status
+
+current_phase: MapPredict Phase 2.6 pseudo-GT alignment conflict resolution
+feature_provider_role: true
+planner: false
+VLA: false
+output_actions: false
+input_partial_3d_source: real_depth_backprojection_raycast
+input_channels: observed_free, observed_occupied, unknown_mask, frontier_mask, robot_position_gaussian, height_channel
+metadata_channels: robot_pose, camera_pose, camera_intrinsics, crop_origin_xyz, crop_center_xyz, voxel_size
+target_label: full_occupancy
+target_label_type: dense_scan_pseudo_gt
+target_label_is_perfect_ground_truth: false
+axis_order_convention: D=Z,H=Y,W=X
+conflict_metric: observed_occupied_and_gt_free OR observed_free_and_gt_occupied
+not_conflict: observed_occupied_in_gt_unknown; observed_free_in_gt_unknown
+corrected_dataset_version: local_voxel_v2_aligned_real_partial_3d
+observed_occupied_zero_rate: 0.02
+safe_to_train_3d_unet_baseline: true
+training_started: false
+map_predict_training_started: false
+VLA_training_started: false
+SFT_started: false
+GDPO_started: false
+RL_started: false
+VLM_output_contract_unchanged: Go to candidate <id>.
+next_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+<!-- map_predict_phase26_status:end -->
+
 <!-- map_predict_phase25_status:start -->
 ## MapPredict Phase 2.5 Real Partial 3D Interface Status
 

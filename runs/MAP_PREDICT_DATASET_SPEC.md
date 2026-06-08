@@ -1,3 +1,38 @@
+<!-- map_predict_phase26_status:start -->
+## MapPredict Phase 2.6 Corrected Dataset Status
+
+current_phase: MapPredict Phase 2.6 pseudo-GT alignment conflict resolution
+dataset_version: local_voxel_v2_aligned_real_partial_3d
+dataset_path: /home/ubuntu22/VLA/data/map_predict/local_voxel_dataset/local_voxel_v2_aligned_real_partial_3d
+source_dataset: local_voxel_v1_real_partial_3d
+array_layout: [D, H, W]
+axis_order_convention: D=Z,H=Y,W=X
+voxel_shape: [24, 64, 64]
+voxel_size: 0.2
+partial_3d_source: real_depth_backprojection_raycast
+gt_type: dense_scan_pseudo_gt
+dense_scan_pseudo_gt_is_perfect_ground_truth: false
+full_occupancy_used_as_input: false
+full_occupancy_label_only: true
+conflict_metric: observed_occupied_and_gt_free OR observed_free_and_gt_occupied
+not_conflict: observed_occupied_in_gt_unknown; observed_free_in_gt_unknown
+dilation_radius_vox: 0
+endpoint_margin_vox: 1
+sample_count: 100
+pass_count: 97
+warning_count: 3
+reject_count: 0
+observed_occupied_zero_rate: 0.02
+gt_observed_conflict_ratio_mean: 0.024815626936946437
+gt_observed_conflict_ratio_p95: 0.06417149773117023
+training_started: false
+map_predict_training_started: false
+training_ready: false
+requires_review: true
+safe_to_train_3d_unet_baseline: true
+next_phase: MapPredict Phase 3 3D U-Net occupancy completion baseline
+<!-- map_predict_phase26_status:end -->
+
 <!-- map_predict_phase25_status:start -->
 ## MapPredict Phase 2.5 Real Partial 3D Dataset Status
 
