@@ -18,7 +18,7 @@ A1-VLM-LA Explorer for 3D Active Exploration
 current_scene_id: building_scene_1_scene_20260608_171052
 current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
 original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
-current_scene_phase: New Scene Phase F short closed-loop smoke
+current_scene_phase: New Scene Phase G long rollout data collection
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
@@ -31,9 +31,9 @@ vlm_output_mode: pseudo_from_classical_selector
 output_contract: Go to candidate <id>.
 training_ready: false
 requires_human_review: true
-next_phase: New Scene Phase G long rollout data collection
-closed_loop_phaseF_status: passed
-safe_to_long_rollout: true
+safe_to_human_review: true
+next_phase: New Scene Phase H dataset quality audit / human review packet
+phaseG_status: passed
 ```
 
 ## New Scene Route
@@ -44,29 +44,29 @@ safe_to_long_rollout: true
 4. Phase D: candidate viewpoint + information gain smoke. Status: passed.
 5. Phase E: VLM-LA interface smoke. Status: passed.
 6. Phase F: short closed-loop smoke. Status: passed.
-7. Phase G: long rollout data collection. Status: next if Phase F passed.
+7. Phase G: long rollout data collection. Status: passed.
 8. Phase H: dataset quality audit and human review packet.
 
-## Phase F Gate
+## Phase G Gate
 
-action_count: 5
-successful_action_count: 5
+start_count: 10
+completed_start_count: 10
+max_actions_per_start: 20
+total_action_count: 200
+candidate_rows: 4800
+vlm_la_sample_count: 200
+average_final_known_ratio: 0.408687
+average_known_ratio_gain: 0.408687
 parse_success_rate: 1.0
 validation_success_rate: 1.0
-target_pose_lookup_success_rate: 1.0
 movement_success_rate: 1.0
-fallback_count: 0
-initial_known_ratio: 0.0
-final_known_ratio: 0.236667
-total_known_ratio_gain: 0.236667
-known_ratio_monotonic_non_decreasing: true
-average_candidate_count: 24.0
-average_valid_candidate_count: 21.4
+starts_with_failures: 0
 collision_count: 0
 stuck_count: 0
 falling_count: 0
-failure_count: 0
-safe_to_long_rollout: true
+real_rgb_sensor_valid_rate: 1.0
+real_depth_sensor_valid_rate: 1.0
+real_camera_pointcloud_valid_rate: 1.0
 
 
 ## Negative Scope
@@ -78,5 +78,5 @@ GDPO: false
 map_predict: false
 PI_finetuning: false
 A1_locomotion_training: false
-long_rollout: false
 real_VLM_inference: false
+training_ready: false
