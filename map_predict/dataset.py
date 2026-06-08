@@ -109,8 +109,41 @@ def iter_rollout_sources(workspace: Path) -> Iterable[RolloutSource]:
         quality_dir=runs / "phase9_human_review_packet_20260607_213732",
     )
     yield RolloutSource(
-        scene_id="building_scene_1_scene_20260608_171052",
+        scene_id="new_building_scene_1",
         scene_path=str(workspace / "scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda"),
         rollout_dir=runs / "new_scene_building_scene_1_phaseG_long_rollout_20260608_185904",
         quality_dir=runs / "new_scene_building_scene_1_phaseH_dataset_quality_audit_20260608_191002",
     )
+
+
+def local_voxel_dataset_manifest(
+    *,
+    dataset_name: str,
+    gt_type: str,
+    scenes: list[str],
+    voxel_shape: tuple[int, int, int],
+    voxel_size: float,
+    sample_count: int,
+    pass_count: int,
+    warning_count: int,
+    reject_count: int,
+    partial_3d_source: str,
+) -> dict[str, Any]:
+    """Build the canonical manifest for a local voxel crop dataset."""
+
+    return {
+        "dataset_name": dataset_name,
+        "gt_type": gt_type,
+        "scenes": scenes,
+        "voxel_shape": list(voxel_shape),
+        "voxel_layout": ["D", "H", "W"],
+        "voxel_axis_order": "D=z, H=y, W=x",
+        "voxel_size": float(voxel_size),
+        "sample_count": int(sample_count),
+        "pass_count": int(pass_count),
+        "warning_count": int(warning_count),
+        "reject_count": int(reject_count),
+        "partial_3d_source": partial_3d_source,
+        "training_ready": False,
+        "requires_review": True,
+    }

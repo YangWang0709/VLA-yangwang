@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+
 import numpy as np
 
 
@@ -27,3 +29,27 @@ def precision_recall(pred: np.ndarray, target: np.ndarray) -> tuple[float, float
 def unknown_region_iou(pred: np.ndarray, target: np.ndarray, unknown_mask: np.ndarray) -> float:
     mask = np.asarray(unknown_mask, dtype=bool)
     return binary_iou(np.asarray(pred)[mask], np.asarray(target)[mask])
+
+
+def observed_gt_conflict_ratio(observed_occupied: np.ndarray, full_occupancy: np.ndarray) -> float:
+    """Return fraction of observed occupied voxels absent from full occupancy."""
+
+    observed = np.asarray(observed_occupied, dtype=bool)
+    if observed.sum() == 0:
+        return 0.0
+    full = np.asarray(full_occupancy, dtype=bool)
+    return float(np.logical_and(observed, ~full).sum() / observed.sum())
+
+
+def count_distribution(values: Iterable[int | float]) -> dict[str, float | int | None]:
+    arr = np.asarray(list(values), dtype=np.float64)
+    if arr.size == 0:
+        return {"count": 0, "min": None, "max": None, "mean": None, "p50": None, "p90": None}
+    return {
+        "count": int(arr.size),
+        "min": float(arr.min()),
+        "max": float(arr.max()),
+        "mean": float(arr.mean()),
+        "p50": float(np.percentile(arr, 50)),
+        "p90": float(np.percentile(arr, 90)),
+    }
