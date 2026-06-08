@@ -1,0 +1,11 @@
+start_id,quality_status,sample_count,accepted_sample_count,warning_sample_count,rejected_sample_count,acceptance_rate,warning_rate,rejection_rate,final_known_ratio,known_ratio_gain,action_count,phaseG_failure_count,phaseG_stop_reason
+0,pass,20,20,0,0,1.0,0.0,0.0,0.482656,0.482656,20,0,
+1,pass,20,20,0,0,1.0,0.0,0.0,0.415312,0.415312,20,0,
+2,pass,20,20,0,0,1.0,0.0,0.0,0.444688,0.444688,20,0,
+3,pass,20,20,0,0,1.0,0.0,0.0,0.384375,0.384375,20,0,
+4,warning,20,19,1,0,0.95,0.05,0.0,0.40375,0.40375,20,0,
+5,pass,20,20,0,0,1.0,0.0,0.0,0.34625,0.34625,20,0,
+6,pass,20,20,0,0,1.0,0.0,0.0,0.377812,0.377812,20,0,
+7,pass,20,20,0,0,1.0,0.0,0.0,0.425,0.425,20,0,
+8,pass,20,20,0,0,1.0,0.0,0.0,0.416406,0.416406,20,0,
+9,pass,20,20,0,0,1.0,0.0,0.0,0.390625,0.390625,20,0,
