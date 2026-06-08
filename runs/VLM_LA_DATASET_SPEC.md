@@ -4,55 +4,42 @@
 
 A1-VLM-LA Explorer for 3D Active Exploration
 
-## Formal A1 Metadata
-
-Formal A1 data must use:
+## Current New Scene Dataset Status
 
 ```yaml
+current_scene_id: building_scene_1_scene_20260608_171052
+current_scene_path: /home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda
+original_user_usd_path: /home/ubuntu22/VLA/building_scene(1).usd
 robot_platform: unitree_a1
 robot_source: existing_usd_prim
 a1_root_prim: /World/A1
 base_frame: /World/A1/base
-```
-
-## Phase 9 Review Packet Metadata
-
-```yaml
-source_dataset: Phase 8 rollout
-dataset_quality_summary: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/summary/dataset_quality_summary.json
-accepted_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/accepted_samples.jsonl
-warning_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/warning_samples.jsonl
-rejected_samples: /home/ubuntu22/VLA/runs/phase9_human_review_packet_20260607_213732/quality/rejected_samples.jsonl
+sensor_method: real_isaac_omniverse_rgbd_not_started
 training_ready: false
 requires_human_review: true
-recommended_next_phase: manual_review_before_sft_preparation
 ```
 
-## Phase 9 Audit Counts
+No new-scene dataset samples have been created. Phase A only validated scene opening and A1 robot presence.
 
-```yaml
-total_samples: 77
-accepted_sample_count: 74
-warning_sample_count: 3
-rejected_sample_count: 0
-acceptance_rate: 0.961
-warning_rate: 0.039
-rejection_rate: 0.0
-real_sensor_sample_rate: 1.0
-```
+## Required New Scene Sample Metadata
 
-## Status
+Future Phase G samples, only after Phase B-F pass, must include:
 
-Phase 9 prepared a human review packet. The data must not be used for SFT or GDPO until the manual review result explicitly approves preparation.
+- real RGB/depth metadata
+- depth_backprojection pointcloud stats
+- BEV candidate render reference
+- candidate table reference
+- selected_candidate_id
+- target_language: `Go to candidate <id>.`
+- parser and validator result
+- target pose
+- movement result
+- map stats
+- failure reason if any
 
-## Label Contract
+## Training Gate
 
-`target_language` must contain a parseable candidate ID:
+training_ready: false
+requires_human_review: true
 
-```text
-Go to candidate <id>.
-```
-
-## Large Artifact Safety
-
-Raw sensor data, large RGB-D/depth/BEV images, `.npz`, `.hdf5`, checkpoints, meshes, textures, and USD scene bundles must not be committed to Git.
+Do not use new-scene data for SFT, GDPO, RL, or any training until a later explicit human review approves preparation.

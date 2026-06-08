@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "source_usd": "/home/ubuntu22/VLA/building_scene(1).usd",
+  "bundle_root": "/home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda",
+  "a1_local_reference": "./dependencies/Assets/Isaac/4.5/Isaac/Robots/Unitree/A1/a1.usd",
+  "source_layer_text_len": 283108,
+  "localized_text_len": 283059,
+  "remote_reference_count": 1,
+  "root_out_exists": true,
+  "root_out_size_bytes": 283059,
+  "a1_dependency_exists": true,
+  "a1_dependency_size_bytes": 6593466,
+  "root_sha256": "b7cb2afc19845f6b45fd785a62decc7fc2aaf611ca807b76535b01f1e34e4ef7",
+  "a1_sha256": "dc5b136e18050d7f2ab1b08be92ba18c31342646ed3c5254593314a3c78d933f",
+  "original_usd_modified": false
+}

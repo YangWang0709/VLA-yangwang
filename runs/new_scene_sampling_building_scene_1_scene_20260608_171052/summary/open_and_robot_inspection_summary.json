@@ -1,0 +1,1102 @@
+{
+  "phase": "New Scene Phase A",
+  "workspace": "/home/ubuntu22/VLA",
+  "scene_id": "building_scene_1_scene_20260608_171052",
+  "scene_path": "/home/ubuntu22/VLA/scenes/new_scene_building_scene_1_repaired/building_scene_1_repaired.usda",
+  "original_user_usd_path": "/home/ubuntu22/VLA/building_scene(1).usd",
+  "scene_selection_reason": "localized repaired bundle derived from newest user USD /home/ubuntu22/VLA/building_scene(1).usd; remote Unitree A1 reference replaced by local dependency copy",
+  "scene_exists": true,
+  "scene_size_bytes": 283059,
+  "scene_mtime": "2026-06-08 17:31:28",
+  "run_dir": "/home/ubuntu22/VLA/runs/new_scene_sampling_building_scene_1_scene_20260608_171052",
+  "report_path": "/home/ubuntu22/VLA/runs/new_scene_sampling_building_scene_1_scene_20260608_171052/NEW_SCENE_OPEN_AND_ROBOT_INSPECTION_REPORT.md",
+  "summary_json_path": "/home/ubuntu22/VLA/runs/new_scene_sampling_building_scene_1_scene_20260608_171052/summary/open_and_robot_inspection_summary.json",
+  "stage_open_method": "pxr.Usd.Stage.Open after Isaac headless startup",
+  "stage_open_elapsed_sec": 2.59,
+  "open_stage_result": true,
+  "stage_available": true,
+  "prim_count": 1230,
+  "prim_type_counts": {
+    "Mesh": 170,
+    "Cube": 149,
+    "Material": 167,
+    "Camera": 0,
+    "Light": 1,
+    "ArticulationRoot": 1,
+    "PhysicsJoint": 54
+  },
+  "all_prim_type_counts": {
+    "Cube": 149,
+    "Cylinder": 8,
+    "DistantLight": 1,
+    "Material": 167,
+    "Mesh": 170,
+    "PhysicsFixedJoint": 10,
+    "PhysicsPrismaticJoint": 32,
+    "PhysicsRevoluteJoint": 12,
+    "PhysicsScene": 2,
+    "Plane": 1,
+    "Scope": 132,
+    "Shader": 166,
+    "Sphere": 8,
+    "UNDEFINED": 6,
+    "Xform": 366
+  },
+  "core_dump_found": false,
+  "core_dump_paths": [],
+  "robot_platform": "unitree_a1",
+  "robot_source": "existing_usd_prim",
+  "a1_root_prim": "/World/A1",
+  "a1_base_frame_candidate": "/World/A1/base",
+  "robot_candidate_prims": [
+    {
+      "path": "/World/A1",
+      "name": "A1",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1",
+        "articulation_root"
+      ],
+      "child_count": 24,
+      "has_articulation_root_api": true,
+      "score": 730
+    },
+    {
+      "path": "/World/A1/trunk",
+      "name": "trunk",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 7,
+      "has_articulation_root_api": false,
+      "score": 214
+    },
+    {
+      "path": "/World/A1/base",
+      "name": "base",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 209
+    },
+    {
+      "path": "/World/A1/base/floating_base",
+      "name": "floating_base",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/base/visuals",
+      "name": "visuals",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/FL_hip_joint",
+      "name": "FL_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/FR_hip_joint",
+      "name": "FR_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/RL_hip_joint",
+      "name": "RL_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/RR_hip_joint",
+      "name": "RR_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/imu_joint",
+      "name": "imu_joint",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/FL_hip",
+      "name": "FL_hip",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 4,
+      "has_articulation_root_api": false,
+      "score": 193
+    },
+    {
+      "path": "/World/A1/FR_hip",
+      "name": "FR_hip",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 4,
+      "has_articulation_root_api": false,
+      "score": 193
+    },
+    {
+      "path": "/World/A1/RL_hip",
+      "name": "RL_hip",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 4,
+      "has_articulation_root_api": false,
+      "score": 193
+    },
+    {
+      "path": "/World/A1/RR_hip",
+      "name": "RR_hip",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 4,
+      "has_articulation_root_api": false,
+      "score": 193
+    },
+    {
+      "path": "/World/A1/FL_calf",
+      "name": "FL_calf",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/FL_thigh",
+      "name": "FL_thigh",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/FR_calf",
+      "name": "FR_calf",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/FR_thigh",
+      "name": "FR_thigh",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/RL_calf",
+      "name": "RL_calf",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/RL_thigh",
+      "name": "RL_thigh",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/RR_calf",
+      "name": "RR_calf",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/RR_thigh",
+      "name": "RR_thigh",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 3,
+      "has_articulation_root_api": false,
+      "score": 192
+    },
+    {
+      "path": "/World/A1/FL_foot",
+      "name": "FL_foot",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 191
+    },
+    {
+      "path": "/World/A1/FR_foot",
+      "name": "FR_foot",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 191
+    },
+    {
+      "path": "/World/A1/RL_foot",
+      "name": "RL_foot",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 191
+    },
+    {
+      "path": "/World/A1/RR_foot",
+      "name": "RR_foot",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 191
+    },
+    {
+      "path": "/World/A1/imu_link",
+      "name": "imu_link",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 191
+    },
+    {
+      "path": "/World/A1/FL_thigh_shoulder",
+      "name": "FL_thigh_shoulder",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 190
+    },
+    {
+      "path": "/World/A1/FR_thigh_shoulder",
+      "name": "FR_thigh_shoulder",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 190
+    },
+    {
+      "path": "/World/A1/RL_thigh_shoulder",
+      "name": "RL_thigh_shoulder",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 190
+    },
+    {
+      "path": "/World/A1/RR_thigh_shoulder",
+      "name": "RR_thigh_shoulder",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 190
+    },
+    {
+      "path": "/World/A1/Looks",
+      "name": "Looks",
+      "type": "UNDEFINED",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 9,
+      "has_articulation_root_api": false,
+      "score": 186
+    },
+    {
+      "path": "/World/A1/Looks/material_black",
+      "name": "material_black",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_blue",
+      "name": "material_blue",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_brown",
+      "name": "material_brown",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_green",
+      "name": "material_green",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_grey",
+      "name": "material_grey",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_orange",
+      "name": "material_orange",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_red",
+      "name": "material_red",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_silver",
+      "name": "material_silver",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/Looks/material_white",
+      "name": "material_white",
+      "type": "Material",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 1,
+      "has_articulation_root_api": false,
+      "score": 177
+    },
+    {
+      "path": "/World/A1/FL_calf/FL_foot_fixed",
+      "name": "FL_foot_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_calf/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_calf/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_foot/collisions",
+      "name": "collisions",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_foot/visuals",
+      "name": "visuals",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_hip/FL_hip_fixed",
+      "name": "FL_hip_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_hip/FL_thigh_joint",
+      "name": "FL_thigh_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_hip/collisions",
+      "name": "collisions",
+      "type": "Cylinder",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_hip/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_thigh/FL_calf_joint",
+      "name": "FL_calf_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_thigh/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_thigh/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FL_thigh_shoulder/collisions",
+      "name": "collisions",
+      "type": "Cylinder",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_calf/FR_foot_fixed",
+      "name": "FR_foot_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_calf/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_calf/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_foot/collisions",
+      "name": "collisions",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_foot/visuals",
+      "name": "visuals",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_hip/FR_hip_fixed",
+      "name": "FR_hip_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_hip/FR_thigh_joint",
+      "name": "FR_thigh_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_hip/collisions",
+      "name": "collisions",
+      "type": "Cylinder",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_hip/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_thigh/FR_calf_joint",
+      "name": "FR_calf_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_thigh/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_thigh/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/FR_thigh_shoulder/collisions",
+      "name": "collisions",
+      "type": "Cylinder",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_calf/RL_foot_fixed",
+      "name": "RL_foot_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_calf/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_calf/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_foot/collisions",
+      "name": "collisions",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_foot/visuals",
+      "name": "visuals",
+      "type": "Sphere",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_hip/RL_hip_fixed",
+      "name": "RL_hip_fixed",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_hip/RL_thigh_joint",
+      "name": "RL_thigh_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_hip/collisions",
+      "name": "collisions",
+      "type": "Cylinder",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_hip/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_thigh/RL_calf_joint",
+      "name": "RL_calf_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    },
+    {
+      "path": "/World/A1/RL_thigh/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 176
+    }
+  ],
+  "base_candidate_prims": [
+    {
+      "path": "/World/A1/trunk",
+      "name": "trunk",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 7,
+      "has_articulation_root_api": false,
+      "score": 214
+    },
+    {
+      "path": "/World/A1/base",
+      "name": "base",
+      "type": "Xform",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 2,
+      "has_articulation_root_api": false,
+      "score": 209
+    },
+    {
+      "path": "/World/A1/base/floating_base",
+      "name": "floating_base",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/base/visuals",
+      "name": "visuals",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1",
+        "base"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/FL_hip_joint",
+      "name": "FL_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/FR_hip_joint",
+      "name": "FR_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/RL_hip_joint",
+      "name": "RL_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/RR_hip_joint",
+      "name": "RR_hip_joint",
+      "type": "PhysicsRevoluteJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/collisions",
+      "name": "collisions",
+      "type": "Cube",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/imu_joint",
+      "name": "imu_joint",
+      "type": "PhysicsFixedJoint",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    },
+    {
+      "path": "/World/A1/trunk/visuals",
+      "name": "visuals",
+      "type": "Mesh",
+      "matched_keywords": [
+        "a1",
+        "trunk"
+      ],
+      "child_count": 0,
+      "has_articulation_root_api": false,
+      "score": 194
+    }
+  ],
+  "existing_camera_prims": [],
+  "existing_lidar_prims": [],
+  "existing_sensor_prims": [
+    "/World/A1/trunk/imu_joint",
+    "/World/A1/imu_link",
+    "/World/A1/imu_link/visuals",
+    "/World/A1/imu_link/collisions"
+  ],
+  "safe_to_real_sensor_smoke": true,
+  "formal_sampling_started": false,
+  "next_action": "continue_to_new_scene_phaseB_real_sensor_smoke",
+  "exception": null,
+  "traceback": null,
+  "training": false,
+  "RL": false,
+  "SFT": false,
+  "GDPO": false,
+  "map_predict": false,
+  "PI_finetuning": false,
+  "A1_locomotion_training": false,
+  "rollout": false,
+  "USD_modified_or_saved": false,
+  "a1_found": true
+}
